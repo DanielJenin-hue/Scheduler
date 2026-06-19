@@ -1,0 +1,147 @@
+from __future__ import annotations
+
+import sqlite3
+from datetime import date
+from unittest.mock import patch
+
+from lab_scheduler.compliance.audit_export import (
+    ComplianceAuditSummary,
+    DeflectedViolationsSummary,
+    ScheduleCoverage,
+    TenantMetadata,
+)
+from lab_scheduler.tenant.configuration import (
+    MANAGER_MODE_KEY,
+    ensure_tenant_configuration_schema,
+    get_tenant_config_value,
+    set_tenant_config_value,
+)
+
+
+def _sample_audit_summary(*, filled: int = 224, total: int = 336) -> ComplianceAuditSummary:
+    open_slots = max(total - filled, 0)
+    return ComplianceAuditSummary(
+        report_id="r1",
+        generated_at_utc="2026-06-01T00:00:00Z",
+        tenant=TenantMetadata(
+            id="acme-lab",
+            name="Acme Lab",
+            slug="acme-lab",
+            status="active",
+        ),
+        period_id="period-1",
+        period_name="Summer 2026",
+        period_start=date(2026, 6, 1),
+        period_end=date(2026, 8, 31),
+        week_count=12,
+        jurisdiction_display="Manitoba",
+        jurisdiction_code="MB",
+        statute_reference="",
+        citation_label="",
+        rules_evaluated=[],
+        coverage=ScheduleCoverage(
+            total_shift_slots=total,
+            filled_slots=filled,
+            open_slots=open_slots,
+            assignment_count=filled,
+            coverage_pct=100.0 * filled / total if total else 0.0,
+            is_empty=filled == 0,
+            is_partial=0 < filled < total,
+        ),
+        deflected=DeflectedViolationsSummary(
+            total_deflected=0,
+            compliance_blocked_slots=0,
+            qualification_gaps=0,
+        ),
+        active_error_count=0,
+        active_warning_count=0,
+        active_violations=[],
+        labor_summaries=[],
+    )
+
+
+def test_workspace_publish_state_from_audit_coverage() -> None:
+    from scripts.app import _workspace_publish_state
+
+    audit = _sample_audit_summary(filled=224, total=336)
+    state = _workspace_publish_state(
+        period_id="period-1",
+        audit_summary=audit,
+    )
+
+    assert state["persist_ok"] is True
+    assert state["saved_filled"] == 224
+    assert state["saved_total"] == 336
+    assert state["required_filled"] == 224
+    assert state["required_total"] == 336
+    assert state["violation_codes"] == {}
+
+
+def test_is_manager_mode_defaults_on_for_regular_tenant() -> None:
+    from scripts.app import _is_manager_mode
+
+    conn = sqlite3.connect(":memory:")
+    conn.execute("PRAGMA foreign_keys = OFF")
+    ensure_tenant_configuration_schema(conn)
+    conn.commit()
+
+    with patch("scripts.app.st") as mock_st:
+        mock_st.session_state = {}
+        assert _is_manager_mode(conn, "acme-lab") is True
+
+
+def test_is_manager_mode_off_for_demo_ops_tenant() -> None:
+    from scripts.app import NORTHSTAR_TENANT_ID, _is_manager_mode
+
+    conn = sqlite3.connect(":memory:")
+    with patch("scripts.app.st") as mock_st:
+        mock_st.session_state = {}
+        assert _is_manager_mode(conn, NORTHSTAR_TENANT_ID) is False
+
+
+def test_is_manager_mode_respects_tenant_config_and_session() -> None:
+    from scripts.app import _is_manager_mode
+
+    conn = sqlite3.connect(":memory:")
+    conn.execute("PRAGMA foreign_keys = OFF")
+    ensure_tenant_configuration_schema(conn)
+    set_tenant_config_value(
+        conn,
+        tenant_id="acme-lab",
+        config_key=MANAGER_MODE_KEY,
+        config_value="false",
+    )
+    conn.commit()
+
+    with patch("scripts.app.st") as mock_st:
+        mock_st.session_state = {}
+        assert _is_manager_mode(conn, "acme-lab") is False
+
+        mock_st.session_state = {"manager_mode": True}
+        assert _is_manager_mode(conn, "acme-lab") is True
+
+
+def test_manager_mode_config_key_round_trip() -> None:
+    conn = sqlite3.connect(":memory:")
+    conn.execute("PRAGMA foreign_keys = OFF")
+    ensure_tenant_configuration_schema(conn)
+    conn.commit()
+
+    assert get_tenant_config_value(
+        conn,
+        tenant_id="acme-lab",
+        config_key=MANAGER_MODE_KEY,
+        default="true",
+    ) == "true"
+
+    set_tenant_config_value(
+        conn,
+        tenant_id="acme-lab",
+        config_key=MANAGER_MODE_KEY,
+        config_value="false",
+    )
+    assert get_tenant_config_value(
+        conn,
+        tenant_id="acme-lab",
+        config_key=MANAGER_MODE_KEY,
+    ) == "false"

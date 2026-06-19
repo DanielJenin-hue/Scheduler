@@ -1,0 +1,262 @@
+{
+  "archive_version": 1,
+  "name": "portage-summer-2026-gold",
+  "description": "Authoritative summer 2026 manual schedule (includes all-off roster lines)",
+  "exported_at": "2026-06-11T20:43:16+00:00",
+  "tenant_id": "tenant-northstar-lab",
+  "period_id": "period-2026-summer",
+  "period_start": "2026-06-01",
+  "period_end": "2026-07-26",
+  "employees": {
+    "portage-mla-01": [
+      "EEEEE--",
+      "EEEEE--",
+      "EEEEE--",
+      "EEEEE--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-02": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-03": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-04": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-05": [
+      "DDDDD--",
+      "DDDDDE-",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-06": [
+      "DDDDDNN",
+      "NNNDDNN",
+      "NNNDDNN",
+      "NNNDDNN",
+      "NNNNN--",
+      "DDDDN--",
+      "NNNNN--",
+      "DDDDN--"
+    ],
+    "portage-mla-07": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDDNN",
+      "NNNDDNN",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-08": [
+      "NNNNN--",
+      "----NNN",
+      "NNNNN--",
+      "----NNN",
+      "-----NN",
+      "NNNNN--",
+      "-----NN",
+      "NNNNN--"
+    ],
+    "portage-mla-09": [
+      "-------",
+      "-------",
+      "NNNNN--",
+      "----NNN",
+      "NNNNN--",
+      "-----NN",
+      "NNNNN--",
+      "-----NN"
+    ],
+    "portage-mla-10": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-11": [
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "-------"
+    ],
+    "portage-mla-12": [
+      "-------",
+      "-----DD",
+      "DDD----",
+      "-----DD",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-01": [
+      "DDDDDNN",
+      "NNNDDNN",
+      "NNNDDNN",
+      "NNNDDNN",
+      "NNNNN--",
+      "DDDDN--",
+      "NNNNN--",
+      "DDDDN--"
+    ],
+    "portage-mlt-02": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDDNN",
+      "NNNDDNN",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-03": [
+      "NNNNN--",
+      "----NNN",
+      "NNNNN--",
+      "----NNN",
+      "-----NN",
+      "NNNNN--",
+      "-----NN",
+      "NNNNN--"
+    ],
+    "portage-mlt-04": [
+      "-------",
+      "-------",
+      "NNNNN--",
+      "----NNN",
+      "NNNNN--",
+      "-----NN",
+      "NNNNN--",
+      "-----NN"
+    ],
+    "portage-mlt-05": [
+      "DDDDD--",
+      "DDDDD--",
+      "EEEEE--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-06": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "EEE--EE",
+      "----EE-",
+      "EEE--EE",
+      "----EE-"
+    ],
+    "portage-mlt-07": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-08": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-09": [
+      "DDD--ED",
+      "DD-EEED",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-10": [
+      "DDDDD--",
+      "DDDDD--",
+      "DD--EEE",
+      "DD--EEE",
+      "----EDD",
+      "EEEE-DD",
+      "----EDD",
+      "EE---DD"
+    ],
+    "portage-mlt-11": [
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "------D",
+      "-------",
+      "------D",
+      "-------"
+    ],
+    "portage-mlt-12": [
+      "-------",
+      "-------",
+      "---D---",
+      "-------",
+      "-------",
+      "-------",
+      "-------",
+      "-------"
+    ],
+    "portage-mlt-13": [
+      "-----EE",
+      "EEE----",
+      "-----EE",
+      "EEE----",
+      "-------",
+      "-------",
+      "-------",
+      "-------"
+    ]
+  }
+}

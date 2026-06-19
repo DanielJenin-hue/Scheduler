@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Northstar Medical Laboratory · Breakroom Schedule</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    @page {
+      size: legal landscape;
+      margin: 0.35in;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", "Helvetica Neue", sans-serif;
+      color: #000000;
+      background: #ffffff;
+    }
+    .breakroom-sheet {
+      width: 100%;
+    }
+    .breakroom-header {
+      border-bottom: 2px solid #000000;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+    }
+    .breakroom-header h1 {
+      margin: 0 0 4px 0;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .breakroom-header .meta {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .breakroom-grid-wrap {
+      overflow: hidden;
+    }
+    table.breakroom-grid {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 10px;
+    }
+    table.breakroom-grid th,
+    table.breakroom-grid td {
+      border: 1px solid #000000;
+      text-align: center;
+      vertical-align: middle;
+      padding: 6px 4px;
+    }
+    table.breakroom-grid thead th {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 800;
+      font-size: 9px;
+      line-height: 1.15;
+    }
+    table.breakroom-grid tbody td.emp-col {
+      text-align: left;
+      font-weight: 700;
+      font-size: 10px;
+      padding-left: 6px;
+      width: 180px;
+      min-width: 180px;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+    }
+    table.breakroom-grid tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    table.breakroom-grid tbody tr.tally-row {
+      background-color: #dbeafe;
+      font-weight: 800;
+    }
+    table.breakroom-grid tbody tr.tally-row td.tally-label {
+      font-weight: 800;
+    }
+    table.breakroom-grid tbody tr.tally-row td.tally-cell {
+      font-weight: 800;
+      font-size: 11px;
+    }
+    table.breakroom-grid td.shift-cell {
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      height: 26px;
+      padding: 6px 5px;
+    }
+    table.breakroom-grid .print-token {
+      display: inline-block;
+      min-width: 20px;
+      padding: 3px 6px;
+      border: 2px solid #000000;
+      font-family: "Arial Black", "Arial", sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+    }
+    table.breakroom-grid td.shift-cell--open {
+      background-image: repeating-linear-gradient(
+        45deg, #f3f4f6, #f3f4f6 3px, #ffffff 3px, #ffffff 7px
+      );
+    }
+    table.breakroom-grid tbody tr.coverage-gap-row {
+      background-color: #fff7ed;
+      font-weight: 800;
+    }
+    table.breakroom-grid tbody tr.coverage-gap-row td.emp-col {
+      font-weight: 800;
+      color: #9a3412;
+    }
+    table.breakroom-grid td.coverage-gap-cell {
+      background-image: repeating-linear-gradient(
+        45deg, #fed7aa, #fed7aa 3px, #ffffff 3px, #ffffff 7px
+      );
+    }
+    table.breakroom-grid .open-shift {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+    }
+    table.breakroom-grid .open-shift-plus {
+      font-family: "Arial Black", "Arial", sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      color: #111827;
+    }
+    table.breakroom-grid .open-shift-text {
+      font-size: 6.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #374151;
+    }
+    table.breakroom-grid .print-token-d {
+      background: #dbeafe;
+      color: #1e3a8a;
+    }
+    table.breakroom-grid .print-token-e {
+      background: #fef3c7;
+      color: #78350f;
+    }
+    table.breakroom-grid .print-token-n {
+      background: #1e293b;
+      color: #f8fafc;
+    }
+    table.breakroom-grid .print-token-t {
+      background: #dcfce7;
+      color: #166534;
+    }
+    table.breakroom-grid .triage-escalated-tag {
+      display: inline-block;
+      padding: 1px 3px;
+      border: 2px solid #991b1b;
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 7px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      white-space: normal;
+    }
+    table.breakroom-grid .week-start {
+      border-left-width: 2px;
+    }
+    table.breakroom-grid th.contract-tracking-col,
+    table.breakroom-grid td.contract-tracking-col {
+      width: 148px;
+      min-width: 148px;
+      text-align: left;
+      padding: 4px 6px;
+      border-left: 2px solid #000000;
+      vertical-align: middle;
+    }
+    table.breakroom-grid thead th.contract-tracking-col {
+      font-size: 8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .contract-tracking-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: flex-start;
+    }
+    .union-line-badge {
+      display: inline-block;
+      padding: 1px 5px;
+      border: 1.5px solid #000000;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #ffffff;
+    }
+    .union-line-de { background: #eff6ff; }
+    .union-line-dn { background: #f5f3ff; }
+    .union-line-m-f { background: #ecfdf5; }
+    .contract-hours {
+      font-size: 8px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .contract-status {
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 8px;
+      font-weight: 800;
+      line-height: 1.2;
+      border: 1px solid transparent;
+    }
+    .contract-ok {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #86efac;
+    }
+    .contract-union-risk {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+    .contract-overtime-risk {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fcd34d;
+    }
+    .breakroom-footer {
+      margin-top: 10px;
+      border-top: 2px solid #000000;
+      padding-top: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .breakroom-compliance-badge {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #000000;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .aggressive-fill-flags {
+      margin: 0 0 16px 0;
+      padding: 12px 14px;
+      border: 2px solid #b45309;
+      background: #fffbeb;
+      border-radius: 6px;
+    }
+    .aggressive-fill-flags h2 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #92400e;
+    }
+    .aggressive-fill-note {
+      margin: 0 0 8px 0;
+      font-size: 11px;
+      color: #78350f;
+    }
+    .aggressive-fill-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 10px;
+      max-height: 180px;
+      overflow: auto;
+    }
+    .no-screen-controls {
+      display: none;
+    }
+    @media screen {
+      body {
+        padding: 18px;
+      }
+      .print-hint {
+        margin-bottom: 12px;
+        font-size: 12px;
+        color: #334155;
+      }
+    }
+    @media print {
+      @page {
+        size: legal landscape;
+        margin: 0.35in;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .print-hint,
+      .no-print {
+        display: none !important;
+      }
+      body {
+        padding: 0;
+      }
+      /* Mute interior grid lines so ink does not bleed on cheap printers. */
+      table.breakroom-grid th,
+      table.breakroom-grid td {
+        border-color: #E0E0E0 !important;
+      }
+      /* Keep a full staff member's row intact across page breaks. */
+      thead {
+        display: table-header-group;
+      }
+      table.breakroom-grid tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      table.breakroom-grid .print-token-d {
+        background: #dbeafe !important;
+        color: #1e3a8a !important;
+      }
+      table.breakroom-grid .print-token-e {
+        background: #fef3c7 !important;
+        color: #78350f !important;
+      }
+      table.breakroom-grid .print-token-n {
+        background: #1e293b !important;
+        color: #f8fafc !important;
+      }
+      table.breakroom-grid .print-token-t {
+        background: #dcfce7 !important;
+        color: #166534 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="breakroom-sheet">
+    <div class="print-hint no-print">
+      Open browser print dialog and choose Legal or Ledger landscape for best breakroom output.
+    </div>
+    <header class="breakroom-header">
+      <h1>Northstar Medical Laboratory</h1>
+      <div class="meta">
+        Master Rotation 2026-06-01 · 2026-06-01 to 2026-06-14
+        · 2-week Monday-start block
+      </div>
+    </header>
+    
+    <div class="breakroom-grid-wrap">
+      <table class="breakroom-grid">
+        <thead>
+          <tr>
+            <th class="emp-col">Employee</th>
+            <th class='day-col week-start'>06/01<br>Mon</th><th class='day-col'>06/02<br>Tue</th><th class='day-col'>06/03<br>Wed</th><th class='day-col'>06/04<br>Thu</th><th class='day-col'>06/05<br>Fri</th><th class='day-col'>06/06<br>Sat</th><th class='day-col'>06/07<br>Sun</th><th class='day-col week-start'>06/08<br>Mon</th><th class='day-col'>06/09<br>Tue</th><th class='day-col'>06/10<br>Wed</th><th class='day-col'>06/11<br>Thu</th><th class='day-col'>06/12<br>Fri</th><th class='day-col'>06/13<br>Sat</th><th class='day-col'>06/14<br>Sun</th>
+            <th class="contract-tracking-col">Contract Tracking<br>Line · Target · Actual · Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class='emp-col'>Vacant MLA D/E - Line 01 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/N - Line 01 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 01 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>16h actual</span><span class='contract-status contract-union-risk'>16h / 80h - 64h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/N - Line 01 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell week-start'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>32h actual</span><span class='contract-status contract-union-risk'>32h / 80h - 48h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 02 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/N - Line 02 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 02 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>8h actual</span><span class='contract-status contract-union-risk'>8h / 80h - 72h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/N - Line 02 (80h)</td><td class='shift-cell week-start'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>24h actual</span><span class='contract-status contract-union-risk'>24h / 80h - 56h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 03 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/N - Line 03 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 03 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>8h actual</span><span class='contract-status contract-union-risk'>8h / 80h - 72h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/N - Line 03 (80h)</td><td class='shift-cell week-start'><span class='print-token print-token-d' style='background:#dbeafe;color:#1e3a8a;'>D</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>32h actual</span><span class='contract-status contract-union-risk'>32h / 80h - 48h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 04 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/N - Line 04 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 04 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>8h actual</span><span class='contract-status contract-union-risk'>8h / 80h - 72h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/N - Line 04 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-n' style='background:#1e293b;color:#f8fafc;'>N</span></td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-n'>D/N</span><span class='contract-hours'>80h target</span><span class='contract-hours'>32h actual</span><span class='contract-status contract-union-risk'>32h / 80h - 48h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 05 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 80h - 80h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 05 (80h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>8h actual</span><span class='contract-status contract-union-risk'>8h / 80h - 72h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 06 (56h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>56h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 56h - 56h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 06 (80h)</td><td class='shift-cell week-start'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>80h target</span><span class='contract-hours'>16h actual</span><span class='contract-status contract-union-risk'>16h / 80h - 64h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 07 (48h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>48h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 48h - 48h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 07 (56h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>56h target</span><span class='contract-hours'>16h actual</span><span class='contract-status contract-union-risk'>16h / 56h - 40h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLA D/E - Line 08 (32h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>32h target</span><span class='contract-hours'>0h actual</span><span class='contract-status contract-union-risk'>0h / 32h - 32h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 08 (40h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>40h target</span><span class='contract-hours'>16h actual</span><span class='contract-status contract-union-risk'>16h / 40h - 24h Union Risk</span></div></td></tr><tr><td class='emp-col'>Vacant MLT D/E - Line 09 (16h)</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell week-start'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'>&nbsp;</td><td class='shift-cell'><span class='print-token print-token-e' style='background:#fef3c7;color:#78350f;'>E</span></td><td class='shift-cell'>&nbsp;</td><td class='contract-tracking-col'><div class='contract-tracking-cell'><span class='union-line-badge union-line-d-e'>D/E</span><span class='contract-hours'>16h target</span><span class='contract-hours'>16h actual</span><span class='contract-status contract-ok'>16h / 16h - OK</span></div></td></tr><tr class='tally-row'><td class='emp-col tally-label'>Total Days</td><td class='shift-cell tally-cell week-start'>1</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell week-start'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='shift-cell tally-cell'>0</td><td class='contract-tracking-col'>&nbsp;</td></tr><tr class='tally-row'><td class='emp-col tally-label'>Total Evenings</td><td class='shift-cell tally-cell week-start'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell week-start'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='contract-tracking-col'>&nbsp;</td></tr><tr class='tally-row'><td class='emp-col tally-label'>Total Nights</td><td class='shift-cell tally-cell week-start'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell week-start'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='shift-cell tally-cell'>1</td><td class='contract-tracking-col'>&nbsp;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="breakroom-footer">
+      Shift legend: D = Day · E = Evening · N = Night · T = FTE Top-up · I = Off (Sick) · V = Off (Vacation) · + OPEN = Open shift (pickup available)
+      · Contract lines: D/E = Day+Evening · D/N = Day+Night · M-F = Monday–Friday Day only
+    </footer>
+    <div class="breakroom-compliance-badge">Compliance Verified: Manitoba Labor Standards [2026-05-30]</div>
+  </div>
+</body>
+</html>

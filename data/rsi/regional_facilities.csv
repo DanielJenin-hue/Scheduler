@@ -1,0 +1,9 @@
+facility_id,facility_name,region,state_province,annual_test_volume,mlt_fte,mla_fte
+MB-WPG-PORTAGE,Portage Regional Health Centre,Prairies,MB,920000,12.0,10.0
+MB-WPG-STB,St. Boniface Hospital,Prairies,MB,1100000,14.0,11.0
+ON-TO-GH,Toronto General Hospital,Ontario,ON,2400000,22.0,18.0
+ON-OT-OTT,Ottawa Civic Laboratory,Ontario,ON,680000,9.0,8.0
+BC-VAN-VGH,Vancouver General Hospital,Pacific,BC,1850000,18.0,15.0
+AB-CGY-FMC,Foothills Medical Centre,Prairies,AB,1350000,16.0,13.0
+SK-SAK-RUH,Royal University Hospital,Prairies,SK,540000,7.0,6.0
+MB-SEL-SELK,Selkirk Regional Lab,Prairies,MB,210000,3.0,2.0

@@ -1,0 +1,1089 @@
+{
+  "generated_at_utc": "2026-05-28T17:45:26Z",
+  "period_end": "2026-07-26",
+  "period_start": "2026-06-01",
+  "status": "PARTIAL_SUCCESS",
+  "triage_count": 108,
+  "triage_list": [
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 851",
+      "slot_id": "2026-06-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 01|seat=850|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 852",
+      "slot_id": "2026-06-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 02|seat=851|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 853",
+      "slot_id": "2026-06-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 03|seat=852|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-04",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 854",
+      "slot_id": "2026-06-04|MORNING|shift-morning|Smooth Day Balance - MLA - Day 04|seat=853|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-05",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 855",
+      "slot_id": "2026-06-05|MORNING|shift-morning|Smooth Day Balance - MLT - Day 05|seat=854|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 856",
+      "slot_id": "2026-06-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 06|seat=855|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-09",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 857",
+      "slot_id": "2026-06-09|MORNING|shift-morning|Smooth Day Balance - MLT - Day 07|seat=856|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-10",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 858",
+      "slot_id": "2026-06-10|MORNING|shift-morning|Smooth Day Balance - MLA - Day 08|seat=857|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-11",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 859",
+      "slot_id": "2026-06-11|MORNING|shift-morning|Smooth Day Balance - MLT - Day 09|seat=858|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-12",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 860",
+      "slot_id": "2026-06-12|MORNING|shift-morning|Smooth Day Balance - MLA - Day 10|seat=859|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-15",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 861",
+      "slot_id": "2026-06-15|MORNING|shift-morning|Smooth Day Balance - MLT - Day 11|seat=860|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-16",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 862",
+      "slot_id": "2026-06-16|MORNING|shift-morning|Smooth Day Balance - MLA - Day 12|seat=861|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-17",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 863",
+      "slot_id": "2026-06-17|MORNING|shift-morning|Smooth Day Balance - MLT - Day 13|seat=862|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-18",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 864",
+      "slot_id": "2026-06-18|MORNING|shift-morning|Smooth Day Balance - MLA - Day 14|seat=863|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-19",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 865",
+      "slot_id": "2026-06-19|MORNING|shift-morning|Smooth Day Balance - MLT - Day 15|seat=864|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-22",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 866",
+      "slot_id": "2026-06-22|MORNING|shift-morning|Smooth Day Balance - MLA - Day 16|seat=865|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-23",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 867",
+      "slot_id": "2026-06-23|MORNING|shift-morning|Smooth Day Balance - MLT - Day 17|seat=866|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-24",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 868",
+      "slot_id": "2026-06-24|MORNING|shift-morning|Smooth Day Balance - MLA - Day 18|seat=867|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-25",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 869",
+      "slot_id": "2026-06-25|MORNING|shift-morning|Smooth Day Balance - MLT - Day 19|seat=868|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-26",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 870",
+      "slot_id": "2026-06-26|MORNING|shift-morning|Smooth Day Balance - MLA - Day 20|seat=869|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-29",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 871",
+      "slot_id": "2026-06-29|MORNING|shift-morning|Smooth Day Balance - MLT - Day 21|seat=870|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-30",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 872",
+      "slot_id": "2026-06-30|MORNING|shift-morning|Smooth Day Balance - MLA - Day 22|seat=871|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 873",
+      "slot_id": "2026-07-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 23|seat=872|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 874",
+      "slot_id": "2026-07-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 24|seat=873|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 875",
+      "slot_id": "2026-07-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 25|seat=874|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-06",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 876",
+      "slot_id": "2026-07-06|MORNING|shift-morning|Smooth Day Balance - MLA - Day 26|seat=875|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-07",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 877",
+      "slot_id": "2026-07-07|MORNING|shift-morning|Smooth Day Balance - MLT - Day 27|seat=876|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 878",
+      "slot_id": "2026-07-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 28|seat=877|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-09",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 879",
+      "slot_id": "2026-07-09|MORNING|shift-morning|Smooth Day Balance - MLT - Day 29|seat=878|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-10",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 880",
+      "slot_id": "2026-07-10|MORNING|shift-morning|Smooth Day Balance - MLA - Day 30|seat=879|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-13",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 881",
+      "slot_id": "2026-07-13|MORNING|shift-morning|Smooth Day Balance - MLT - Day 31|seat=880|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-14",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 882",
+      "slot_id": "2026-07-14|MORNING|shift-morning|Smooth Day Balance - MLA - Day 32|seat=881|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-15",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 883",
+      "slot_id": "2026-07-15|MORNING|shift-morning|Smooth Day Balance - MLT - Day 33|seat=882|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-16",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 884",
+      "slot_id": "2026-07-16|MORNING|shift-morning|Smooth Day Balance - MLA - Day 34|seat=883|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-17",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 885",
+      "slot_id": "2026-07-17|MORNING|shift-morning|Smooth Day Balance - MLT - Day 35|seat=884|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-20",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 886",
+      "slot_id": "2026-07-20|MORNING|shift-morning|Smooth Day Balance - MLA - Day 36|seat=885|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-21",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 887",
+      "slot_id": "2026-07-21|MORNING|shift-morning|Smooth Day Balance - MLT - Day 37|seat=886|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-22",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 888",
+      "slot_id": "2026-07-22|MORNING|shift-morning|Smooth Day Balance - MLA - Day 38|seat=887|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-23",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 889",
+      "slot_id": "2026-07-23|MORNING|shift-morning|Smooth Day Balance - MLT - Day 39|seat=888|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-24",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 890",
+      "slot_id": "2026-07-24|MORNING|shift-morning|Smooth Day Balance - MLA - Day 40|seat=889|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 891",
+      "slot_id": "2026-06-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 01|seat=890|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 892",
+      "slot_id": "2026-06-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 02|seat=891|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 893",
+      "slot_id": "2026-06-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 03|seat=892|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-04",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 894",
+      "slot_id": "2026-06-04|MORNING|shift-morning|Smooth Day Balance - MLA - Day 04|seat=893|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-05",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 895",
+      "slot_id": "2026-06-05|MORNING|shift-morning|Smooth Day Balance - MLT - Day 05|seat=894|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 896",
+      "slot_id": "2026-06-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 06|seat=895|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-09",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 897",
+      "slot_id": "2026-06-09|MORNING|shift-morning|Smooth Day Balance - MLT - Day 07|seat=896|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-10",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 898",
+      "slot_id": "2026-06-10|MORNING|shift-morning|Smooth Day Balance - MLA - Day 08|seat=897|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-11",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 899",
+      "slot_id": "2026-06-11|MORNING|shift-morning|Smooth Day Balance - MLT - Day 09|seat=898|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-12",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 900",
+      "slot_id": "2026-06-12|MORNING|shift-morning|Smooth Day Balance - MLA - Day 10|seat=899|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-15",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 901",
+      "slot_id": "2026-06-15|MORNING|shift-morning|Smooth Day Balance - MLT - Day 11|seat=900|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-16",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 902",
+      "slot_id": "2026-06-16|MORNING|shift-morning|Smooth Day Balance - MLA - Day 12|seat=901|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-17",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 903",
+      "slot_id": "2026-06-17|MORNING|shift-morning|Smooth Day Balance - MLT - Day 13|seat=902|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-18",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 904",
+      "slot_id": "2026-06-18|MORNING|shift-morning|Smooth Day Balance - MLA - Day 14|seat=903|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-19",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 905",
+      "slot_id": "2026-06-19|MORNING|shift-morning|Smooth Day Balance - MLT - Day 15|seat=904|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-22",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 906",
+      "slot_id": "2026-06-22|MORNING|shift-morning|Smooth Day Balance - MLA - Day 16|seat=905|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-23",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 907",
+      "slot_id": "2026-06-23|MORNING|shift-morning|Smooth Day Balance - MLT - Day 17|seat=906|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-24",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 908",
+      "slot_id": "2026-06-24|MORNING|shift-morning|Smooth Day Balance - MLA - Day 18|seat=907|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-25",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 909",
+      "slot_id": "2026-06-25|MORNING|shift-morning|Smooth Day Balance - MLT - Day 19|seat=908|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-26",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 910",
+      "slot_id": "2026-06-26|MORNING|shift-morning|Smooth Day Balance - MLA - Day 20|seat=909|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-29",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 911",
+      "slot_id": "2026-06-29|MORNING|shift-morning|Smooth Day Balance - MLT - Day 21|seat=910|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-30",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 912",
+      "slot_id": "2026-06-30|MORNING|shift-morning|Smooth Day Balance - MLA - Day 22|seat=911|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 913",
+      "slot_id": "2026-07-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 23|seat=912|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 914",
+      "slot_id": "2026-07-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 24|seat=913|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 915",
+      "slot_id": "2026-07-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 25|seat=914|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-06",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 916",
+      "slot_id": "2026-07-06|MORNING|shift-morning|Smooth Day Balance - MLA - Day 26|seat=915|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-07",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 917",
+      "slot_id": "2026-07-07|MORNING|shift-morning|Smooth Day Balance - MLT - Day 27|seat=916|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 918",
+      "slot_id": "2026-07-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 28|seat=917|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-09",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 919",
+      "slot_id": "2026-07-09|MORNING|shift-morning|Smooth Day Balance - MLT - Day 29|seat=918|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-10",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 920",
+      "slot_id": "2026-07-10|MORNING|shift-morning|Smooth Day Balance - MLA - Day 30|seat=919|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-13",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 921",
+      "slot_id": "2026-07-13|MORNING|shift-morning|Smooth Day Balance - MLT - Day 31|seat=920|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-14",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 922",
+      "slot_id": "2026-07-14|MORNING|shift-morning|Smooth Day Balance - MLA - Day 32|seat=921|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-15",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 923",
+      "slot_id": "2026-07-15|MORNING|shift-morning|Smooth Day Balance - MLT - Day 33|seat=922|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-16",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 924",
+      "slot_id": "2026-07-16|MORNING|shift-morning|Smooth Day Balance - MLA - Day 34|seat=923|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-17",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 925",
+      "slot_id": "2026-07-17|MORNING|shift-morning|Smooth Day Balance - MLT - Day 35|seat=924|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-20",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 926",
+      "slot_id": "2026-07-20|MORNING|shift-morning|Smooth Day Balance - MLA - Day 36|seat=925|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-21",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 927",
+      "slot_id": "2026-07-21|MORNING|shift-morning|Smooth Day Balance - MLT - Day 37|seat=926|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-22",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 928",
+      "slot_id": "2026-07-22|MORNING|shift-morning|Smooth Day Balance - MLA - Day 38|seat=927|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-23",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 929",
+      "slot_id": "2026-07-23|MORNING|shift-morning|Smooth Day Balance - MLT - Day 39|seat=928|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-24",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 930",
+      "slot_id": "2026-07-24|MORNING|shift-morning|Smooth Day Balance - MLA - Day 40|seat=929|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 931",
+      "slot_id": "2026-06-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 01|seat=930|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 932",
+      "slot_id": "2026-06-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 02|seat=931|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 933",
+      "slot_id": "2026-06-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 03|seat=932|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-04",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 934",
+      "slot_id": "2026-06-04|MORNING|shift-morning|Smooth Day Balance - MLA - Day 04|seat=933|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-05",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 935",
+      "slot_id": "2026-06-05|MORNING|shift-morning|Smooth Day Balance - MLT - Day 05|seat=934|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 936",
+      "slot_id": "2026-06-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 06|seat=935|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-09",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 937",
+      "slot_id": "2026-06-09|MORNING|shift-morning|Smooth Day Balance - MLT - Day 07|seat=936|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-10",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 938",
+      "slot_id": "2026-06-10|MORNING|shift-morning|Smooth Day Balance - MLA - Day 08|seat=937|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-11",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 939",
+      "slot_id": "2026-06-11|MORNING|shift-morning|Smooth Day Balance - MLT - Day 09|seat=938|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-12",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 940",
+      "slot_id": "2026-06-12|MORNING|shift-morning|Smooth Day Balance - MLA - Day 10|seat=939|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-15",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 941",
+      "slot_id": "2026-06-15|MORNING|shift-morning|Smooth Day Balance - MLT - Day 11|seat=940|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-16",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 942",
+      "slot_id": "2026-06-16|MORNING|shift-morning|Smooth Day Balance - MLA - Day 12|seat=941|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-17",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 943",
+      "slot_id": "2026-06-17|MORNING|shift-morning|Smooth Day Balance - MLT - Day 13|seat=942|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-18",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 944",
+      "slot_id": "2026-06-18|MORNING|shift-morning|Smooth Day Balance - MLA - Day 14|seat=943|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-19",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 945",
+      "slot_id": "2026-06-19|MORNING|shift-morning|Smooth Day Balance - MLT - Day 15|seat=944|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-22",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 946",
+      "slot_id": "2026-06-22|MORNING|shift-morning|Smooth Day Balance - MLA - Day 16|seat=945|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-23",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 947",
+      "slot_id": "2026-06-23|MORNING|shift-morning|Smooth Day Balance - MLT - Day 17|seat=946|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-24",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 948",
+      "slot_id": "2026-06-24|MORNING|shift-morning|Smooth Day Balance - MLA - Day 18|seat=947|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-25",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 949",
+      "slot_id": "2026-06-25|MORNING|shift-morning|Smooth Day Balance - MLT - Day 19|seat=948|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-26",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 950",
+      "slot_id": "2026-06-26|MORNING|shift-morning|Smooth Day Balance - MLA - Day 20|seat=949|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-29",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 951",
+      "slot_id": "2026-06-29|MORNING|shift-morning|Smooth Day Balance - MLT - Day 21|seat=950|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-30",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 952",
+      "slot_id": "2026-06-30|MORNING|shift-morning|Smooth Day Balance - MLA - Day 22|seat=951|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-01",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 953",
+      "slot_id": "2026-07-01|MORNING|shift-morning|Smooth Day Balance - MLT - Day 23|seat=952|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-02",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 954",
+      "slot_id": "2026-07-02|MORNING|shift-morning|Smooth Day Balance - MLA - Day 24|seat=953|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-03",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 955",
+      "slot_id": "2026-07-03|MORNING|shift-morning|Smooth Day Balance - MLT - Day 25|seat=954|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-06",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 956",
+      "slot_id": "2026-07-06|MORNING|shift-morning|Smooth Day Balance - MLA - Day 26|seat=955|qual=MLA"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-07",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLT D/E - Line 957",
+      "slot_id": "2026-07-07|MORNING|shift-morning|Smooth Day Balance - MLT - Day 27|seat=956|qual=MLT"
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-08",
+      "deficit_hours": 8.0,
+      "error_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "failed_rule_code": "ERR_IMPOSSIBLE_COVERAGE",
+      "shift_code": "MORNING",
+      "slot": "Vacant MLA D/E - Line 958",
+      "slot_id": "2026-07-08|MORNING|shift-morning|Smooth Day Balance - MLA - Day 28|seat=957|qual=MLA"
+    }
+  ]
+}

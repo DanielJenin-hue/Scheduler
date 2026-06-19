@@ -1,0 +1,1 @@
+"""Lab scheduler UI components."""

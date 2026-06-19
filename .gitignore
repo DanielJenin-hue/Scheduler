@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.rsi/
+dist/
+build/
+*.egg-info/
+
+# Runtime DB snapshots (local only; can be hundreds of MB)
+snapshots/
+
+
+# Added for local secrets/runtime
+.env
+*.sqlite3
+logs/
+*.pid

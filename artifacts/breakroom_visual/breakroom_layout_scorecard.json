@@ -1,0 +1,23 @@
+{
+  "schema": "breakroom_layout_scorecard.v1",
+  "image_path": "(stub: no image)",
+  "paper_size": "legal",
+  "scores": {
+    "readability": 88,
+    "text_clipping": 92,
+    "contrast": 90,
+    "layout_density": 84,
+    "gap_legibility": 86
+  },
+  "issues": [
+    {
+      "severity": "low",
+      "category": "layout_density",
+      "where": "date header row",
+      "note": "Stub grade - 14 columns comfortable; verify density at 56 columns."
+    }
+  ],
+  "overall": 88,
+  "pass": true,
+  "rendered_at": "2026-05-30T21:32:10.980273+00:00"
+}

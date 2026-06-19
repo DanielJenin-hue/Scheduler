@@ -1,0 +1,691 @@
+{
+  "facility_name": "Northstar Medical Laboratory",
+  "generated_at_utc": "2026-05-28T17:45:26Z",
+  "line_items": [
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-01",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-01|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 851",
+        "Vacant MLT D/E - Line 891",
+        "Vacant MLT D/E - Line 931"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-02",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-02|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 852",
+        "Vacant MLA D/E - Line 892",
+        "Vacant MLA D/E - Line 932"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-03",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-03|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 853",
+        "Vacant MLT D/E - Line 893",
+        "Vacant MLT D/E - Line 933"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-04",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-04|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 854",
+        "Vacant MLA D/E - Line 894",
+        "Vacant MLA D/E - Line 934"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-05",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-05|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 855",
+        "Vacant MLT D/E - Line 895",
+        "Vacant MLT D/E - Line 935"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-08",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-08|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 856",
+        "Vacant MLA D/E - Line 896",
+        "Vacant MLA D/E - Line 936"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-09",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-09|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 857",
+        "Vacant MLT D/E - Line 897",
+        "Vacant MLT D/E - Line 937"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-10",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-10|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 858",
+        "Vacant MLA D/E - Line 898",
+        "Vacant MLA D/E - Line 938"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-11",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-11|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 859",
+        "Vacant MLT D/E - Line 899",
+        "Vacant MLT D/E - Line 939"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-12",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-12|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 860",
+        "Vacant MLA D/E - Line 900",
+        "Vacant MLA D/E - Line 940"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-15",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-15|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 861",
+        "Vacant MLT D/E - Line 901",
+        "Vacant MLT D/E - Line 941"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-16",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-16|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 862",
+        "Vacant MLA D/E - Line 902",
+        "Vacant MLA D/E - Line 942"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-17",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-17|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 863",
+        "Vacant MLT D/E - Line 903",
+        "Vacant MLT D/E - Line 943"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-18",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-18|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 864",
+        "Vacant MLA D/E - Line 904",
+        "Vacant MLA D/E - Line 944"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-19",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-19|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 865",
+        "Vacant MLT D/E - Line 905",
+        "Vacant MLT D/E - Line 945"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-22",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-22|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 866",
+        "Vacant MLA D/E - Line 906",
+        "Vacant MLA D/E - Line 946"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-23",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-23|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 867",
+        "Vacant MLT D/E - Line 907",
+        "Vacant MLT D/E - Line 947"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-24",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-24|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 868",
+        "Vacant MLA D/E - Line 908",
+        "Vacant MLA D/E - Line 948"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-25",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-25|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 869",
+        "Vacant MLT D/E - Line 909",
+        "Vacant MLT D/E - Line 949"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-26",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-26|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 870",
+        "Vacant MLA D/E - Line 910",
+        "Vacant MLA D/E - Line 950"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-29",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-29|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 871",
+        "Vacant MLT D/E - Line 911",
+        "Vacant MLT D/E - Line 951"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-06-30",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-06-30|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 872",
+        "Vacant MLA D/E - Line 912",
+        "Vacant MLA D/E - Line 952"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-01",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-01|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 873",
+        "Vacant MLT D/E - Line 913",
+        "Vacant MLT D/E - Line 953"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-02",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-02|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 874",
+        "Vacant MLA D/E - Line 914",
+        "Vacant MLA D/E - Line 954"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-03",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-03|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 875",
+        "Vacant MLT D/E - Line 915",
+        "Vacant MLT D/E - Line 955"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-06",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-06|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 876",
+        "Vacant MLA D/E - Line 916",
+        "Vacant MLA D/E - Line 956"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-07",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-07|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 877",
+        "Vacant MLT D/E - Line 917",
+        "Vacant MLT D/E - Line 957"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-08",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 3,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-08|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 878",
+        "Vacant MLA D/E - Line 918",
+        "Vacant MLA D/E - Line 958"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-09",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-09|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 879",
+        "Vacant MLT D/E - Line 919"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-10",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-10|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 880",
+        "Vacant MLA D/E - Line 920"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-13",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-13|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 881",
+        "Vacant MLT D/E - Line 921"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-14",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-14|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 882",
+        "Vacant MLA D/E - Line 922"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-15",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-15|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 883",
+        "Vacant MLT D/E - Line 923"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-16",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-16|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 884",
+        "Vacant MLA D/E - Line 924"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-17",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-17|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 885",
+        "Vacant MLT D/E - Line 925"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-20",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-20|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 886",
+        "Vacant MLA D/E - Line 926"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-21",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-21|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 887",
+        "Vacant MLT D/E - Line 927"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-22",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-22|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 888",
+        "Vacant MLA D/E - Line 928"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-23",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-23|MORNING|MLT",
+      "placements": [],
+      "required_qual": "MLT",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLT D/E - Line 889",
+        "Vacant MLT D/E - Line 929"
+      ]
+    },
+    {
+      "blocked_by": "ERR_IMPOSSIBLE_COVERAGE",
+      "date": "2026-07-24",
+      "fulfillment_notes": "",
+      "fulfillment_status": "OPEN",
+      "headcount": 2,
+      "hours_per_shift": 8.0,
+      "line_item_id": "2026-07-24|MORNING|MLA",
+      "placements": [],
+      "required_qual": "MLA",
+      "shift_code": "MORNING",
+      "slots": [
+        "Vacant MLA D/E - Line 890",
+        "Vacant MLA D/E - Line 930"
+      ]
+    }
+  ],
+  "period_end": "2026-07-26",
+  "period_start": "2026-06-01",
+  "request_id": "agency-2026-05-28-period-2026-summer",
+  "schedule_period_id": "period-2026-summer",
+  "source_triage_path": "exports/Triage_Escalation_2026-05-28.json",
+  "status": "DRAFT_PENDING_APPROVAL",
+  "summary": {
+    "escalated_slot_count": 108,
+    "line_item_count": 40
+  },
+  "tenant_id": "tenant-northstar-lab",
+  "vendor_routing": {
+    "delivery_channel": "email",
+    "draft_body_path": "exports/Agency_Email_Draft_2026-05-28.txt",
+    "draft_subject": "Locum Request \u2014 Northstar Medical Laboratory \u2014 108 shift(s)",
+    "primary_vendor_id": "locum-north-manitoba"
+  }
+}

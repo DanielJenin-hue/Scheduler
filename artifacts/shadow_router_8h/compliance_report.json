@@ -1,0 +1,14 @@
+{
+  "passed": false,
+  "pass_rate_pct": 0.0,
+  "conflict_count": 111,
+  "warning_count": 13,
+  "unfilled_gap_total": 0,
+  "unfilled_gaps": [],
+  "conflict_labels": [
+    "Weekend staffing cap (1 MLT + 1 MLA)",
+    "Weekday day-shift capacity limit (14 staff)",
+    "Max weekly hours violation",
+    "Contract FTE violation (320h target)"
+  ]
+}

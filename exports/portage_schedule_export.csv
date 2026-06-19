@@ -1,0 +1,26 @@
+Employee,employee_id,fte,contract_line_type,2026-06-01,2026-06-02,2026-06-03,2026-06-04,2026-06-05,2026-06-06,2026-06-07,2026-06-08,2026-06-09,2026-06-10,2026-06-11,2026-06-12,2026-06-13,2026-06-14,2026-06-15,2026-06-16,2026-06-17,2026-06-18,2026-06-19,2026-06-20,2026-06-21,2026-06-22,2026-06-23,2026-06-24,2026-06-25,2026-06-26,2026-06-27,2026-06-28
+Vacant MLT D/E - Line 01,portage-mlt-05,1.0,D/E,D,D,D,D,D,—,—,D,D,D,D,—,—,D,—,—,E,E,E,E,E,E,—,—,E,—,—,—
+Vacant MLT D/E - Line 02,portage-mlt-06,1.0,D/E,D,D,D,D,—,—,D,—,—,E,E,E,E,E,E,—,—,E,—,—,D,D,D,D,D,D,—,—
+Vacant MLT D/E - Line 03,portage-mlt-07,1.0,D/E,—,—,E,E,E,E,E,E,—,—,E,—,—,—,D,D,D,D,D,—,—,—,—,E,E,E,E,E
+Vacant MLT D/E - Line 04,portage-mlt-08,1.0,D/E,E,E,E,E,—,—,D,D,D,D,D,D,—,—,—,—,E,E,E,E,E,E,—,—,E,E,—,—
+Vacant MLT D/E - Line 05,portage-mlt-09,1.0,D/E,D,D,D,D,D,—,—,—,—,E,E,E,E,E,E,—,—,E,E,—,—,D,D,D,D,—,—,—
+Vacant MLT D/E - Line 06,portage-mlt-10,1.0,D/E,—,—,E,E,E,E,E,E,—,—,E,E,—,—,D,D,D,D,—,—,—,D,D,D,D,D,—,—
+Vacant MLT D/E - Line 07,portage-mlt-11,0.7,D/E,E,E,E,E,E,—,—,D,D,D,D,—,—,—,D,D,D,D,D,—,—,—,—,—,—,—,—,—
+Vacant MLT D/E - Line 08,portage-mlt-12,0.5,D/E,D,D,D,D,—,—,—,D,D,D,D,D,—,—,D,—,—,—,—,—,—,—,—,—,—,—,—,—
+Vacant MLT D/E - Line 09,portage-mlt-13,0.2,D/E,D,D,D,D,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—,—
+Vacant MLT D/N - Line 01,portage-mlt-01,1.0,D/N,D,D,D,D,D,—,—,D,D,D,D,D,—,—,—,—,N,N,N,N,N,—,—,—,—,D,D,D
+Vacant MLT D/N - Line 02,portage-mlt-02,1.0,D/N,D,D,D,D,D,—,—,N,N,—,—,N,N,N,—,—,—,—,—,D,—,D,D,D,D,D,—,—
+Vacant MLT D/N - Line 03,portage-mlt-03,1.0,D/N,N,—,—,N,N,N,N,—,—,N,N,—,—,D,D,D,D,D,D,—,—,N,N,—,—,N,N,N
+Vacant MLT D/N - Line 04,portage-mlt-04,1.0,D/N,—,N,N,—,—,D,—,D,D,D,D,D,—,—,N,N,—,—,D,D,D,—,—,N,N,—,—,D
+Vacant MLA D/E - Line 01,portage-mla-01,1.0,D/E,D,D,D,D,D,—,—,—,—,E,E,E,E,E,—,—,D,D,D,D,—,E,E,E,E,—,—,—
+Vacant MLA D/E - Line 02,portage-mla-02,1.0,D/E,—,—,E,E,E,E,E,—,—,D,D,D,D,—,E,E,E,E,—,—,—,D,D,D,D,D,—,—
+Vacant MLA D/E - Line 03,portage-mla-03,1.0,D/E,D,D,D,D,D,—,—,E,E,E,E,—,—,D,D,D,D,D,D,—,—,—,—,E,E,E,E,E
+Vacant MLA D/E - Line 04,portage-mla-04,1.0,D/E,E,E,E,E,—,—,D,D,D,D,D,D,—,—,—,—,E,E,E,E,E,—,—,D,D,D,D,—
+Vacant MLA D/E - Line 05,portage-mla-05,1.0,D/E,D,D,D,D,D,—,—,—,—,E,E,E,E,E,—,—,D,D,—,—,D,E,E,E,E,E,—,—
+Vacant MLA D/E - Line 06,portage-mla-10,0.7,D/E,—,—,E,E,E,E,E,—,—,D,D,—,—,—,E,E,E,E,E,—,—,D,D,—,—,—,—,—
+Vacant MLA D/E - Line 07,portage-mla-11,0.6,D/E,D,D,D,D,—,—,—,—,—,E,E,E,E,—,—,D,D,D,—,—,—,—,—,E,—,—,—,—
+Vacant MLA D/E - Line 08,portage-mla-12,0.4,D/E,—,—,E,E,E,E,—,—,D,D,D,—,—,—,—,—,E,—,—,—,—,—,—,—,—,—,—,—
+Vacant MLA D/N - Line 01,portage-mla-06,1.0,D/N,D,D,D,D,D,—,—,N,—,—,N,N,N,—,D,D,D,D,D,—,—,—,N,N,—,—,D,D
+Vacant MLA D/N - Line 02,portage-mla-07,1.0,D/N,—,N,N,—,—,D,—,D,D,D,D,D,—,—,N,—,—,N,N,N,—,D,D,D,D,D,—,—
+Vacant MLA D/N - Line 03,portage-mla-08,1.0,D/N,D,D,D,D,D,—,—,—,N,N,—,—,D,—,D,D,D,D,D,—,—,N,—,—,N,N,N,N
+Vacant MLA D/N - Line 04,portage-mla-09,1.0,D/N,N,—,—,N,N,N,—,D,D,D,D,D,—,—,—,N,N,—,—,D,D,D,D,D,D,—,—,D

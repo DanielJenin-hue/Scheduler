@@ -1,0 +1,409 @@
+{
+  "generated_at_utc": "2026-05-30T00:15:07Z",
+  "period_end": "2026-07-26",
+  "period_start": "2026-06-01",
+  "status": "PARTIAL_SUCCESS",
+  "triage_count": 40,
+  "triage_list": [
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-01",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-01|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-02",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-02|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-03",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-03|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-04",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-04|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-05",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-05|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-08",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-08|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-09",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-09|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-10",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-10|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-11",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-11|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-12",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-12|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-15",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-15|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-16",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-16|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-17",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-17|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-18",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-18|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-19",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-19|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-22",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-22|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-23",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-23|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-24",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-24|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-25",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-25|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-26",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-26|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-29",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-29|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-06-30",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-06-30|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-01",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-01|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-02",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-02|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-03",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-03|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-06",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-06|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-07",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-07|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-08",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-08|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-09",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-09|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-10",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-10|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-13",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-13|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-14",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-14|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-15",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-15|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-16",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-16|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-17",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-17|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-20",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-20|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-21",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-21|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-22",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-22|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-23",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-23|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    },
+    {
+      "blocked_by": "LABOR_RULE",
+      "date": "2026-07-24",
+      "deficit_hours": 6.25,
+      "error_code": "LABOR_RULE",
+      "failed_rule_code": "LABOR_RULE",
+      "shift_code": "TOPUP",
+      "slot": "Vacant MLT D/E - Line 01",
+      "slot_id": "2026-07-24|TOPUP|twelve-hour-fte-topup|General Coverage|seat=0|qual=ANY"
+    }
+  ]
+}

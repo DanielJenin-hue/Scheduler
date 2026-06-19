@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lab-staffing-scheduler"
+version = "0.1.0"
+description = "Backend utilities for medical lab staffing schedules and rotations"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+app = ["streamlit>=1.32", "pandas>=2.0", "openpyxl>=3.1"]
+billing = ["stripe>=10.0", "fastapi>=0.110", "uvicorn[standard]>=0.27"]
+postgres = ["psycopg[binary]>=3.1"]
+solver = ["ortools>=9.8"]
+# Dev-only visual snapshot + layout-scorecard pipeline (scripts/visual/).
+# Heavy: also requires `python -m playwright install chromium` (~150 MB browser
+# download + network). Never a core dependency; the scorecard harness runs
+# offline via a stub seam when no browser/vision model is provisioned.
+viz = ["playwright>=1.40"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+python_files = ["test_*.py", "compliance_rules.py"]
+markers = [
+    "legacy: Auto-Pilot / auto-generate engine tests (excluded from default slim runs)",
+    "slow: long-running tests (excluded from default slim runs unless explicitly selected)",
+]
+addopts = "-m 'not legacy'"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["auto_manager"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lab_scheduler*"]
+

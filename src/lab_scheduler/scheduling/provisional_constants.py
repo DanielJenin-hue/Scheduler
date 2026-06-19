@@ -1,0 +1,15 @@
+"""Shared constants for provisional stretch approval — no heavy imports."""
+
+PROVISIONAL_STRETCH_NOTE_PREFIX = "PROVISIONAL_STRETCH|"
+APPROVED_STRETCH_NOTE_PREFIX = "APPROVED_STRETCH|"
+CONTRACT_LINE_EXCEPTION_NOTE_PREFIX = "CONTRACT_LINE_EXCEPTION|"
+APPROVED_CONTRACT_LINE_EXCEPTION_NOTE_PREFIX = "APPROVED_CONTRACT_LINE|"
+CLINICAL_FLOOR_MANDATE_REASON = "clinical_floor_mandate"
+CLINICAL_FLOOR_CONTRACT_LINE_REASON = "clinical_floor_contract_line_borrow"
+CONTRACT_LINE_EXCEPTION_VIOLATION_CODE = "CONTRACT_LINE_EXCEPTION"
+
+PROVISIONAL_SESSION_FILE_GLOBS = (
+    "provisional_assignments_*.json",
+    "Provisional_Assignments_*.json",
+    "*provisional*stretch*.json",
+)

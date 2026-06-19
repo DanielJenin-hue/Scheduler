@@ -1,0 +1,900 @@
+{
+  "conflict_count": 51,
+  "conflicts": [
+    {
+      "assignment_date": "2026-06-06",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-06: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-07",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-07: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-13: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-14",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-14: missing MLA (counts MLT=2 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-20: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-21",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-21: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-27: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-27: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-28: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-28: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-04",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-04: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-05",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-05: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-11",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-11: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-11",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-11: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-12",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-12: missing MLA (counts MLT=1 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-07-26",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-07-26: missing MLA (counts MLT=2 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-08",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/N - Line 01: 48.0h in work week starting 2026-06-08 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-06",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/N - Line 01: 48.0h in work week starting 2026-07-06 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-08",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-05",
+      "employee_name": "Vacant MLT D/E - Line 01",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/E - Line 01: 48.0h in work week starting 2026-06-08 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-22",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/N - Line 01: 48.0h in work week starting 2026-06-22 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-20",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/N - Line 01: 48.0h in work week starting 2026-07-20 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-01",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/N - Line 02: 48.0h in work week starting 2026-06-01 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-20",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-06",
+      "employee_name": "Vacant MLT D/E - Line 02",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/E - Line 02: 48.0h in work week starting 2026-07-20 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-29",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-02",
+      "employee_name": "Vacant MLT D/N - Line 02",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/N - Line 02: 48.0h in work week starting 2026-06-29 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-20",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/N - Line 03: 48.0h in work week starting 2026-07-20 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-01",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-07",
+      "employee_name": "Vacant MLT D/E - Line 03",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/E - Line 03: 48.0h in work week starting 2026-06-01 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-29",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/N - Line 04: 48.0h in work week starting 2026-06-29 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-13",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-08",
+      "employee_name": "Vacant MLT D/E - Line 04",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/E - Line 04: 48.0h in work week starting 2026-07-13 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-20",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-04",
+      "employee_name": "Vacant MLT D/N - Line 04",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/N - Line 04: 48.0h in work week starting 2026-07-20 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-06-29",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mlt-10",
+      "employee_name": "Vacant MLT D/E - Line 06",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLT D/E - Line 06: 48.0h in work week starting 2026-06-29 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-13",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-11",
+      "employee_name": "Vacant MLA D/E - Line 07",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/E - Line 07: 48.0h in work week starting 2026-07-13 (limit 40h)."
+    },
+    {
+      "assignment_date": "2026-07-13",
+      "category": "manitoba_union",
+      "code": "MAX_WEEKLY_HOURS",
+      "employee_id": "portage-mla-12",
+      "employee_name": "Vacant MLA D/E - Line 08",
+      "manager_label": "Max weekly hours violation",
+      "message": "Vacant MLA D/E - Line 08: 48.0h in work week starting 2026-07-13 (limit 40h)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-01",
+      "employee_name": "Vacant MLA D/E - Line 01",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/E - Line 01 scheduled 272.0h vs 320h contract target (48.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/N - Line 01 scheduled 312.0h vs 320h contract target (8.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-05",
+      "employee_name": "Vacant MLT D/E - Line 01",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 01 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/N - Line 01 scheduled 304.0h vs 320h contract target (16.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-02",
+      "employee_name": "Vacant MLA D/E - Line 02",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/E - Line 02 scheduled 272.0h vs 320h contract target (48.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/N - Line 02 scheduled 312.0h vs 320h contract target (8.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-06",
+      "employee_name": "Vacant MLT D/E - Line 02",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 02 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-02",
+      "employee_name": "Vacant MLT D/N - Line 02",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/N - Line 02 scheduled 304.0h vs 320h contract target (16.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-03",
+      "employee_name": "Vacant MLA D/E - Line 03",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/E - Line 03 scheduled 272.0h vs 320h contract target (48.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/N - Line 03 scheduled 312.0h vs 320h contract target (8.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-07",
+      "employee_name": "Vacant MLT D/E - Line 03",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 03 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-03",
+      "employee_name": "Vacant MLT D/N - Line 03",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/N - Line 03 scheduled 304.0h vs 320h contract target (16.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-04",
+      "employee_name": "Vacant MLA D/E - Line 04",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/E - Line 04 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/N - Line 04 scheduled 304.0h vs 320h contract target (16.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-08",
+      "employee_name": "Vacant MLT D/E - Line 04",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 04 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-04",
+      "employee_name": "Vacant MLT D/N - Line 04",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/N - Line 04 scheduled 304.0h vs 320h contract target (16.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mla-05",
+      "employee_name": "Vacant MLA D/E - Line 05",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLA D/E - Line 05 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-09",
+      "employee_name": "Vacant MLT D/E - Line 05",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 05 scheduled 280.0h vs 320h contract target (40.0h short)."
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "portage-mlt-10",
+      "employee_name": "Vacant MLT D/E - Line 06",
+      "manager_label": "Contract FTE violation (320h target)",
+      "message": "Vacant MLT D/E - Line 06 scheduled 280.0h vs 320h contract target (40.0h short)."
+    }
+  ],
+  "generated_at_utc": "2026-06-03T00:37:00Z",
+  "manager_summary": [
+    "Weekend staffing floor (1 MLT + 1 MLA)",
+    "Max weekly hours violation",
+    "Contract FTE violation (320h target)",
+    "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED"
+  ],
+  "overtime_compliance_bypassed": [
+    {
+      "assignment_date": "2026-06-19",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 01 assigned NIGHT on 2026-06-19 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-30",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-06-30 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-07",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-07-07 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-17",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 02 assigned NIGHT on 2026-07-17 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-24",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 03 assigned NIGHT on 2026-07-24 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-06",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-07",
+      "employee_name": "Vacant MLT D/E - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 03 assigned MORNING on 2026-06-06 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-05",
+      "employee_name": "Vacant MLT D/E - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 01 assigned MORNING on 2026-06-13 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned MORNING on 2026-06-20 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-21",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned MORNING on 2026-06-21 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-04",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-10",
+      "employee_name": "Vacant MLT D/E - Line 06",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 06 assigned MORNING on 2026-07-04 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-11",
+      "employee_name": "Vacant MLA D/E - Line 07",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 07 assigned MORNING on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-08",
+      "employee_name": "Vacant MLT D/E - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 04 assigned MORNING on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-19",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-11",
+      "employee_name": "Vacant MLA D/E - Line 07",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 07 assigned MORNING on 2026-07-19 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-05",
+      "employee_name": "Vacant MLA D/E - Line 05",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 05 assigned MORNING on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-06",
+      "employee_name": "Vacant MLT D/E - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 02 assigned MORNING on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-06",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 01 assigned NIGHT on 2026-06-06 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-02",
+      "employee_name": "Vacant MLT D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 02 assigned NIGHT on 2026-06-13 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-03",
+      "employee_name": "Vacant MLT D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 03 assigned NIGHT on 2026-06-20 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 02 assigned NIGHT on 2026-06-20 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-21",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 03 assigned NIGHT on 2026-06-21 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 04 assigned NIGHT on 2026-06-27 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-04",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-02",
+      "employee_name": "Vacant MLT D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 02 assigned NIGHT on 2026-07-04 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-12",
+      "employee_name": "Vacant MLA D/E - Line 08",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 08 assigned EVENING on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-03",
+      "employee_name": "Vacant MLT D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 03 assigned NIGHT on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-18",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 04 assigned NIGHT on 2026-07-18 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-19",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-07-19 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-19",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-12",
+      "employee_name": "Vacant MLA D/E - Line 08",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 08 assigned EVENING on 2026-07-19 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-19",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 01 assigned NIGHT on 2026-07-19 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-11",
+      "employee_name": "Vacant MLA D/E - Line 07",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 07 assigned EVENING on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 02 assigned NIGHT on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-26",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-13",
+      "employee_name": "Vacant MLT D/E - Line 09",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/E - Line 09 assigned EVENING on 2026-07-26 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-26",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-12",
+      "employee_name": "Vacant MLA D/E - Line 08",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/E - Line 08 assigned EVENING on 2026-07-26 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-26",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 01 assigned NIGHT on 2026-07-26 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-26",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 03 assigned NIGHT on 2026-07-26 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 04 assigned NIGHT on 2026-06-13 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-26",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 01 assigned NIGHT on 2026-06-26 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-02",
+      "employee_name": "Vacant MLT D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 02 assigned NIGHT on 2026-06-27 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-11",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 02 assigned NIGHT on 2026-07-11 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-06",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 03 assigned NIGHT on 2026-06-06 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-14",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 01 assigned NIGHT on 2026-06-14 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-05",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-09",
+      "employee_name": "Vacant MLA D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 04 assigned NIGHT on 2026-07-05 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-11",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-04",
+      "employee_name": "Vacant MLT D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 04 assigned NIGHT on 2026-07-11 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-12",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-06",
+      "employee_name": "Vacant MLA D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 01 assigned NIGHT on 2026-07-12 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-07",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-07",
+      "employee_name": "Vacant MLA D/N - Line 02",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 02 assigned NIGHT on 2026-06-07 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-01",
+      "employee_name": "Vacant MLT D/N - Line 01",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 01 assigned NIGHT on 2026-06-28 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mla-08",
+      "employee_name": "Vacant MLA D/N - Line 03",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLA D/N - Line 03 assigned NIGHT on 2026-06-28 with weekly-hour compliance bypassed to preserve clinical coverage."
+    },
+    {
+      "assignment_date": "2026-07-25",
+      "category": "overtime_compliance_bypass",
+      "code": "OVERTIME_REQUIRED_COMPLIANCE_BYPASSED",
+      "employee_id": "portage-mlt-04",
+      "employee_name": "Vacant MLT D/N - Line 04",
+      "manager_label": "OVERTIME-REQUIRED-COMPLIANCE-BYPASSED",
+      "message": "Vacant MLT D/N - Line 04 assigned NIGHT on 2026-07-25 with weekly-hour compliance bypassed to preserve clinical coverage."
+    }
+  ],
+  "pass_rate_pct": 0.0,
+  "passed": false,
+  "period_end": "2026-07-26",
+  "period_start": "2026-06-01",
+  "week_count": 8
+}

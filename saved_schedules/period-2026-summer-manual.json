@@ -1,0 +1,262 @@
+{
+  "archive_version": 1,
+  "name": "period-2026-summer-manual",
+  "description": "Standard manual save for Summer 2026 Master Rotation",
+  "exported_at": "2026-06-19T19:36:05+00:00",
+  "tenant_id": "tenant-northstar-lab",
+  "period_id": "period-2026-summer",
+  "period_start": "2026-06-01",
+  "period_end": "2026-07-26",
+  "employees": {
+    "portage-mla-01": [
+      "EEEEEEE",
+      "-DDDD--",
+      "DDDDD--",
+      "DDDD---",
+      "DDDDD--",
+      "EDDDD--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-02": [
+      "DDDDD--",
+      "EEEEEEE",
+      "-DDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DEDDD--",
+      "DDDDD--",
+      "DDD-D--"
+    ],
+    "portage-mla-03": [
+      "DDDDD--",
+      "DDDDD--",
+      "EEEEEEE",
+      "-DDDD--",
+      "DDDDD--",
+      "DDDDDE-",
+      "DD-DD--",
+      "DDDD---"
+    ],
+    "portage-mla-04": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "EEEEEEE",
+      "-DDDD--",
+      "DDEDD--",
+      "DDDDD--",
+      "-DDDD--"
+    ],
+    "portage-mla-05": [
+      "DDDD-DD",
+      "DD-DDDD",
+      "-DDDD--",
+      "D-DD---",
+      "EEEEEEE",
+      "-DDED--",
+      "DDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-06": [
+      "NNNNNNN",
+      "NNNN-NN",
+      "DDD-N--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDD---",
+      "DD-DD--"
+    ],
+    "portage-mla-07": [
+      "DDDDD--",
+      "DDD-N--",
+      "NNNN-NN",
+      "NNNNNNN",
+      "-DDDD--",
+      "DDDDD--",
+      "D-DDD--",
+      "DDDDD--"
+    ],
+    "portage-mla-08": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "NNNNNNN",
+      "NNNNNNN",
+      "--DDD--",
+      "-DD-D--"
+    ],
+    "portage-mla-09": [
+      "DDDDD--",
+      "DDDDD--",
+      "DD-DD--",
+      "DDDDD--",
+      "DDDD---",
+      "D--DD--",
+      "NNNNNNN",
+      "NNNNNNN"
+    ],
+    "portage-mla-10": [
+      "DDD----",
+      "D-DDD--",
+      "DDDD-DD",
+      "-DDD-DD",
+      "DDDD---",
+      "----E-E",
+      "-DD---E",
+      "----EEE"
+    ],
+    "portage-mla-11": [
+      "D--DD--",
+      "DDDD---",
+      "D--DD--",
+      "DD--D--",
+      "DD--DDD",
+      "D-D--D-",
+      "EEEEEE-",
+      "-DD-D--"
+    ],
+    "portage-mla-12": [
+      "---DD--",
+      "-D--D--",
+      "-D-DD--",
+      "D------",
+      "D-D-D--",
+      "D--DD--",
+      "D---D--",
+      "EEEE---"
+    ],
+    "portage-mlt-01": [
+      "NNNNNNN",
+      "NNNN-NN",
+      "DDD-N--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDD-D--",
+      "DDDD---"
+    ],
+    "portage-mlt-02": [
+      "DDDDD--",
+      "DDD-N--",
+      "NNNN-NN",
+      "NNNNNNN",
+      "-DDDD--",
+      "DDDDD--",
+      "DD-DD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-03": [
+      "DDDDD--",
+      "DDDDD--",
+      "D-DDD--",
+      "DDDDD--",
+      "NNNNNNN",
+      "NNNNNNN",
+      "-DDD---",
+      "D-DDD--"
+    ],
+    "portage-mlt-04": [
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "D--DD--",
+      "DDD----",
+      "NNNNNNN",
+      "NNNNNNN"
+    ],
+    "portage-mlt-05": [
+      "EEEEEEE",
+      "--DDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "EDDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-06": [
+      "DDDD---",
+      "EEEEEEE",
+      "-DDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DEDDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-07": [
+      "DDDDD--",
+      "DDDDD--",
+      "EEEEEEE",
+      "-D-DD--",
+      "DDDDD--",
+      "DDDDD--",
+      "DDEDD--",
+      "DDDDD--"
+    ],
+    "portage-mlt-08": [
+      "-D-DD--",
+      "DDDDD--",
+      "DDDDD--",
+      "EEEEEEE",
+      "-DDDD--",
+      "DDDDD--",
+      "DDDDDE-",
+      "DDDDD--"
+    ],
+    "portage-mlt-09": [
+      "D---DDD",
+      "D-D-DDD",
+      "DDD-D--",
+      "D-DDD--",
+      "EEEEEEE",
+      "-DDDD-D",
+      "DDDED-D",
+      "DD-D-DD"
+    ],
+    "portage-mlt-10": [
+      "D-DDD--",
+      "DDDDD--",
+      "DDDD-DD",
+      "DDD-DDD",
+      "-DDDD--",
+      "EEEEEEE",
+      "-DDDE--",
+      "D-DDD--"
+    ],
+    "portage-mlt-11": [
+      "DDD-D--",
+      "DD-----",
+      "D-D----",
+      "DD-DD--",
+      "D--D-DD",
+      "DD-D-DD",
+      "D--DD-E",
+      "E-EEDEE"
+    ],
+    "portage-mlt-12": [
+      "-DDD---",
+      "---DD--",
+      "D--DD--",
+      "--D-D--",
+      "D-D----",
+      "-DD----",
+      "DDD--D-",
+      "-E-DE--"
+    ],
+    "portage-mlt-13": [
+      "-------",
+      "---D---",
+      "----D--",
+      "-------",
+      "D------",
+      "-------",
+      "-----DD",
+      "D----DD"
+    ]
+  }
+}

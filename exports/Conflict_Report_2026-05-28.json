@@ -1,0 +1,530 @@
+{
+  "conflict_count": 57,
+  "conflicts": [
+    {
+      "assignment_date": "2026-06-01",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-01 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-01",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-01 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-02",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-02 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-02",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-02 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-03",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-03 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-03",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-03 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-04",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-04 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-04",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-04 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-05",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-05 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-05",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-05 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-08",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-08 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-08",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-08 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-09",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-09 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-09",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-09 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-10",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-10 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-10",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-10 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-11",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-11 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-11",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-11 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-12",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-12 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-12",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-12 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-15",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-15 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-15",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-15 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-16",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-16 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-16",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-16 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-17",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-17 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-17",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-17 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-18",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-18 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-18",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-18 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-19",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-19 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-19",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-19 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-22",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-22 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-22",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-22 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-23",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-23 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-23",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-23 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-24",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-24 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-24",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-24 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-25",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-25 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-25",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-25 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-26",
+      "category": "clinical_floor",
+      "code": "CLINICAL_EVENING",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Evening)",
+      "message": "2026-06-26 EVENING: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-26",
+      "category": "clinical_floor",
+      "code": "CLINICAL_NIGHT",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Clinical floor violation (Night)",
+      "message": "2026-06-26 NIGHT: 0/2 seats filled (requires exactly 2)."
+    },
+    {
+      "assignment_date": "2026-06-06",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-06: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-06",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-06: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-07",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-07: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-07",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-07: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-13: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-13",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-13: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-14",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-14: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-14",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-14: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-20: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-20",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-20: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-21",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-21: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-21",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-21: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-27: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-27",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-27: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-28: missing MLT (counts MLT=0 MLA=0)"
+    },
+    {
+      "assignment_date": "2026-06-28",
+      "category": "weekend_staffing",
+      "code": "WEEKEND_CLINICAL_FLOOR",
+      "employee_id": "",
+      "employee_name": "",
+      "manager_label": "Weekend staffing floor (1 MLT + 1 MLA)",
+      "message": "2026-06-28: missing MLA (counts MLT=0 MLA=0)"
+    },
+    {
+      "category": "contract_fte",
+      "code": "CONTRACT_FTE_160",
+      "employee_id": "emp-a1",
+      "employee_name": "Avery Miller",
+      "manager_label": "Contract FTE violation (160h target)",
+      "message": "Avery Miller scheduled 8.0h vs 160h contract target (152.0h short)."
+    }
+  ],
+  "generated_at_utc": "2026-05-28T15:11:13Z",
+  "manager_summary": [
+    "Clinical floor violation (Evening)",
+    "Clinical floor violation (Night)",
+    "Weekend staffing floor (1 MLT + 1 MLA)",
+    "Contract FTE violation (160h target)"
+  ],
+  "overtime_compliance_bypassed": [],
+  "pass_rate_pct": 0.0,
+  "passed": false,
+  "period_end": "2026-06-28",
+  "period_start": "2026-06-01",
+  "week_count": 4
+}

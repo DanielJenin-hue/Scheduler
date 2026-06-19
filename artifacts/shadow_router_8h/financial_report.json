@@ -1,0 +1,35 @@
+{
+  "weights": {
+    "fte_overage_per_hour": 85.0,
+    "unfilled_gap_per_hour": 150.0,
+    "weekend_variance_per_unit": 25.0
+  },
+  "baseline": {
+    "fte_overage_penalty": 55420.0,
+    "unfilled_gap_penalty": 18000.0,
+    "weekend_asymmetry_penalty": 1850.0,
+    "total_penalty": 75270.0,
+    "overage_hours": 652.0,
+    "unfilled_gap_hours": 120.0,
+    "unfilled_gap_count": 15,
+    "weekend_floor_average": 3,
+    "weekend_excess_shifts": 74
+  },
+  "agent": {
+    "fte_overage_penalty": 680.0,
+    "unfilled_gap_penalty": 0.0,
+    "weekend_asymmetry_penalty": 650.0,
+    "total_penalty": 1330.0,
+    "overage_hours": 8.0,
+    "unfilled_gap_hours": 0.0,
+    "unfilled_gap_count": 0,
+    "weekend_floor_average": 3,
+    "weekend_excess_shifts": 26
+  },
+  "gainshare": {
+    "baseline_total": 75270.0,
+    "agent_total": 1330.0,
+    "saved": 73940.0,
+    "saved_pct": 98.2
+  }
+}
