@@ -485,6 +485,18 @@ if any("manager_app" in str(arg) for arg in sys.argv):
     os.environ.setdefault("LAB_SCHEDULER_MANAGER_ENTRY", "1")
 
 
+def _is_production_runtime() -> bool:
+    return os.environ.get("LAB_SCHEDULER_ENV", "development").strip().lower() == "production"
+
+
+def _is_authenticated_session() -> bool:
+    return bool(st.session_state.get("authenticated"))
+
+
+def _production_requires_login() -> bool:
+    return _is_production_runtime() and not _is_authenticated_session()
+
+
 def _manager_entry_requested() -> bool:
     if os.environ.get("LAB_SCHEDULER_MANAGER_ENTRY", "").strip() == "1":
         return True
@@ -515,12 +527,25 @@ def _apply_demo_manager_session(conn: sqlite3.Connection, tenant_id: str) -> Non
 
 
 def _resolve_local_tenant_id(conn: sqlite3.Connection) -> str:
-    """Always return a usable tenant id for the local demo/manager app."""
+    """Return a usable tenant id for the local demo/manager app."""
     existing = st.session_state.get("tenant_id")
     if existing and _tenant_exists(conn, str(existing)):
-        if _manager_entry_requested():
-            st.session_state["manager_mode"] = True
-        return str(existing)
+        if _is_production_runtime() and not _is_authenticated_session():
+            for key in ("tenant_id", "tenant_name", "tenant_slug", "username", "display_name", "account_id"):
+                st.session_state.pop(key, None)
+        else:
+            if _manager_entry_requested():
+                st.session_state["manager_mode"] = True
+            return str(existing)
+
+    if _is_production_runtime():
+        if _is_authenticated_session():
+            tenant = st.session_state.get("tenant_id")
+            if tenant and _tenant_exists(conn, str(tenant)):
+                if _manager_entry_requested():
+                    st.session_state["manager_mode"] = True
+                return str(tenant)
+        return ""
 
     try:
         demo_password = _demo_northstar_password()
@@ -11762,7 +11787,7 @@ def _process_roster_management_actions(
 
 
 def _clear_workspace_session_keys() -> None:
-    preserve = {"FormSubmitter", "login_form"}
+    preserve = {"FormSubmitter", "login_form", "signup_form"}
     for key in list(st.session_state.keys()):
         if key in preserve:
             continue
@@ -11780,6 +11805,7 @@ def _clear_workspace_session_keys() -> None:
         "roster_error",
         "roster_success",
         "login_error",
+        "signup_error",
     ):
         st.session_state.pop(key, None)
 
@@ -11872,14 +11898,21 @@ def _attempt_login(conn: sqlite3.Connection, *, username: str, password: str) ->
             (username,),
         ).fetchone()
         if row is None:
+            suffix = (
+                ""
+                if _is_production_runtime()
+                else " Try the quick demo buttons below."
+            )
             st.session_state["login_error"] = (
-                f"No active account found for `{username}`. "
-                "Try the quick demo buttons below."
+                f"No active account found for `{username}`.{suffix}"
             )
         else:
-            st.session_state["login_error"] = (
-                "Password incorrect. Use your account password or the demo quick-login buttons."
+            suffix = (
+                ""
+                if _is_production_runtime()
+                else " Use your account password or the demo quick-login buttons."
             )
+            st.session_state["login_error"] = f"Password incorrect.{suffix}"
         return False
     st.session_state.pop("login_error", None)
     _establish_auth_session(session)
@@ -12682,10 +12715,78 @@ def _render_business_operator_shell(conn: sqlite3.Connection, tenant_id: str) ->
     render_business_section(conn)
 
 
+def _render_production_auth_gate(conn: sqlite3.Connection) -> None:
+    st.markdown(
+        """
+        <div class="lab-login-wrap">
+          <p class="lab-login-title">Lab Staffing Scheduler</p>
+          <p class="lab-login-sub">
+            Sign in to your facility workspace or create a new trial account.
+          </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    sign_in_tab, sign_up_tab = st.tabs(["Sign in", "Create account"])
+
+    with sign_in_tab:
+        with st.form("login_form", clear_on_submit=False):
+            username = st.text_input("Email or username")
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Sign in", type="primary", width="stretch")
+            if submitted and _attempt_login(conn, username=username, password=password):
+                st.session_state.pop("signup_error", None)
+                st.rerun()
+
+    with sign_up_tab:
+        with st.form("signup_form", clear_on_submit=False):
+            facility_name = st.text_input("Facility / lab name")
+            email = st.text_input("Work email")
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button(
+                "Create trial workspace",
+                type="primary",
+                width="stretch",
+            )
+            if submitted:
+                st.session_state.pop("login_error", None)
+                try:
+                    session = register_tenant(
+                        conn,
+                        facility_name=facility_name,
+                        email=email,
+                        password=password,
+                    )
+                except SignupError as exc:
+                    st.session_state["signup_error"] = str(exc)
+                else:
+                    st.session_state.pop("signup_error", None)
+                    _establish_auth_session(session)
+                    st.rerun()
+
+    login_error = st.session_state.get("login_error")
+    if login_error:
+        st.error(login_error)
+    signup_error = st.session_state.get("signup_error")
+    if signup_error:
+        st.error(signup_error)
+
+
 def _run_application_routing(conn: sqlite3.Connection) -> None:
-    ensure_demo_account_credentials(conn)
+    if not _is_production_runtime():
+        ensure_demo_account_credentials(conn)
     apply_pending_app_section(st.session_state)
+
+    if _production_requires_login():
+        _render_production_auth_gate(conn)
+        return
+
     tenant_id = _resolve_local_tenant_id(conn)
+    if not tenant_id:
+        _render_production_auth_gate(conn)
+        return
+
     manager_mode = _is_manager_mode(conn, tenant_id)
 
     if not manager_mode:
