@@ -1795,6 +1795,242 @@ def _trim_weekend_evening_qual_cap(
     return changed
 
 
+def _trim_weekend_night_qual_cap(
+    frame: pd.DataFrame,
+    *,
+    frame_order: Sequence[str],
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    dates: Sequence[date],
+    qual_codes: Mapping[str, str],
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> int:
+    """Drop surplus weekend N per qual so footer tallies stay at need 2."""
+    changed = 0
+    night_cap = weekend_alt_band_cap_per_qual("N")
+    for day in dates:
+        if day.weekday() < 5:
+            continue
+        for qual in ("MLT", "MLA"):
+            while True:
+                counts = weekend_band_qual_count(
+                    frame,
+                    row_lookup,
+                    employees_by_id,
+                    qual_codes,
+                    day,
+                    "N",
+                )
+                if counts.get(qual, 0) <= night_cap:
+                    break
+                donors: List[Tuple[int, int, str, int]] = []
+                for employee_id in frame_order:
+                    profile = employees_by_id.get(employee_id)
+                    row_idx = row_lookup.get(employee_id)
+                    if profile is None or row_idx is None:
+                        continue
+                    if (profile.contract_line_type or "").upper() != "D/N":
+                        continue
+                    if infer_qual_code(profile, qual_codes=qual_codes) != qual:
+                        continue
+                    if get_grid_token(frame, row_idx, day) != "N":
+                        continue
+                    assigned = _count_row_band_shifts(frame, row_idx, dates, "N")
+                    donors.append((assigned, assigned, employee_id, row_idx))
+                if not donors:
+                    break
+                donors.sort(reverse=True)
+                _surplus, _assigned, employee_id, row_idx = donors[0]
+                if not is_editable_cell(
+                    employee_id,
+                    day,
+                    locked_cells=locked_cells,
+                    blocked_map=blocked_map,
+                ):
+                    break
+                if _clear_row_token_if_work_shift(frame, row_idx, day):
+                    changed += 1
+                else:
+                    break
+    return changed
+
+
+def _try_relocate_dn_night_for_footer_gap(
+    frame: pd.DataFrame,
+    *,
+    gap_day: date,
+    qual: str,
+    frame_order: Sequence[str],
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    dates: Sequence[date],
+    qual_codes: Mapping[str, str],
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> bool:
+    """Move one N from a surplus day to a footer gap without changing line night totals."""
+    from lab_scheduler.scheduling.schedule_tallies import calculate_daily_shift_tallies
+
+    date_keys = [day.isoformat() for day in dates]
+    tallies = calculate_daily_shift_tallies(frame, dates=date_keys)
+    qual_cap = (
+        operational_alt_band_cap_per_qual("N")
+        if gap_day.weekday() < 5
+        else weekend_alt_band_cap_per_qual("N")
+    )
+    candidates: List[Tuple[int, int, int, str, int, date]] = []
+    for donor_day in dates:
+        if donor_day == gap_day:
+            continue
+        donor_key = donor_day.isoformat()
+        donor_target = shift_target_for_date(donor_day, "N")
+        donor_total = tallies.nights.get(donor_key, 0)
+        donor_qual = daily_band_qual_count(
+            frame,
+            row_lookup,
+            employees_by_id,
+            qual_codes,
+            donor_day,
+            "N",
+        ).get(qual, 0)
+        donor_qual_cap = (
+            operational_alt_band_cap_per_qual("N")
+            if donor_day.weekday() < 5
+            else weekend_alt_band_cap_per_qual("N")
+        )
+        if donor_total <= donor_target and donor_qual <= donor_qual_cap:
+            continue
+        for employee_id in frame_order:
+            profile = employees_by_id.get(employee_id)
+            row_idx = row_lookup.get(employee_id)
+            if profile is None or row_idx is None:
+                continue
+            if (profile.contract_line_type or "").upper() != "D/N":
+                continue
+            if infer_qual_code(profile, qual_codes=qual_codes) != qual:
+                continue
+            if get_grid_token(frame, row_idx, donor_day) != "N":
+                continue
+            if not is_editable_cell(
+                employee_id,
+                donor_day,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ):
+                continue
+            if not is_editable_cell(
+                employee_id,
+                gap_day,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ):
+                continue
+            gap_token = get_grid_token(frame, row_idx, gap_day)
+            if gap_token not in {"", OFF_DISPLAY, "D"}:
+                continue
+            candidates.append(
+                (
+                    donor_total - donor_target,
+                    donor_qual - donor_qual_cap,
+                    -donor_day.toordinal(),
+                    employee_id,
+                    row_idx,
+                    donor_day,
+                )
+            )
+    for _total_surplus, _qual_surplus, _ordinal, employee_id, row_idx, donor_day in sorted(
+        candidates, reverse=True
+    ):
+        gap_token = get_grid_token(frame, row_idx, gap_day)
+        if not _clear_row_token_if_work_shift(frame, row_idx, donor_day):
+            continue
+        if _would_violate_night_streak_cap(frame, row_idx, gap_day, dates):
+            set_grid_token(frame, row_idx, donor_day, "N")
+            continue
+        if gap_token == "D":
+            placed = _place_token(
+                frame,
+                row_idx=row_idx,
+                employee_id=employee_id,
+                day=gap_day,
+                band="N",
+                mirror=False,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+                allow_overwrite=True,
+            )
+            if placed:
+                return True
+            set_grid_token(frame, row_idx, donor_day, "N")
+            continue
+        if set_grid_token(frame, row_idx, gap_day, "N"):
+            return True
+        set_grid_token(frame, row_idx, donor_day, "N")
+    return False
+
+
+def _rebalance_dn_footer_night_gaps(
+    frame: pd.DataFrame,
+    *,
+    frame_order: Sequence[str],
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    dates: Sequence[date],
+    qual_codes: Mapping[str, str],
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> int:
+    """Relocate D/N nights from surplus days onto footer gaps (2/2 lab-wide)."""
+    from lab_scheduler.scheduling.schedule_tallies import calculate_daily_shift_tallies
+
+    changed = 0
+    date_keys = [day.isoformat() for day in dates]
+    for _ in range(64):
+        progressed = False
+        tallies = calculate_daily_shift_tallies(frame, dates=date_keys)
+        for gap_day in dates:
+            gap_key = gap_day.isoformat()
+            if tallies.nights.get(gap_key, 0) >= shift_target_for_date(gap_day, "N"):
+                continue
+            for qual in ("MLT", "MLA"):
+                qual_cap = (
+                    operational_alt_band_cap_per_qual("N")
+                    if gap_day.weekday() < 5
+                    else weekend_alt_band_cap_per_qual("N")
+                )
+                qual_count = daily_band_qual_count(
+                    frame,
+                    row_lookup,
+                    employees_by_id,
+                    qual_codes,
+                    gap_day,
+                    "N",
+                ).get(qual, 0)
+                if qual_count >= qual_cap:
+                    continue
+                if _try_relocate_dn_night_for_footer_gap(
+                    frame,
+                    gap_day=gap_day,
+                    qual=qual,
+                    frame_order=frame_order,
+                    row_lookup=row_lookup,
+                    employees_by_id=employees_by_id,
+                    dates=dates,
+                    qual_codes=qual_codes,
+                    locked_cells=locked_cells,
+                    blocked_map=blocked_map,
+                ):
+                    changed += 1
+                    progressed = True
+                    break
+            if progressed:
+                break
+        if not progressed:
+            break
+    return changed
+
+
 def _trim_weekday_evening_qual_cap(
     frame: pd.DataFrame,
     *,
@@ -2382,6 +2618,165 @@ def _try_place_pool_gap_night(
         blocked_map=blocked_map,
         allow_overwrite=True,
     )
+
+
+def _rebalance_dn_ft_weekday_day_quotas(
+    frame: pd.DataFrame,
+    *,
+    frame_order: Sequence[str],
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    dates: Sequence[date],
+    rules: JurisdictionRules,
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+    employee_target_hours: Mapping[str, float],
+) -> int:
+    """Align each FT D/N line's weekday D count with payroll minus night target."""
+    from lab_scheduler.scheduling.portage_equity_targets import (
+        portage_is_fulltime_catalog_hours,
+    )
+    from lab_scheduler.scheduling.rotation_reference_builder import (
+        _ft_dn_day_eligible_for_d,
+        _weekday_day_counts,
+    )
+    from lab_scheduler.solver.cpsat_fill import is_vacant_portage_line
+
+    weekdays = [day for day in dates if day.weekday() < 5]
+    changed = 0
+    for _ in range(len(frame_order) * len(weekdays) * 2):
+        progressed = False
+        day_counts = _weekday_day_counts(frame, row_lookup, weekdays)
+        for employee_id in frame_order:
+            profile = employees_by_id.get(employee_id)
+            row_idx = row_lookup.get(employee_id)
+            if profile is None or row_idx is None:
+                continue
+            if not is_vacant_portage_line(profile.full_name):
+                continue
+            if (profile.contract_line_type or "").upper() != "D/N":
+                continue
+            hours = float(employee_target_hours.get(employee_id, 0.0))
+            if not portage_is_fulltime_catalog_hours(hours):
+                continue
+            expected_wd_d = (
+                portage_contract_shift_count(hours) - PORTAGE_DN_FT_NIGHT_SHIFT_TARGET
+            )
+            weekday_d = sum(
+                1
+                for day in weekdays
+                if get_grid_token(frame, row_idx, day) == "D"
+            )
+            delta = expected_wd_d - weekday_d
+            if delta > 0:
+                candidate_days = sorted(
+                    (
+                        day
+                        for day in weekdays
+                        if _ft_dn_day_eligible_for_d(
+                            frame,
+                            employee_id=employee_id,
+                            row_idx=row_idx,
+                            day=day,
+                            locked_cells=locked_cells,
+                            blocked_map=blocked_map,
+                            dates=dates,
+                            rules=rules,
+                        )
+                    ),
+                    key=lambda day: (day_counts[day], day.toordinal()),
+                )
+                placed = False
+                if candidate_days:
+                    day = candidate_days[0]
+                    if set_grid_token(frame, row_idx, day, "D"):
+                        changed += 1
+                        progressed = True
+                        day_counts[day] += 1
+                        placed = True
+                if not placed:
+                    date_set = set(dates)
+                    for day in weekdays:
+                        next_day = day + timedelta(days=1)
+                        if next_day not in date_set:
+                            continue
+                        if not is_empty_grid_token(frame.at[row_idx, day.isoformat()]):
+                            continue
+                        if get_grid_token(frame, row_idx, next_day) != "N":
+                            continue
+                        if not is_editable_cell(
+                            employee_id,
+                            day,
+                            locked_cells=locked_cells,
+                            blocked_map=blocked_map,
+                        ) or not is_editable_cell(
+                            employee_id,
+                            next_day,
+                            locked_cells=locked_cells,
+                            blocked_map=blocked_map,
+                        ):
+                            continue
+                        relocate_day: date | None = None
+                        for candidate in reversed(weekdays):
+                            if candidate in {day, next_day}:
+                                continue
+                            if not is_empty_grid_token(
+                                frame.at[row_idx, candidate.isoformat()]
+                            ):
+                                continue
+                            if not is_editable_cell(
+                                employee_id,
+                                candidate,
+                                locked_cells=locked_cells,
+                                blocked_map=blocked_map,
+                            ):
+                                continue
+                            if _would_violate_night_streak_cap(
+                                frame, row_idx, candidate, dates
+                            ):
+                                continue
+                            relocate_day = candidate
+                            break
+                        if relocate_day is None:
+                            continue
+                        if not _clear_row_token_if_work_shift(frame, row_idx, next_day):
+                            continue
+                        if not set_grid_token(frame, row_idx, relocate_day, "N"):
+                            set_grid_token(frame, row_idx, next_day, "N")
+                            continue
+                        if set_grid_token(frame, row_idx, day, "D"):
+                            changed += 1
+                            progressed = True
+                            day_counts[day] += 1
+                            break
+                        _clear_row_token_if_work_shift(frame, row_idx, relocate_day)
+                        set_grid_token(frame, row_idx, next_day, "N")
+            elif delta < 0:
+                heavy_days = sorted(
+                    (
+                        day
+                        for day in weekdays
+                        if get_grid_token(frame, row_idx, day) == "D"
+                    ),
+                    key=lambda day: (-day_counts[day], -day.toordinal()),
+                )
+                if not heavy_days:
+                    continue
+                day = heavy_days[0]
+                if not is_editable_cell(
+                    employee_id,
+                    day,
+                    locked_cells=locked_cells,
+                    blocked_map=blocked_map,
+                ):
+                    continue
+                if _clear_row_token_if_work_shift(frame, row_idx, day):
+                    changed += 1
+                    progressed = True
+                    day_counts[day] -= 1
+        if not progressed:
+            break
+    return changed
 
 
 def _stamp_de_weekday_days_from_catalog(
@@ -5200,6 +5595,308 @@ def fill_schedule_by_preferences(
         if restored:
             result.cells_changed += restored
             result.tier_counts["dn_night_quota_restore"] = restored
+
+    if mode in {FillMode.FULL, FillMode.ALTERNATE_SHIFTS}:
+        footer_n_rebalanced = _rebalance_dn_footer_night_gaps(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            qual_codes=qual_codes,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if footer_n_rebalanced:
+            result.cells_changed += footer_n_rebalanced
+            result.tier_counts["footer_n_rebalance"] = footer_n_rebalanced
+        trimmed_we_n = _trim_weekend_night_qual_cap(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            qual_codes=qual_codes,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if trimmed_we_n:
+            result.cells_changed += trimmed_we_n
+            result.tier_counts["weekend_n_trim"] = trimmed_we_n
+        weekend_pool = _cover_dn_pool_night_gaps(
+            working,
+            frame_order=frame_order,
+            profiles=profiles,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            employees=employees,
+            employee_profiles=employee_profiles,
+            dates=dates,
+            qual_codes=qual_codes,
+            templates=templates,
+            rules=rules,
+            period_start=period_start,
+            period_end=period_end,
+            weeks_in_period=weeks_in_period,
+            shift_templates=shift_templates,
+            employee_target_hours=employee_target_hours,
+            availability_blocked=availability_blocked,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            allow_emergency_override=(mode == FillMode.ALTERNATE_SHIFTS),
+            weekend_only=True,
+        )
+        if weekend_pool:
+            result.cells_changed += weekend_pool
+            result.tier_counts["pool_night_gaps"] = (
+                result.tier_counts.get("pool_night_gaps", 0) + weekend_pool
+            )
+        trimmed_we_n2 = _trim_weekend_night_qual_cap(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            qual_codes=qual_codes,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if trimmed_we_n2:
+            result.cells_changed += trimmed_we_n2
+            result.tier_counts["weekend_n_trim"] = (
+                result.tier_counts.get("weekend_n_trim", 0) + trimmed_we_n2
+            )
+        footer_n_final = _rebalance_dn_footer_night_gaps(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            qual_codes=qual_codes,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if footer_n_final:
+            result.cells_changed += footer_n_final
+            result.tier_counts["footer_n_rebalance"] = (
+                result.tier_counts.get("footer_n_rebalance", 0) + footer_n_final
+            )
+        restored_after_trim = _restore_dn_night_quota_if_under_target(
+            working,
+            dates=dates,
+            employees_by_id=employees_by_id,
+            employee_target_hours=employee_target_hours,
+            period_start=period_start,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if restored_after_trim:
+            result.cells_changed += restored_after_trim
+            result.tier_counts["dn_night_quota_restore"] = (
+                result.tier_counts.get("dn_night_quota_restore", 0) + restored_after_trim
+            )
+
+    if mode == FillMode.ALTERNATE_SHIFTS:
+        from lab_scheduler.scheduling.rotation_reference_builder import (
+            rebalance_weekday_day_shifts,
+        )
+
+        dn_wd_rebalanced = _rebalance_dn_ft_weekday_day_quotas(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            rules=rules,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            employee_target_hours=employee_target_hours,
+        )
+        if dn_wd_rebalanced:
+            result.cells_changed += dn_wd_rebalanced
+            result.tier_counts["dn_weekday_day_quota"] = dn_wd_rebalanced
+        footer_after_dn_d = _rebalance_dn_footer_night_gaps(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            qual_codes=qual_codes,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if footer_after_dn_d:
+            result.cells_changed += footer_after_dn_d
+            result.tier_counts["footer_n_rebalance"] = (
+                result.tier_counts.get("footer_n_rebalance", 0) + footer_after_dn_d
+            )
+        pool_after_dn_d = _cover_dn_pool_night_gaps(
+            working,
+            frame_order=frame_order,
+            profiles=profiles,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            employees=employees,
+            employee_profiles=employee_profiles,
+            dates=dates,
+            qual_codes=qual_codes,
+            templates=templates,
+            rules=rules,
+            period_start=period_start,
+            period_end=period_end,
+            weeks_in_period=weeks_in_period,
+            shift_templates=shift_templates,
+            employee_target_hours=employee_target_hours,
+            availability_blocked=availability_blocked,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            allow_emergency_override=True,
+        )
+        if pool_after_dn_d:
+            result.cells_changed += pool_after_dn_d
+            result.tier_counts["pool_night_gaps"] = (
+                result.tier_counts.get("pool_night_gaps", 0) + pool_after_dn_d
+            )
+        weekend_pool_after_dn_d = _cover_dn_pool_night_gaps(
+            working,
+            frame_order=frame_order,
+            profiles=profiles,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            employees=employees,
+            employee_profiles=employee_profiles,
+            dates=dates,
+            qual_codes=qual_codes,
+            templates=templates,
+            rules=rules,
+            period_start=period_start,
+            period_end=period_end,
+            weeks_in_period=weeks_in_period,
+            shift_templates=shift_templates,
+            employee_target_hours=employee_target_hours,
+            availability_blocked=availability_blocked,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            allow_emergency_override=True,
+            weekend_only=True,
+        )
+        if weekend_pool_after_dn_d:
+            result.cells_changed += weekend_pool_after_dn_d
+            result.tier_counts["pool_night_gaps"] = (
+                result.tier_counts.get("pool_night_gaps", 0) + weekend_pool_after_dn_d
+            )
+        restored_after_dn_d = _restore_dn_night_quota_if_under_target(
+            working,
+            dates=dates,
+            employees_by_id=employees_by_id,
+            employee_target_hours=employee_target_hours,
+            period_start=period_start,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if restored_after_dn_d:
+            result.cells_changed += restored_after_dn_d
+            result.tier_counts["dn_night_quota_restore"] = (
+                result.tier_counts.get("dn_night_quota_restore", 0) + restored_after_dn_d
+            )
+        for _ in range(4):
+            footer_pass = _rebalance_dn_footer_night_gaps(
+                working,
+                frame_order=frame_order,
+                row_lookup=row_lookup,
+                employees_by_id=employees_by_id,
+                dates=dates,
+                qual_codes=qual_codes,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            )
+            pool_pass = _cover_dn_pool_night_gaps(
+                working,
+                frame_order=frame_order,
+                profiles=profiles,
+                row_lookup=row_lookup,
+                employees_by_id=employees_by_id,
+                employees=employees,
+                employee_profiles=employee_profiles,
+                dates=dates,
+                qual_codes=qual_codes,
+                templates=templates,
+                rules=rules,
+                period_start=period_start,
+                period_end=period_end,
+                weeks_in_period=weeks_in_period,
+                shift_templates=shift_templates,
+                employee_target_hours=employee_target_hours,
+                availability_blocked=availability_blocked,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+                allow_emergency_override=True,
+            )
+            weekend_pass = _cover_dn_pool_night_gaps(
+                working,
+                frame_order=frame_order,
+                profiles=profiles,
+                row_lookup=row_lookup,
+                employees_by_id=employees_by_id,
+                employees=employees,
+                employee_profiles=employee_profiles,
+                dates=dates,
+                qual_codes=qual_codes,
+                templates=templates,
+                rules=rules,
+                period_start=period_start,
+                period_end=period_end,
+                weeks_in_period=weeks_in_period,
+                shift_templates=shift_templates,
+                employee_target_hours=employee_target_hours,
+                availability_blocked=availability_blocked,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+                allow_emergency_override=True,
+                weekend_only=True,
+            )
+            pass_changed = footer_pass + pool_pass + weekend_pass
+            if pass_changed:
+                result.cells_changed += pass_changed
+                result.tier_counts["footer_n_rebalance"] = (
+                    result.tier_counts.get("footer_n_rebalance", 0) + pass_changed
+                )
+            if pass_changed == 0:
+                break
+        dn_wd_rebalanced2 = _rebalance_dn_ft_weekday_day_quotas(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            rules=rules,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            employee_target_hours=employee_target_hours,
+        )
+        if dn_wd_rebalanced2:
+            result.cells_changed += dn_wd_rebalanced2
+            result.tier_counts["dn_weekday_day_quota"] = (
+                result.tier_counts.get("dn_weekday_day_quota", 0) + dn_wd_rebalanced2
+            )
+        post_restore_rebalanced = rebalance_weekday_day_shifts(
+            working,
+            frame_order=frame_order,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            dates=dates,
+            period_start=period_start,
+            rules=rules,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+            employee_target_hours=employee_target_hours,
+        )
+        if post_restore_rebalanced:
+            result.cells_changed += post_restore_rebalanced
+            result.tier_counts["de_weekday_day_rebalance"] = (
+                result.tier_counts.get("de_weekday_day_rebalance", 0)
+                + post_restore_rebalanced
+            )
 
     result.lines_touched = len(touched)
     return working, result
