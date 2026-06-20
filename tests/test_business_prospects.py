@@ -192,15 +192,16 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     lowered = draft.body.lower()
     assert "managed" in lowered
     assert "$800" in draft.body or "800" in draft.body
-    assert "14-day trial" in lowered
-    managed_idx = lowered.find("managed")
-    trial_idx = lowered.find("14-day trial")
-    assert managed_idx < trial_idx
+    assert "14-day trial" not in lowered
+    assert "sample breakroom" not in lowered
+    assert "what we deliver for managers" not in lowered
+    assert lowered.count("excel weekend") == 0
+    assert 'reply with "yes — [week] works"' in lowered
     assert "!!!" not in draft.body
     assert "urgent" not in lowered
     assert "Selkirk Regional Lab" in draft.subject or "selkirk" in draft.subject.lower()
     assert "Jordan" in draft.body
-    assert len(draft.body.splitlines()) >= 8
+    assert len(draft.body.split()) <= 150
 
 
 def test_proceed_with_client_creates_tenant() -> None:

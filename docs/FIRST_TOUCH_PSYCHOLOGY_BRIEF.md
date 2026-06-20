@@ -1,6 +1,6 @@
 # First-Touch Psychology Brief — Manitoba Hospital Labs (Batch 1)
 
-**Date:** 2026-06-19 · **Iteration 3**  
+**Date:** 2026-06-19 · **Iteration 4**  
 **Owner:** persuasion-psychology-partner  
 **Handoff to:** brand-voice-partner (wording), revenue-growth (target list), customer-relations (reply path)  
 **North star:** 5 qualified first-touch mailtos → 1 pilot reply → $800 managed block
@@ -20,7 +20,7 @@
 
 ## Primary psychological lever
 
-**Specificity + low-commitment reciprocity** — lead with *their* facility and a true pain mirror, offer one useful artifact (sample breakroom HTML from demo roster) before any pricing ask. Single CTA: reply with line count + preferred week for 15-min walkthrough.
+**Specificity + single low-commitment ask** — lead with *their* facility and a true pain mirror, then one managed-first offer paragraph (8-week publish, compliance check, breakroom HTML). **One CTA only:** reply with `"yes — [week] works"` and roughly how many MLT/MLA lines they run. Defer sample exports, Pro, and trial to follow-up #2 or the 15-minute walkthrough — not the first touch.
 
 ---
 
@@ -28,7 +28,7 @@
 
 | Variant | Subject | Hypothesis | Ethical guard |
 |---------|---------|------------|---------------|
-| **A (recommended)** | `{Facility} — breakroom grid ready for a quick look?` | Curiosity gap tied to true deliverable (breakroom HTML) | Payoff must include sample export offer in body |
+| **A (recommended)** | `{Facility} — breakroom grid ready for a quick look?` | Curiosity gap tied to true deliverable (breakroom HTML) | Body must describe managed publish outcome; no sample attachment promise in first email |
 | **B** | `{Facility} rotation before posting season` | Loss-aversion (kind): seasonal stress without scare tactics | No fake deadlines; acknowledge stress only |
 | **C** | `Quick question — MLT lines at {Facility}` | Specificity + question format boosts open on mobile | Body must answer the implied question in first 2 lines |
 
@@ -36,23 +36,34 @@
 
 ---
 
-## Body structure (recommended)
+## Body structure (recommended — first touch)
 
 1. **Greeting** — first name if known  
 2. **Peer opener** (2 sentences) — Manitoba hospital lab context, not vendor pitch  
 3. **Facility mirror** — why *this* roster shape matters  
 4. **Pain acknowledgment** — 1–3 bullets from prospect pain_signals (honest only)  
-5. **Value stack** — 2 bullets max (breakroom-ready export + compliance check before publish)  
-6. **Reciprocity offer** — sample breakroom export from Portage-style demo (no PHI)  
-7. **Managed-first path** — $800–1,200 CAD 8-week block; Pro/trial as footnote  
-8. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run`  
-9. **Sign-off** — Port Optical team
+5. **Managed-first offer** — one paragraph: $800–1,200 CAD 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out)  
+6. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run` (walkthrough times follow on reply)  
+7. **Sign-off** — em dash + sender name (Port Optical team)
+
+**Not in first touch:** sample breakroom export offer, Pro self-serve pricing, 14-day trial link, extra value-bullet stacks, or secondary CTAs.
+
+---
+
+## Follow-up #2 (after reply or no response)
+
+Use to deliver deferred reciprocity and upsell paths without cluttering the opener:
+
+- **Sample breakroom HTML** from Portage-style demo roster (no PHI) — on walkthrough or second email  
+- **Pro self-serve** and **14-day trial** — only after managed path is understood or post successful publish  
+- Calendar times for 15-minute walkthrough — confirm once they reply with week + line count
 
 ---
 
 ## Friction removal checklist
 
 - [ ] One primary action only (no trial link + calendar link + attachment in first touch)  
+- [ ] No Pro/trial/sample-export language in first-touch body (Email Preview honesty scan + human read)  
 - [ ] Subject ≤ 60 characters for mobile  
 - [ ] Honesty scan passes (`blocked_honesty_phrases` in Email Preview)  
 - [ ] Reply-To set to monitored inbox (`LAB_INBOUND_REPLY_TO`) so replies sync to Business → Inbox  
@@ -69,6 +80,8 @@ When prospect replies, use numbered intake:
 3. Union rules summary (DE/DN, weekend pattern, max consecutive)  
 4. Preferred breakroom publish date  
 5. Billing contact for managed block invoice
+
+(Offer sample export and walkthrough scheduling in this thread, not in the cold first touch.)
 
 ---
 
@@ -88,7 +101,8 @@ When prospect replies, use numbered intake:
 
 - [x] Psychology brief artifact exists for batch 1  
 - [x] Subject A/B/C selectable in Business → Email Preview (`first_touch_subject` helper)  
+- [x] First-touch template aligned to managed-first single CTA (no sample/Pro/trial in opener)  
 - [ ] First 5 mailtos sent with Reply-To wired  
 - [ ] Reply converted via numbered intake template
 
-*Brief ready for brand-voice polish pass on live drafts in Business → Email Preview.*
+*Brief synced with managed-first Email Preview defaults (2026-06-19).*

@@ -231,21 +231,25 @@ def build_template_context(
         "mlt_mla_summary": enrichment.mlt_mla_summary if enrichment else "your MLT/MLA lines",
         "annual_test_volume": format_test_volume(enrichment.annual_test_volume) if enrichment else "your test volume",
         "pain_opener": pain_opener,
+        "managed_offer_paragraph": (
+            f"Most labs we work with start with a managed 8-week publish ({MANAGED_BLOCK_PRICE_LABEL}): "
+            "you send roster lines and period dates, we build the schedule, run a compliance check, "
+            "and deliver breakroom HTML you can post."
+        ),
         "solution_paragraph": (
-            "What we deliver: an 8-week schedule that is legal, covered, and breakroom-ready — "
+            "We deliver an 8-week schedule that is legal, covered, and breakroom-ready — "
             "with Manitoba labor rules and vacant-line fairness built in."
         ),
         "proof_paragraph": (
-            f"Most labs start with a managed 8-week publish ({MANAGED_BLOCK_PRICE_LABEL}): "
-            "you send roster and dates, we build the schedule, run a compliance check, and "
-            "deliver breakroom HTML you can post. I can share a sample export from a Portage-style "
-            f"demo roster (no patient data). Pro self-serve ({PRO_MONTHLY_PRICE_LABEL}) or a "
-            "free 14-day trial are optional next steps after a successful publish."
+            f"After a successful managed publish ({MANAGED_BLOCK_PRICE_LABEL}), teams can move to "
+            f"Pro self-serve ({PRO_MONTHLY_PRICE_LABEL}) or explore with a free 14-day trial on "
+            "a Portage-style demo roster."
         ),
         "estimated_savings": savings,
         "pitch_angle": pitch_angle,
         "cta_line": (
-            'If useful, reply with "yes — [week] works" and roughly how many MLT/MLA lines you run.'
+            'Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run — '
+            "I'll follow up with times for a 15-minute walkthrough."
         ),
         "sender_name": sender_name,
         "trial_link": trial_link,
@@ -275,19 +279,17 @@ def email_preview_envelope_html(*, to: str, subject: str, body: str) -> str:
 
 DEFAULT_EMAIL_BODY_TEMPLATE = """Hi {{first_name}},
 
-I work with Manitoba hospital labs on breakroom-ready rotation schedules — coverage, union rest rules, and the posted grid all have to land together.
+I work with Manitoba hospital labs on breakroom-ready rotation schedules — evening/night coverage, union rest rules, and the posted grid all have to line up.
 
 {{facility_name}} is the kind of roster where that alignment really matters.
 
 {{pain_opener}}
 
-{{solution_paragraph}}
-
-{{proof_paragraph}}
+{{managed_offer_paragraph}}
 
 {{cta_line}}
 
-Best regards,
+—
 {{sender_name}}"""
 
 DEFAULT_EMAIL_SUBJECT_TEMPLATE = "{{facility_name}} — breakroom grid ready for a quick look?"

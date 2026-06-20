@@ -100,8 +100,6 @@ def generate_outreach_email(
     greeting = _greeting(prospect.contact_name)
     facility = prospect.facility.strip()
     pain_block = format_pain_signals_for_email(prospect.pain_signals)
-    value_props = _pick_value_props(prospect.pain_signals, count=2)
-    value_lines = "\n".join(f"  • {prop}" for prop in value_props)
 
     subject = f"{facility} — breakroom grid ready for a quick look?"
 
@@ -115,16 +113,9 @@ def generate_outreach_email(
         "",
         pain_block,
         "",
-        "What we deliver for managers like you:",
-        value_lines,
-        "",
         f"Most labs we work with start with a managed 8-week publish ({MANAGED_BLOCK_PRICE_LABEL}): "
         "you send roster lines and period dates, we build the schedule, run a compliance check, "
-        "and deliver breakroom HTML you can post — not another Excel weekend.",
-        "",
-        "I can share a sample breakroom export from a Portage-style demo roster (no patient data). "
-        f"After a successful publish, some teams move to Pro self-serve ({PRO_MONTHLY_PRICE_LABEL}); "
-        "a free 14-day trial is also available if you prefer to explore on your own first.",
+        "and deliver breakroom HTML you can post.",
     ]
 
     if extra_context and extra_context.strip():
@@ -133,10 +124,10 @@ def generate_outreach_email(
     body_parts.extend(
         [
             "",
-            'If a quick look would help, reply with "yes — [week] works" and roughly how many '
-            "MLT/MLA lines you run. I will follow up with times for a 15-minute walkthrough.",
+            'Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run — '
+            "I'll follow up with times for a 15-minute walkthrough.",
             "",
-            "Best regards,",
+            "—",
             sender_name,
         ]
     )
