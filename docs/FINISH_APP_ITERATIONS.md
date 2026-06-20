@@ -544,3 +544,97 @@ Wiring the stale `email_preview.py` module would regress outbound prep. Revisit 
 ---
 
 *Iteration 5 logged by goal-coordinator.*
+
+---
+
+### First-Dollar Sprint — Live prod smoke (2026-06-19)
+
+**Target:** https://lablife.streamlit.app/ (production Streamlit Cloud)  
+**Method:** cursor-ide-browser MCP + CDP (Streamlit iframe; session pre-authenticated as `northstar_admin`)
+
+| Flow | Result | Evidence |
+|------|--------|----------|
+| Sign in | **PASS** | Manager shell loaded — `northstar_admin` · `tenant-northstar-lab`; Operator console + Control Panel visible (`smoke-02-business-section.png`) |
+| Revenue Pipeline | **PASS** | Business → Pipeline tab active; MRR cockpit, 3 NEW prospects, TOP TARGET Portage Regional (`smoke-02-business-section.png`) |
+| Gather | **PASS** | Toast: "0 new prospects added (3 already in pipeline)"; Prospects tab; Portage + St. Boniface cards visible (`smoke-03-gather-prospects.png`) |
+| Email Preview | **PASS** | Portage Regional header; managed-first draft; facility-specific pitch angle (`smoke-04-email-preview.png`) |
+| Subject A/B/C | **PASS** | Variant picker A/B/C present; B selected → mail preview subject updated to rotation variant; mobile length warning at 70 chars (`smoke-05b-subject-variant-b.png`) |
+| Mailto link | **PARTIAL** | `Open in mail client` disabled until **To** field populated (expected `section.py` guard); Reply-To env notes visible; Copy/Save draft present — human must enter recipient email to activate `st.link_button` mailto |
+| Back to manager workspace | **PASS** | Section → Scheduling; Save + schedule health panel; REVENUE COCKPIT cleared (`smoke-07-back-to-scheduling.png`) |
+
+**Smoke verdict:** **PARTIAL PASS** — 6/7 flows green; mailto requires human To entry (Streamlit widget not automatable). No login wall encountered this session (demo tenant already signed in).
+
+---
+
+# First-Dollar Sprint Scorecard — 2026-06-19
+
+**Operator:** first-dollar-sprint (Cursor agent)  
+**Live URL:** https://lablife.streamlit.app/  
+**Sprint goal:** 5 mailtos → 1 reply → $800 managed block path
+
+## Phase summary
+
+| Phase | Status | Blocker |
+|-------|--------|---------|
+| A — Live prod smoke | **PARTIAL PASS** | Mailto link needs human To email; session was pre-authenticated |
+| B — Publish bundle | **BLOCKED** | RSI gate **FAIL** (5 operational + 16 rotation violations); bundle doc created with FAIL evidence |
+| C — Batch 1 outbound | **0/5 sent — PREP DONE** | Only 3 MB facilities in `regional_facilities.csv`; human must send mailtos |
+| D — Reply intake | **READY** (stub) | No reply yet; intake steps documented in `FIRST_TOUCH_PSYCHOLOGY_BRIEF.md` |
+
+## Prod smoke (Phase A)
+
+| Flow | Result |
+|------|--------|
+| Sign in | PASS — northstar_admin shell |
+| Revenue Pipeline → Gather → Email Preview | PASS |
+| Mailto + Reply-To | PARTIAL — mailto gated on To field; Reply-To env caption present |
+| Back to manager workspace | PASS |
+
+## Publish bundle (Phase B)
+
+- RSI gate: **FAIL** (exit code 1)
+- Breakroom path: `exports/breakroom_schedule_period-2026-summer_9.html`
+- Bundle doc: `docs/publish_bundle_2026-06-19.md`
+
+## Outbound log (Phase C) — prep only (human send)
+
+| # | Facility | ICP | Variant (recommended) | Checklist | Sent (UTC) | Notes |
+|---|----------|-----|----------------------|-----------|------------|-------|
+| 1 | Portage Regional Health Centre | 100 | **A** (posting-season pain) | Ready — brand ≥7/10; friction OK in preview; **defer compliance claims until RSI PASS** | — | Top target on live Pipeline |
+| 2 | St. Boniface Hospital | 100 | **A** or **B** (rotation/footer) | Ready — same gates | — | Highest volume MB site in dataset |
+| 3 | Selkirk Regional Lab | 45 | **C** (mobile question format) | Ready — smaller roster; variant C fits | — | Lower ICP; good mobile-subject test |
+| 4 | *(dataset gap)* Health Sciences Centre Winnipeg | — | **A** | **BLOCKED** — add to `regional_facilities.csv` then Gather | — | Recommended expansion per revenue-growth |
+| 5 | *(dataset gap)* Brandon Regional Health Centre | — | **B** | **BLOCKED** — add to CSV then Gather | — | Recommended expansion per revenue-growth |
+
+### Mailto send protocol (human-only)
+
+1. Business → Prospects → **Preview email** on target card  
+2. Enter real **To** address → pick subject **A / B / C** → **Apply subject variant**  
+3. Verify draft vs `FIRST_TOUCH_PSYCHOLOGY_BRIEF.md` friction checklist (single CTA, no trial/Pro/sample in opener)  
+4. Click **Open in mail client** → human reviews and sends  
+5. Log in prospect notes: `first_touch_sent | variant=A|B|C | ts=YYYY-MM-DDTHH:MM:SSZ`
+
+## Reply (Phase D)
+
+| Field | Value |
+|-------|-------|
+| First reply received | **N** |
+| Intake steps completed | **0/5** |
+| Handoff | customer-relations (READY stub — numbered intake in psych brief) |
+
+## Human blockers remaining
+
+- [ ] Fix RSI gate to PASS before citing compliance in outbound
+- [ ] Enter recipient **To** on each Email Preview → send 3 mailtos (5 when CSV expanded)
+- [ ] Stripe invoice for first $800 managed block
+- [ ] Expand `data/rsi/regional_facilities.csv` with 2+ MB sites for full Batch 1 (5)
+- [ ] Set `LAB_INBOUND_REPLY_TO` / IMAP on production for Inbox sync
+
+## FINISH_APP loop
+
+- [x] Loop re-armed (2026-06-19 per iteration header)
+
+## Team confidence (revenue execution)
+
+**Before sprint:** 3/10  
+**After sprint:** **4/10** — live prod smoke + outbound prep documented; RSI FAIL and zero sends keep execution blocked
