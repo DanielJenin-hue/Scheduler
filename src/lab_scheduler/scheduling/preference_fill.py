@@ -498,31 +498,132 @@ def _repair_dn_weekend_night_orphans(
     rules: JurisdictionRules,
     employee_id: str,
 ) -> int:
-    """Ensure D/N rows never end catalog stamp with Saturday N but no Sunday N."""
+    """Ensure D/N rows never end with Saturday N but no Sunday N (or the reverse)."""
     if (profile.contract_line_type or "").upper() != "D/N":
         return 0
     repaired = 0
     for day in dates:
-        if day.weekday() != 5:
+        if day.weekday() == 5:
+            saturday = day
+            sunday = day + timedelta(days=1)
+        elif day.weekday() == 6:
+            saturday = day - timedelta(days=1)
+            sunday = day
+        else:
             continue
-        sunday = day + timedelta(days=1)
-        if sunday > max(dates):
+        if sunday > max(dates) or saturday < min(dates):
             continue
-        if get_grid_token(frame, row_idx, day) != "N":
+        sat_token = get_grid_token(frame, row_idx, saturday)
+        sun_token = get_grid_token(frame, row_idx, sunday)
+        if sat_token != "N" and sun_token != "N":
             continue
-        if get_grid_token(frame, row_idx, sunday) == "N":
+        if sat_token == "N" and sun_token == "N":
             continue
-        friday = day - timedelta(days=1)
-        if friday >= min(dates) and get_grid_token(frame, row_idx, friday) == "N":
+        anchor = saturday if sat_token == "N" else sunday
+        mirror = sunday if anchor == saturday else saturday
+        friday = saturday - timedelta(days=1)
+        if (
+            anchor == saturday
+            and friday >= min(dates)
+            and get_grid_token(frame, row_idx, friday) == "N"
+        ):
             _clear_row_token_if_work_shift(frame, row_idx, friday)
         if not _would_violate_consecutive_work_cap(
-            frame, row_idx, sunday, dates=dates, rules=rules
+            frame, row_idx, mirror, dates=dates, rules=rules
         ):
-            if set_grid_token(frame, row_idx, sunday, "N"):
+            if set_grid_token(frame, row_idx, mirror, "N"):
                 repaired += 1
                 continue
-        if _clear_row_token_if_work_shift(frame, row_idx, day):
+        if _clear_row_token_if_work_shift(frame, row_idx, anchor):
             repaired += 1
+    return repaired
+
+
+def _repair_weekend_sat_sun_mirror_orphans(
+    frame: pd.DataFrame,
+    *,
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    qual_codes: Mapping[str, str],
+    dates: Sequence[date],
+    rules: JurisdictionRules,
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> int:
+    """Mirror Sat/Sun D/E/N per employee, or drop single-day orphans when mirror fails."""
+    from lab_scheduler.scheduling.weekend_placement_rules import (
+        can_place_weekend_token,
+        weekend_sat_sun_tokens_mirrored,
+    )
+
+    repaired = 0
+    for employee_id, row_idx in row_lookup.items():
+        profile = employees_by_id.get(employee_id)
+        if profile is None:
+            continue
+        contract = (profile.contract_line_type or "").upper()
+        if contract == "D/N":
+            repaired += _repair_dn_weekend_night_orphans(
+                frame,
+                row_idx,
+                dates,
+                profile=profile,
+                rules=rules,
+                employee_id=employee_id,
+            )
+        for day in dates:
+            if day.weekday() != 5:
+                continue
+            sunday = day + timedelta(days=1)
+            if sunday > max(dates):
+                continue
+            sat_token = get_grid_token(frame, row_idx, day)
+            sun_token = get_grid_token(frame, row_idx, sunday)
+            if weekend_sat_sun_tokens_mirrored(sat_token, sun_token):
+                continue
+            if contract == "D/N" and "N" in {sat_token, sun_token}:
+                continue
+            if sat_token in {"D", "E", "N"} and sun_token not in {"D", "E", "N"}:
+                anchor, mirror_day, band = day, sunday, sat_token
+            elif sun_token in {"D", "E", "N"} and sat_token not in {"D", "E", "N"}:
+                anchor, mirror_day, band = sunday, day, sun_token
+            else:
+                anchor, mirror_day, band = day, sunday, sat_token
+            if not is_editable_cell(
+                employee_id,
+                mirror_day,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ) or not is_editable_cell(
+                employee_id,
+                anchor,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ):
+                if _clear_row_token_if_work_shift(frame, row_idx, anchor):
+                    repaired += 1
+                elif _clear_row_token_if_work_shift(frame, row_idx, mirror_day):
+                    repaired += 1
+                continue
+            can_mirror = can_place_weekend_token(
+                frame,
+                row_lookup,
+                employees_by_id,
+                qual_codes,
+                employee_id=employee_id,
+                day=mirror_day,
+                token=band,
+            ) and not _would_violate_consecutive_work_cap(
+                frame, row_idx, mirror_day, dates=dates, rules=rules
+            )
+            if can_mirror and set_grid_token(frame, row_idx, mirror_day, band):
+                repaired += 1
+            elif _clear_row_token_if_work_shift(frame, row_idx, anchor):
+                repaired += 1
+            elif sat_token != sun_token and _clear_row_token_if_work_shift(
+                frame, row_idx, mirror_day
+            ):
+                repaired += 1
     return repaired
 
 
@@ -4916,7 +5017,7 @@ def _run_weekend_stagger_slice(
                     employee_id=employee_id,
                     day=day,
                     band=band,
-                    mirror=False,
+                    mirror=True,
                     locked_cells=locked_cells,
                     blocked_map=blocked_map,
                     allow_overwrite=True,
@@ -5897,6 +5998,21 @@ def fill_schedule_by_preferences(
                 result.tier_counts.get("de_weekday_day_rebalance", 0)
                 + post_restore_rebalanced
             )
+
+    if mode in {FillMode.FULL, FillMode.ALTERNATE_SHIFTS, FillMode.WEEKEND_STAGGER_SLICE}:
+        mirror_repaired = _repair_weekend_sat_sun_mirror_orphans(
+            working,
+            row_lookup=row_lookup,
+            employees_by_id=employees_by_id,
+            qual_codes=qual_codes,
+            dates=dates,
+            rules=rules,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if mirror_repaired:
+            result.cells_changed += mirror_repaired
+            result.tier_counts["weekend_sat_sun_mirror"] = mirror_repaired
 
     result.lines_touched = len(touched)
     return working, result

@@ -17,6 +17,9 @@ FT_DE_EVENING_BLOCK_STREAK_DAYS = 7  # exception to default 6-day Portage cap
 # Operational weekend stagger (4 shift-days); catalog may label 8 aspirational.
 FT_WEEKEND_SHIFT_DAYS_OPERATIONAL = 4
 
+# Portage gold standard: same employee, same band on Sat and Sun (or neither day).
+WEEKEND_MIRROR_BANDS = frozenset({"D", "E", "N"})
+
 
 @dataclass(frozen=True, slots=True)
 class EveningBlockSpec:

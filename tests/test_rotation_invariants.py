@@ -9,7 +9,10 @@ from lab_scheduler.policy.frame_bridge import schedule_frame_row_index_by_employ
 from lab_scheduler.scheduling.preference_policy import FillMode
 from lab_scheduler.scheduling.profiles import EmployeeProfile
 from lab_scheduler.scheduling.rotation_invariants import check_rotation_invariants
-from lab_scheduler.scheduling.weekend_placement_rules import can_place_daily_alt
+from lab_scheduler.scheduling.weekend_placement_rules import (
+    can_place_daily_alt,
+    weekend_sat_sun_tokens_mirrored,
+)
 from lab_scheduler.simulation.load_test import build_portage_roster, portage_employee_target_hours
 from tests.test_distribute_alternate_shifts import _period_dates
 from tests.test_preference_fill import _empty_frame, _fill_specs
@@ -56,6 +59,56 @@ def test_weekday_evening_cap_is_one_per_qual() -> None:
         employee_id=second_mlt,
         day=monday,
         band="E",
+    )
+
+
+def test_weekend_sat_sun_mirror_helper() -> None:
+    assert weekend_sat_sun_tokens_mirrored("", "")
+    assert weekend_sat_sun_tokens_mirrored("N", "N")
+    assert not weekend_sat_sun_tokens_mirrored("N", "")
+    assert not weekend_sat_sun_tokens_mirrored("", "E")
+    assert not weekend_sat_sun_tokens_mirrored("D", "E")
+
+
+def test_weekend_sat_sun_mirror_invariant_flags_split_weekend() -> None:
+    start = date(2026, 6, 1)
+    dates = _period_dates(start)
+    saturday = date(2026, 6, 6)
+    sunday = date(2026, 6, 7)
+    specs = [("mlt-dn-01", "Vacant MLT D/N - Line 01", "D/N")]
+    frame = _empty_frame(dates, specs)
+    row_lookup = schedule_frame_row_index_by_employee_id(frame)
+    employees_by_id = {
+        "mlt-dn-01": EmployeeProfile(
+            id="mlt-dn-01",
+            full_name="Vacant MLT D/N - Line 01",
+            fte=1.0,
+            qualification_ids={"qual-mlt"},
+            contract_line_type="D/N",
+        )
+    }
+    frame.at[row_lookup["mlt-dn-01"], saturday.isoformat()] = "N"
+    report = check_rotation_invariants(
+        frame,
+        dates=dates,
+        row_lookup=row_lookup,
+        employees_by_id=employees_by_id,
+        qual_codes={"qual-mlt": "MLT", "qual-mla": "MLA"},
+        employee_target_hours={"mlt-dn-01": 320.0},
+    )
+    assert not report.passed
+    assert any(v.invariant_id == "weekend_sat_sun_mirror" for v in report.violations)
+    frame.at[row_lookup["mlt-dn-01"], sunday.isoformat()] = "N"
+    report_ok = check_rotation_invariants(
+        frame,
+        dates=dates,
+        row_lookup=row_lookup,
+        employees_by_id=employees_by_id,
+        qual_codes={"qual-mlt": "MLT", "qual-mla": "MLA"},
+        employee_target_hours={"mlt-dn-01": 320.0},
+    )
+    assert report_ok.passed or not any(
+        v.invariant_id == "weekend_sat_sun_mirror" for v in report_ok.violations
     )
 
 

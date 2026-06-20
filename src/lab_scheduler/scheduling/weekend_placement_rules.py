@@ -48,6 +48,19 @@ def mirror_weekend_partner(day: date) -> date | None:
     return None
 
 
+def weekend_work_token(token: str) -> bool:
+    return token in {"D", "E", "N"}
+
+
+def weekend_sat_sun_tokens_mirrored(sat_token: str, sun_token: str) -> bool:
+    """True when Sat/Sun are both off or both carry the same D/E/N band."""
+    sat_work = weekend_work_token(sat_token)
+    sun_work = weekend_work_token(sun_token)
+    if not sat_work and not sun_work:
+        return True
+    return sat_work and sun_work and sat_token == sun_token
+
+
 def is_editable_cell(
     employee_id: str,
     day: date,

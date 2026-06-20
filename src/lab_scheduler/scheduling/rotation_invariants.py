@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, timedelta
 from typing import Dict, List, Mapping, Sequence, Set
 
 import pandas as pd
@@ -26,6 +26,7 @@ from lab_scheduler.scheduling.schedule_tallies import (
 from lab_scheduler.scheduling.weekend_placement_rules import (
     daily_band_qual_count,
     get_grid_token,
+    weekend_sat_sun_tokens_mirrored,
 )
 from lab_scheduler.solver.cpsat_fill import is_vacant_portage_line
 
@@ -219,5 +220,30 @@ def check_rotation_invariants(
                         f"{name}: {weekday_d} weekday D != {expected_weekday_d}",
                     )
                 )
+
+    for employee_id, row_idx in row_lookup.items():
+        profile = employees_by_id.get(employee_id)
+        if profile is None:
+            continue
+        name = getattr(profile, "full_name", employee_id)
+        for day in dates:
+            if day.weekday() != 5:
+                continue
+            sunday = day + timedelta(days=1)
+            if sunday > max(dates):
+                continue
+            sat_token = get_grid_token(frame, row_idx, day)
+            sun_token = get_grid_token(frame, row_idx, sunday)
+            if weekend_sat_sun_tokens_mirrored(sat_token, sun_token):
+                continue
+            violations.append(
+                InvariantViolation(
+                    "weekend_sat_sun_mirror",
+                    (
+                        f"{name}: split weekend {day.isoformat()}/"
+                        f"{sunday.isoformat()} {sat_token or '-'}|{sun_token or '-'}"
+                    ),
+                )
+            )
 
     return InvariantReport(passed=not violations, violations=violations)

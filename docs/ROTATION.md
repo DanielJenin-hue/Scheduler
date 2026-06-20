@@ -30,6 +30,12 @@ Weekday E/N placement uses **1 per qual per day** (`operational_alt_band_cap_per
 
 Operational reality: **4 weekend shift-days** per FT line (`FT_WEEKEND_SHIFT_DAYS`); catalog may label 8 aspirational.
 
+## Weekend Sat/Sun mirror (hard)
+
+Portage gold standard: **same employee, same D/E/N band on both Saturday and Sunday**, or neither day. If someone works Saturday evening, they work Sunday evening too — not a single-day orphan. D/N weekend nights follow the same mirror; `preference_fill` repairs split weekends after trim passes.
+
+Legacy `auto_generate` enforces the same rule via `_apply_portage_weekend_pairing_policy`.
+
 ## D/N nights (frozen)
 
 - 14 N per FT D/N line from `portage_dn_reference.py` / master catalog
