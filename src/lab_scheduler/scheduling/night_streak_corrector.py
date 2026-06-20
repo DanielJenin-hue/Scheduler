@@ -44,26 +44,10 @@ def catalog_dn_weekday_night_streak_allowed(
     streak: NightStreak,
     period_start: date,
 ) -> bool:
-    """Catalog-stamped N cells on full-time D/N master lines are intentional."""
+    """Deprecated: Manitoba gold standard caps all lines at 4 consecutive nights."""
 
-    if parse_vacant_portage_line(employee.full_name) is None:
-        return False
-    if (employee.contract_line_type or "") != "D/N":
-        return False
-    rotation_fte = vacant_master_rotation_fte(employee)
-    if rotation_fte is None or rotation_fte < FULLTIME_FTE_THRESHOLD:
-        return False
-    day = streak.start_date
-    while day <= streak.end_date:
-        if not vacant_master_rotation_permits_shift(
-            employee,
-            day,
-            period_start,
-            NIGHT_SHIFT_CODE,
-        ):
-            return False
-        day += timedelta(days=1)
-    return True
+    _ = (employee, streak, period_start)
+    return False
 
 
 def catalog_dn_night_streak_allowed(

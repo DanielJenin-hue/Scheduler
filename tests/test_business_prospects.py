@@ -195,7 +195,8 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     assert "14-day trial" not in lowered
     assert "sample breakroom" not in lowered
     assert "what we deliver for managers" not in lowered
-    assert lowered.count("excel weekend") == 0
+    assert "posting season" in lowered or "evenings, nights" in lowered
+    assert "walkthrough" in lowered or "walkthrough times" in lowered
     assert 'reply with "yes — [week] works"' in lowered
     assert "!!!" not in draft.body
     assert "urgent" not in lowered

@@ -1026,40 +1026,33 @@ def _would_violate_labor_rules(
             find_consecutive_night_streaks,
         )
 
-        skip_night_streak_cap = master_catalog_stamp and vacant_master_rotation_permits_shift(
-            state.profile,
-            assignment_date,
-            period_start,
-            "NIGHT",
+        night_id = next(
+            (template_id for template_id, info in shift_templates.items() if info.code == "NIGHT"),
+            None,
         )
-        if not skip_night_streak_cap:
-            night_id = next(
-                (template_id for template_id, info in shift_templates.items() if info.code == "NIGHT"),
-                None,
-            )
-            if night_id is not None:
-                simulated = [
-                    PlannedAssignment(state.profile.id, template_id, work_date)
-                    for work_date, template_id in state.assignment_records
-                ] + [
-                    PlannedAssignment(
-                        state.profile.id,
-                        night_id,
-                        assignment_date,
-                    )
-                ]
-                streaks = find_consecutive_night_streaks(
-                    employee_id=state.profile.id,
-                    period_start=period_start,
-                    period_end=period_end,
-                    assignments=simulated,
-                    shift_templates=shift_templates,
-                    min_length=PORTAGE_MAX_CONSECUTIVE_NIGHTS + 1,
+        if night_id is not None:
+            simulated = [
+                PlannedAssignment(state.profile.id, template_id, work_date)
+                for work_date, template_id in state.assignment_records
+            ] + [
+                PlannedAssignment(
+                    state.profile.id,
+                    night_id,
+                    assignment_date,
                 )
-                if streaks:
-                    return _reject(
-                        f"would exceed {PORTAGE_MAX_CONSECUTIVE_NIGHTS} consecutive night shifts"
-                    )
+            ]
+            streaks = find_consecutive_night_streaks(
+                employee_id=state.profile.id,
+                period_start=period_start,
+                period_end=period_end,
+                assignments=simulated,
+                shift_templates=shift_templates,
+                min_length=PORTAGE_MAX_CONSECUTIVE_NIGHTS + 1,
+            )
+            if streaks:
+                return _reject(
+                    f"would exceed {PORTAGE_MAX_CONSECUTIVE_NIGHTS} consecutive night shifts"
+                )
 
     catalog_authoritative = _master_catalog_dn_authoritative_stamp(
         state.profile,

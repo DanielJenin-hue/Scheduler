@@ -286,6 +286,110 @@ def _would_violate_night_streak_cap(
     )
 
 
+def _trim_dn_night_streak_overruns(
+    frame: pd.DataFrame,
+    *,
+    dates: Sequence[date],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> int:
+    """Drop trailing nights from any run longer than the Portage 4-night cap."""
+
+    from lab_scheduler.scheduling.night_streak_corrector import PORTAGE_MAX_CONSECUTIVE_NIGHTS
+
+    row_lookup = schedule_frame_row_index_by_employee_id(frame)
+    changed = 0
+    for employee_id, row_idx in row_lookup.items():
+        profile = employees_by_id.get(employee_id)
+        if profile is None or (profile.contract_line_type or "").upper() != "D/N":
+            continue
+        for _ in range(32):
+            break_day: date | None = None
+            weekend_fallback: date | None = None
+            current = 0
+            for day in dates:
+                if get_grid_token(frame, row_idx, day) == "N":
+                    current += 1
+                    if current == PORTAGE_MAX_CONSECUTIVE_NIGHTS + 1:
+                        if day.weekday() < 5:
+                            break_day = day
+                            break
+                        if weekend_fallback is None:
+                            weekend_fallback = day
+                else:
+                    current = 0
+            if break_day is None:
+                break_day = weekend_fallback
+            if break_day is None:
+                break
+            if not is_editable_cell(
+                employee_id,
+                break_day,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ):
+                break
+            if _clear_row_token_if_work_shift(frame, row_idx, break_day):
+                changed += 1
+            else:
+                break
+    return changed
+
+
+def _restore_dn_night_quota_if_under_target(
+    frame: pd.DataFrame,
+    *,
+    dates: Sequence[date],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    employee_target_hours: Mapping[str, float],
+    period_start: date,
+    locked_cells: Set[Tuple[str, date]],
+    blocked_map: Mapping[str, Mapping[date, str]],
+) -> int:
+    """Add cap-safe catalog nights when streak trim left a D/N line one shift short."""
+
+    from lab_scheduler.scheduling.portage_equity_targets import (
+        PORTAGE_DN_FT_NIGHT_SHIFT_TARGET,
+        portage_is_fulltime_catalog_hours,
+    )
+
+    row_lookup = schedule_frame_row_index_by_employee_id(frame)
+    changed = 0
+    for employee_id, row_idx in row_lookup.items():
+        profile = employees_by_id.get(employee_id)
+        if profile is None or (profile.contract_line_type or "").upper() != "D/N":
+            continue
+        if not portage_is_fulltime_catalog_hours(
+            float(employee_target_hours.get(employee_id, 0.0))
+        ):
+            continue
+        night_count = sum(
+            1 for day in dates if get_grid_token(frame, row_idx, day) == "N"
+        )
+        if night_count >= PORTAGE_DN_FT_NIGHT_SHIFT_TARGET:
+            continue
+        for day in reversed(dates):
+            if night_count >= PORTAGE_DN_FT_NIGHT_SHIFT_TARGET:
+                break
+            if not is_editable_cell(
+                employee_id,
+                day,
+                locked_cells=locked_cells,
+                blocked_map=blocked_map,
+            ):
+                continue
+            token = get_grid_token(frame, row_idx, day)
+            if token != "":
+                continue
+            if _would_violate_night_streak_cap(frame, row_idx, day, dates):
+                continue
+            if set_grid_token(frame, row_idx, day, "N"):
+                changed += 1
+                night_count += 1
+    return changed
+
+
 def _catalog_week_index(day: date, period_start: date) -> int:
     return (day - period_start).days // 7
 
@@ -364,6 +468,10 @@ def _stamp_catalog_shift_allowed(
                         frame, row_idx, sunday, dates=dates, rules=rules
                     ):
                         return False
+        if token == "N" and _would_violate_night_streak_cap(
+            frame, row_idx, day, dates
+        ):
+            return False
         return True
 
     if token == "N" and contract == "D/N" and day.weekday() == 6:
@@ -2420,16 +2528,19 @@ def _cover_dn_pool_night_gaps(
     locked_cells: Set[Tuple[str, date]],
     blocked_map: Mapping[str, Mapping[date, str]],
     allow_emergency_override: bool = False,
+    weekend_only: bool = False,
 ) -> int:
     """
-    Cover weekday pool night gaps left by catalog sacrifice (6-day / night-streak caps).
+    Cover pool night gaps left by catalog sacrifice (6-day / night-streak caps).
 
     When the active D/N night-block line cannot work N, borrow from another D/N line
     in the same qual pool (typically a line on its day-block week).
     """
     changed = 0
     for day in dates:
-        if day.weekday() >= 5:
+        if weekend_only and day.weekday() < 5:
+            continue
+        if not weekend_only and day.weekday() >= 5:
             continue
         for qual in ("MLT", "MLA"):
             counts = daily_band_qual_count(
@@ -2446,9 +2557,7 @@ def _cover_dn_pool_night_gaps(
                 allow_emergency_override
                 and counts.get(qual, 0) < _WEEKDAY_ALT_QUAL_FLOOR
             )
-            night_cap = PORTAGE_DN_FT_NIGHT_SHIFT_TARGET + (
-                1 if pool_emergency else 0
-            )
+            night_cap = PORTAGE_DN_FT_NIGHT_SHIFT_TARGET
             candidates: List[Tuple[int, int, int, str]] = []
             for employee_id in frame_order:
                 sched_profile = profiles.get(employee_id)
@@ -2485,8 +2594,7 @@ def _cover_dn_pool_night_gaps(
                     if not pool_emergency:
                         continue
                 if _would_violate_night_streak_cap(frame, row_idx, day, dates):
-                    if not pool_emergency:
-                        continue
+                    continue
                 night_count = _count_row_band_shifts(frame, row_idx, dates, "N")
                 if night_count >= night_cap:
                     continue
@@ -5078,6 +5186,20 @@ def fill_schedule_by_preferences(
         if rebalanced:
             result.cells_changed += rebalanced
             result.tier_counts["de_weekday_day_rebalance"] = rebalanced
+
+    if mode in {FillMode.FULL, FillMode.ALTERNATE_SHIFTS}:
+        restored = _restore_dn_night_quota_if_under_target(
+            working,
+            dates=dates,
+            employees_by_id=employees_by_id,
+            employee_target_hours=employee_target_hours,
+            period_start=period_start,
+            locked_cells=locked_cells,
+            blocked_map=blocked_map,
+        )
+        if restored:
+            result.cells_changed += restored
+            result.tier_counts["dn_night_quota_restore"] = restored
 
     result.lines_touched = len(touched)
     return working, result

@@ -59,6 +59,38 @@ def test_weekday_evening_cap_is_one_per_qual() -> None:
     )
 
 
+def test_alternate_shifts_rotation_invariants_respect_night_streak_cap() -> None:
+    """No vacant line may exceed the 4-night Manitoba cap after ALTERNATE_SHIFTS fill."""
+    from lab_scheduler.scheduling.night_streak_corrector import PORTAGE_MAX_CONSECUTIVE_NIGHTS
+
+    start = date(2026, 6, 1)
+    dates = _period_dates(start)
+    roster = build_portage_roster()
+    targets = portage_employee_target_hours(roster, weeks_in_period=8, rules=MANITOBA)
+    specs = [(e.id, e.full_name, e.contract_line_type or "D/E") for e in roster]
+    frame, _ = _fill_specs(
+        dates,
+        specs,
+        targets=targets,
+        mode=FillMode.ALTERNATE_SHIFTS,
+    )
+    row_lookup = schedule_frame_row_index_by_employee_id(frame)
+    from lab_scheduler.scheduling.weekend_placement_rules import get_grid_token
+
+    for employee_id, row_idx in row_lookup.items():
+        best = current = 0
+        for day in dates:
+            if get_grid_token(frame, row_idx, day) == "N":
+                current += 1
+                best = max(best, current)
+            else:
+                current = 0
+        assert best <= PORTAGE_MAX_CONSECUTIVE_NIGHTS, (
+            f"{employee_id}: {best} consecutive nights exceeds "
+            f"{PORTAGE_MAX_CONSECUTIVE_NIGHTS}-night cap"
+        )
+
+
 def test_alternate_shifts_rotation_invariants_on_clean_grid() -> None:
     start = date(2026, 6, 1)
     dates = _period_dates(start)

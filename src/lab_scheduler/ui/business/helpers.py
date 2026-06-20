@@ -216,8 +216,19 @@ def build_template_context(
     pain_opener = (
         prospect.pain_signals[0]
         if prospect.pain_signals
-        else "Many hospital lab managers still depend on manual spreadsheets for breakroom posting."
+        else (
+            "Most managers I talk to still juggle separate tabs for evenings, nights, "
+            "and a breakroom grid that has to match union rest rules."
+        )
     )
+    if prospect.pain_signals and (
+        "test volume" in prospect.pain_signals[0].lower()
+        or "ot" in prospect.pain_signals[0].lower()
+    ):
+        pain_opener = (
+            f"{prospect.pain_signals[0].rstrip('.')}. "
+            "That usually shows up as last-minute OT patches and equity questions mid-week."
+        )
     savings = (
         f"${enrichment.estimated_savings_usd:,.0f}/yr"
         if enrichment
@@ -232,9 +243,9 @@ def build_template_context(
         "annual_test_volume": format_test_volume(enrichment.annual_test_volume) if enrichment else "your test volume",
         "pain_opener": pain_opener,
         "managed_offer_paragraph": (
-            f"Most labs we work with start with a managed 8-week publish ({MANAGED_BLOCK_PRICE_LABEL}): "
-            "you send roster lines and period dates, we build the schedule, run a compliance check, "
-            "and deliver breakroom HTML you can post."
+            f"We run managed 8-week publishes for Manitoba hospital labs ({MANAGED_BLOCK_PRICE_LABEL}): "
+            "roster lines and period dates in, compliance check and breakroom HTML out. "
+            "You post the grid — we don't hand you another login to figure out solo."
         ),
         "solution_paragraph": (
             "We deliver an 8-week schedule that is legal, covered, and breakroom-ready — "
@@ -249,7 +260,7 @@ def build_template_context(
         "pitch_angle": pitch_angle,
         "cta_line": (
             'Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run — '
-            "I'll follow up with times for a 15-minute walkthrough."
+            "I'll send walkthrough times."
         ),
         "sender_name": sender_name,
         "trial_link": trial_link,
@@ -279,9 +290,7 @@ def email_preview_envelope_html(*, to: str, subject: str, body: str) -> str:
 
 DEFAULT_EMAIL_BODY_TEMPLATE = """Hi {{first_name}},
 
-I work with Manitoba hospital labs on breakroom-ready rotation schedules — evening/night coverage, union rest rules, and the posted grid all have to line up.
-
-{{facility_name}} is the kind of roster where that alignment really matters.
+Posting season at {{facility_name}} usually means evenings, nights, and the breakroom grid all have to line up — often from separate spreadsheets.
 
 {{pain_opener}}
 
@@ -292,7 +301,7 @@ I work with Manitoba hospital labs on breakroom-ready rotation schedules — eve
 —
 {{sender_name}}"""
 
-DEFAULT_EMAIL_SUBJECT_TEMPLATE = "{{facility_name}} — breakroom grid ready for a quick look?"
+DEFAULT_EMAIL_SUBJECT_TEMPLATE = "{{facility_name}} — breakroom grid before posting season?"
 
 # persuasion-psychology-partner: FIRST_TOUCH_PSYCHOLOGY_BRIEF.md subject A/B/C
 FIRST_TOUCH_SUBJECT_VARIANT_LABELS: dict[str, str] = {
@@ -305,8 +314,8 @@ FIRST_TOUCH_SUBJECT_VARIANT_LABELS: dict[str, str] = {
 def first_touch_subject(*, facility_name: str, variant: str = "a") -> str:
     """Return a psychology-brief subject line for variant a, b, or c."""
     templates = {
-        "a": f"{facility_name} — breakroom grid ready for a quick look?",
-        "b": f"{facility_name} rotation before posting season",
+        "a": f"{facility_name} — breakroom grid before posting season?",
+        "b": f"{facility_name} rotation — one question before you post",
         "c": f"Quick question — MLT lines at {facility_name}",
     }
     return templates.get(variant, templates["a"])

@@ -110,6 +110,28 @@ def test_correct_night_streaks_swaps_day_from_peer_to_break_chain() -> None:
     assert swapped_target.shift_template_id == "shift-morning"
 
 
+def test_catalog_dn_streak_exemption_is_disabled() -> None:
+    from datetime import timedelta
+
+    from lab_scheduler.scheduling.night_streak_corrector import (
+        NightStreak,
+        catalog_dn_weekday_night_streak_allowed,
+    )
+
+    employee = _dn_mlt("01", line=1)
+    streak = NightStreak(
+        employee_id=employee.id,
+        start_date=date(2026, 6, 1),
+        end_date=date(2026, 6, 14),
+        length=14,
+    )
+    assert not catalog_dn_weekday_night_streak_allowed(
+        employee,
+        streak,
+        date(2026, 6, 1),
+    )
+
+
 def test_validate_night_streak_sequences_flags_runs_longer_than_four() -> None:
     start = date(2026, 6, 10)
     employee = _dn_mlt("01", line=1)

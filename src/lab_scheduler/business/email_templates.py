@@ -15,6 +15,7 @@ __all__ = [
     "PRO_MONTHLY_PRICE_LABEL",
     "generate_outreach_email",
     "format_pain_signals_for_email",
+    "first_touch_subject_variants",
 ]
 
 # Managed-first GTM (REVENUE_2000_PLAN) — trial/Pro are footnotes, not the lead hook.
@@ -43,17 +44,31 @@ class EmailDraft:
     body: str
 
 
+def first_touch_subject_variants(facility: str) -> dict[str, str]:
+    """Psychology-brief subject A/B/C (see docs/FIRST_TOUCH_PSYCHOLOGY_BRIEF.md)."""
+    name = facility.strip()
+    return {
+        "a": f"{name} — breakroom grid before posting season?",
+        "b": f"{name} rotation — one question before you post",
+        "c": f"Quick question — MLT lines at {name}",
+    }
+
+
 def format_pain_signals_for_email(signals: Sequence[str], *, max_items: int = 3) -> str:
     if not signals:
         return (
-            "Many hospital lab managers tell us breakroom posting still depends on "
-            "manual spreadsheets and last-minute OT patches."
+            "Most managers I talk to still juggle separate tabs for evenings, nights, "
+            "and a breakroom grid that has to match union rest rules."
         )
-    selected = list(signals[:max_items])
-    if len(selected) == 1:
-        return selected[0]
-    bullets = "\n".join(f"  • {signal}" for signal in selected)
-    return f"From what we see at similar Manitoba labs:\n{bullets}"
+    primary = signals[0].strip()
+    if "test volume" in primary.lower() or "ot" in primary.lower():
+        return (
+            f"{primary.rstrip('.')}. "
+            "That usually shows up as last-minute OT patches and equity questions mid-week."
+        )
+    if len(signals) == 1:
+        return primary
+    return primary
 
 
 def _greeting(contact_name: Optional[str]) -> str:
@@ -63,59 +78,32 @@ def _greeting(contact_name: Optional[str]) -> str:
     return "Hello,"
 
 
-def _pick_value_props(pain_signals: Sequence[str], *, count: int = 2) -> list[str]:
-    props = list(PRODUCT_VALUE_PROPS)
-    lowered = " ".join(pain_signals).lower()
-    prioritized: list[str] = []
-    if "breakroom" in lowered or "excel" in lowered:
-        prioritized.append(PRODUCT_VALUE_PROPS[2])
-    if "union" in lowered or "fatigue" in lowered or "manitoba" in lowered:
-        prioritized.append(PRODUCT_VALUE_PROPS[1])
-    if "volume" in lowered or "ot" in lowered or "coverage" in lowered:
-        prioritized.append(PRODUCT_VALUE_PROPS[0])
-    if "roster" in lowered or "fairness" in lowered:
-        prioritized.append(PRODUCT_VALUE_PROPS[3])
-    if "audit" in lowered or "compliance" in lowered:
-        prioritized.append(PRODUCT_VALUE_PROPS[4])
-
-    seen: set[str] = set()
-    ordered: list[str] = []
-    for prop in prioritized + props:
-        if prop not in seen:
-            seen.add(prop)
-            ordered.append(prop)
-        if len(ordered) >= count:
-            break
-    return ordered
-
-
 def generate_outreach_email(
     prospect: Prospect,
     *,
     sender_name: str = "Port Optical team",
     extra_context: Optional[str] = None,
+    subject_variant: str = "a",
 ) -> EmailDraft:
-    """Generate a professional, non-spammy outreach email for preview before sending."""
+    """Generate a managed-first, single-CTA outreach email for preview before sending."""
 
     greeting = _greeting(prospect.contact_name)
     facility = prospect.facility.strip()
-    pain_block = format_pain_signals_for_email(prospect.pain_signals)
-
-    subject = f"{facility} — breakroom grid ready for a quick look?"
+    subjects = first_touch_subject_variants(facility)
+    subject = subjects.get(subject_variant.lower(), subjects["a"])
+    pain_mirror = format_pain_signals_for_email(prospect.pain_signals)
 
     body_parts = [
         greeting,
         "",
-        "I work with Manitoba hospital labs on breakroom-ready rotation schedules — "
-        "evening/night coverage, union rest rules, and the posted grid all have to line up.",
+        f"Posting season at {facility} usually means evenings, nights, and the breakroom grid "
+        "all have to line up — often from separate spreadsheets.",
         "",
-        f"{facility} is the kind of roster where that alignment really matters.",
+        pain_mirror,
         "",
-        pain_block,
-        "",
-        f"Most labs we work with start with a managed 8-week publish ({MANAGED_BLOCK_PRICE_LABEL}): "
-        "you send roster lines and period dates, we build the schedule, run a compliance check, "
-        "and deliver breakroom HTML you can post.",
+        f"We run managed 8-week publishes for Manitoba hospital labs ({MANAGED_BLOCK_PRICE_LABEL}): "
+        "roster lines and period dates in, compliance check and breakroom HTML out. "
+        "You post the grid — we don't hand you another login to figure out solo.",
     ]
 
     if extra_context and extra_context.strip():
@@ -125,7 +113,7 @@ def generate_outreach_email(
         [
             "",
             'Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run — '
-            "I'll follow up with times for a 15-minute walkthrough.",
+            "I'll send walkthrough times.",
             "",
             "—",
             sender_name,

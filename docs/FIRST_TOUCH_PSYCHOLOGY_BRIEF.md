@@ -1,6 +1,6 @@
 # First-Touch Psychology Brief — Manitoba Hospital Labs (Batch 1)
 
-**Date:** 2026-06-19 · **Iteration 4**  
+**Date:** 2026-06-19 · **Iteration 5**  
 **Owner:** persuasion-psychology-partner  
 **Handoff to:** brand-voice-partner (wording), revenue-growth (target list), customer-relations (reply path)  
 **North star:** 5 qualified first-touch mailtos → 1 pilot reply → $800 managed block
@@ -28,8 +28,8 @@
 
 | Variant | Subject | Hypothesis | Ethical guard |
 |---------|---------|------------|---------------|
-| **A (recommended)** | `{Facility} — breakroom grid ready for a quick look?` | Curiosity gap tied to true deliverable (breakroom HTML) | Body must describe managed publish outcome; no sample attachment promise in first email |
-| **B** | `{Facility} rotation before posting season` | Loss-aversion (kind): seasonal stress without scare tactics | No fake deadlines; acknowledge stress only |
+| **A (recommended)** | `{Facility} — breakroom grid before posting season?` | Curiosity gap tied to posting-season pain + true deliverable | Body must describe managed publish outcome; no sample attachment promise in first email |
+| **B** | `{Facility} rotation — one question before you post` | Specificity + low-pressure question before seasonal post | No fake deadlines; answer the question in the first two lines |
 | **C** | `Quick question — MLT lines at {Facility}` | Specificity + question format boosts open on mobile | Body must answer the implied question in first 2 lines |
 
 **Rule:** Never use fake Re:, prior relationship implication, or urgency fabrication.
@@ -39,12 +39,11 @@
 ## Body structure (recommended — first touch)
 
 1. **Greeting** — first name if known  
-2. **Peer opener** (2 sentences) — Manitoba hospital lab context, not vendor pitch  
-3. **Facility mirror** — why *this* roster shape matters  
-4. **Pain acknowledgment** — 1–3 bullets from prospect pain_signals (honest only)  
-5. **Managed-first offer** — one paragraph: $800–1,200 CAD 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out)  
-6. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run` (walkthrough times follow on reply)  
-7. **Sign-off** — em dash + sender name (Port Optical team)
+2. **Posting-season peer opener** (1–2 sentences) — evenings/nights/grid alignment, not vendor pitch  
+3. **Pain mirror** — one honest sentence from prospect pain_signals (OT/equity when volume pain is present)  
+4. **Managed-first offer** — one paragraph: $800–1,200 CAD 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out)  
+5. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run` (walkthrough times follow on reply)  
+6. **Sign-off** — em dash + sender name (Port Optical team)
 
 **Not in first touch:** sample breakroom export offer, Pro self-serve pricing, 14-day trial link, extra value-bullet stacks, or secondary CTAs.
 
@@ -105,4 +104,4 @@ When prospect replies, use numbered intake:
 - [ ] First 5 mailtos sent with Reply-To wired  
 - [ ] Reply converted via numbered intake template
 
-*Brief synced with managed-first Email Preview defaults (2026-06-19).*
+*Brief synced with managed-first Email Preview defaults and goal-coordinator dispatch (2026-06-19 iteration 5).*
