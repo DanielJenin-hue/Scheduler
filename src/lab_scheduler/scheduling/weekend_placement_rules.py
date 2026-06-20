@@ -120,6 +120,34 @@ def daily_band_qual_count(
     return counts
 
 
+def alt_band_qual_count(
+    frame: pd.DataFrame,
+    row_lookup: Mapping[str, int],
+    employees_by_id: Mapping[str, EmployeeProfile],
+    qual_codes: Mapping[str, str],
+    day: date,
+    band: str,
+) -> Dict[str, int]:
+    """Count E/N per qual on any day (weekday or weekend footer)."""
+    if day.weekday() >= 5:
+        return weekend_band_qual_count(
+            frame,
+            row_lookup,
+            employees_by_id,
+            qual_codes,
+            day,
+            band,
+        )
+    return daily_band_qual_count(
+        frame,
+        row_lookup,
+        employees_by_id,
+        qual_codes,
+        day,
+        band,
+    )
+
+
 def operational_alt_band_cap_per_qual(band: str) -> int:
     """Clinical floor: one MLT + one MLA per band per day (footer target 2 total)."""
     if band in {"E", "N"}:

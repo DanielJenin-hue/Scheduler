@@ -306,17 +306,8 @@ def _plan_eighth_evening_day(
     stagger_block: frozenset[date],
     used_eighth_days: Set[date],
 ) -> Optional[date]:
-    """8th E on a day outside own block, outside peers' blocks, and unique within qual pool."""
+    """8th E on a weekday outside own block, outside peers' blocks, and unique within qual pool."""
     candidates: List[date] = []
-    if line_no <= 4:
-        for day in sorted(stagger_block):
-            if day.weekday() < 5:
-                continue
-            if day in block_days or day in other_peer_block_days:
-                continue
-            if day in used_eighth_days:
-                continue
-            candidates.append(day)
     for day in dates:
         if day.weekday() >= 5:
             continue
