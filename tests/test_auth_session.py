@@ -157,6 +157,34 @@ def test_dev_mode_still_applies_demo_session(monkeypatch: pytest.MonkeyPatch) ->
     assert mock_st.session_state.get("tenant_id") == NORTHSTAR_TENANT_ID
 
 
+def test_business_console_blocked_for_self_serve_trial() -> None:
+    from lab_scheduler.billing.feature_gates import feature_gates_for_billing, fetch_tenant_billing
+
+    from scripts.app import NORTHSTAR_TENANT_ID, _business_console_allowed
+
+    conn = sqlite3.connect(":memory:")
+    conn.executescript(
+        """
+        CREATE TABLE tenants (
+          id TEXT PRIMARY KEY,
+          subscription_status TEXT NOT NULL DEFAULT 'trial',
+          stripe_customer_id TEXT,
+          trial_ends_at TEXT
+        );
+        INSERT INTO tenants (id, subscription_status) VALUES
+          ('tenant-northstar-lab', 'active'),
+          ('tenant-new-signup', 'trial');
+        """
+    )
+    demo_gates = feature_gates_for_billing(
+        fetch_tenant_billing(conn, NORTHSTAR_TENANT_ID)
+    )
+    trial_gates = feature_gates_for_billing(fetch_tenant_billing(conn, "tenant-new-signup"))
+
+    assert _business_console_allowed(NORTHSTAR_TENANT_ID, demo_gates) is True
+    assert _business_console_allowed("tenant-new-signup", trial_gates) is False
+
+
 def test_production_requires_login_helper(monkeypatch: pytest.MonkeyPatch) -> None:
     from unittest.mock import patch
 

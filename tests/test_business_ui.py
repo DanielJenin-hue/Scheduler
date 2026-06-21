@@ -173,10 +173,10 @@ def test_apply_pending_app_section_before_widget_render() -> None:
 def test_first_touch_subject_variants_match_psychology_brief() -> None:
     facility = "Selkirk Regional Lab"
     assert first_touch_subject(facility_name=facility, variant="a") == (
-        f"{facility} — breakroom grid ready for a quick look?"
+        f"{facility} — breakroom grid before posting season?"
     )
     assert first_touch_subject(facility_name=facility, variant="b") == (
-        f"{facility} rotation before posting season"
+        f"{facility} rotation — one question before you post"
     )
     assert first_touch_subject(facility_name=facility, variant="c") == (
         f"Quick question — MLT lines at {facility}"

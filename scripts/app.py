@@ -599,6 +599,14 @@ def _is_self_serve_trial(tenant_id: str, gates: FeatureGates) -> bool:
     return gates.is_trial_tier and not _is_demo_ops_tenant(tenant_id)
 
 
+def _business_console_allowed(tenant_id: str, gates: FeatureGates) -> bool:
+    """Revenue pipeline / Business CRM is operator-only — not self-serve trials."""
+
+    if _is_demo_ops_tenant(tenant_id):
+        return True
+    return not _is_self_serve_trial(tenant_id, gates)
+
+
 def _is_manager_mode(conn: sqlite3.Connection, tenant_id: str) -> bool:
     """Manager-first UI: hide ops/dev surfaces (default on except demo ops tenants)."""
 
@@ -11986,7 +11994,8 @@ def _run_scheduling_dashboard(conn: sqlite3.Connection, tenant_id: str) -> None:
         _sign_out()
         st.rerun()
 
-    if manager_mode:
+    allow_business = _business_console_allowed(tenant_id, gates)
+    if manager_mode and allow_business:
         _render_business_access_hint(manager_entry=_manager_entry_requested())
         if not _manager_entry_requested():
             _render_operator_console_switch()
@@ -12787,11 +12796,23 @@ def _run_application_routing(conn: sqlite3.Connection) -> None:
         _render_production_auth_gate(conn)
         return
 
+    billing = fetch_tenant_billing(conn, tenant_id)
+    gates = feature_gates_for_billing(billing)
     manager_mode = _is_manager_mode(conn, tenant_id)
 
     if not manager_mode:
         section = _render_operator_section_nav()
         if section == "Business":
+            if not _business_console_allowed(tenant_id, gates):
+                st.session_state.pop("force_ops_console", None)
+                st.session_state["manager_mode"] = True
+                request_app_section(st.session_state, "Scheduling")
+                st.warning(
+                    "Revenue pipeline is for operator accounts. "
+                    "Trial workspaces can use Schedule preview only."
+                )
+                st.rerun()
+                return
             _render_business_operator_shell(conn, tenant_id)
             return
 
