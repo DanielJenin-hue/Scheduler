@@ -21,3 +21,5 @@ Bundled demo logins (`northstar_admin`, `southbridge_admin`) are **dev-only**. E
 `LAB_DEMO_SOUTHBRIDGE_PASSWORD` overrides. Never enable on production hosts
 (`LAB_SCHEDULER_ENV=production`).
 
+Optional Cursor SDK tick (RSI gate + FINISH_APP blocker summary): see [docs/CURSOR_SDK.md](docs/CURSOR_SDK.md).
+

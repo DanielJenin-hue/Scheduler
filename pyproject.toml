@@ -21,6 +21,8 @@ solver = ["ortools>=9.8"]
 # download + network). Never a core dependency; the scorecard harness runs
 # offline via a stub seam when no browser/vision model is provisioned.
 viz = ["playwright>=1.40"]
+# Optional Cursor SDK tick (scripts/sdk_first_dollar_tick.py).
+sdk = ["cursor-sdk"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
