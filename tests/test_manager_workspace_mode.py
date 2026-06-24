@@ -90,13 +90,39 @@ def test_is_manager_mode_defaults_on_for_regular_tenant() -> None:
         assert _is_manager_mode(conn, "acme-lab") is True
 
 
-def test_is_manager_mode_off_for_demo_ops_tenant() -> None:
+def test_is_manager_mode_off_for_demo_ops_tenant_in_dev() -> None:
     from scripts.app import NORTHSTAR_TENANT_ID, _is_manager_mode
 
     conn = sqlite3.connect(":memory:")
-    with patch("scripts.app.st") as mock_st:
+    with patch("scripts.app.st") as mock_st, patch("scripts.app._is_production_runtime", return_value=False):
         mock_st.session_state = {}
         assert _is_manager_mode(conn, NORTHSTAR_TENANT_ID) is False
+
+
+def test_is_manager_mode_on_for_demo_ops_tenant_in_production() -> None:
+    from scripts.app import NORTHSTAR_TENANT_ID, _is_manager_mode
+
+    conn = sqlite3.connect(":memory:")
+    with patch("scripts.app.st") as mock_st, patch("scripts.app._is_production_runtime", return_value=True):
+        mock_st.session_state = {}
+        assert _is_manager_mode(conn, NORTHSTAR_TENANT_ID) is True
+
+
+def test_user_facing_account_label_hides_demo_admin_on_production() -> None:
+    from scripts.app import _user_facing_account_label
+
+    with patch("scripts.app.st") as mock_st, patch("scripts.app._is_production_runtime", return_value=True):
+        mock_st.session_state = {
+            "username": "northstar_admin",
+            "display_name": "Northstar Administrator",
+        }
+        assert _user_facing_account_label() == "Operator"
+
+        mock_st.session_state = {
+            "username": "jane.doe@health.mb.ca",
+            "display_name": "Jane Doe",
+        }
+        assert _user_facing_account_label() == "Jane Doe"
 
 
 def test_is_manager_mode_respects_tenant_config_and_session() -> None:

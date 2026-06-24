@@ -60,9 +60,9 @@ def render_hero() -> None:
     st.markdown(
         """
         <div class="biz-hero">
-          <p class="biz-hero-kicker">Revenue cockpit · $2,000 CAD/mo north star</p>
+          <p class="biz-hero-kicker">Outreach & client onboarding</p>
           <h1 class="biz-hero-title">Business</h1>
-          <p class="biz-hero-sub">Gather prospects → Preview email → Replies in Inbox → Proceed with client</p>
+          <p class="biz-hero-sub">Gather prospects → Preview email → Replies in Inbox → Onboard client</p>
         </div>
         """,
         unsafe_allow_html=True,

@@ -731,3 +731,80 @@ Wiring the stale `email_preview.py` module would regress outbound prep. Revisit 
 ---
 
 *Iteration 7 logged by goal-coordinator. Dynamic loop armed: `AGENT_LOOP_WAKE_FINISH_APP` fallback 86400s (PID 34212).*
+
+---
+
+## Iteration 8 — 2026-06-24 (anti-slop / scoring honesty)
+
+**Orchestrator:** goal-coordinator  
+**Trigger:** User frustration — 4/11 YES misread as "no improvement needed"; live site still feels like AI slop.
+
+### Why 4/11 misled
+
+The FINISH_APP loop reports **domain-specific YES**, not holistic production quality:
+
+| Agent | What YES actually meant | What it did NOT mean |
+|-------|-------------------------|----------------------|
+| scheduling-rules-coordinator | RSI gate PASS in CI | Manager UI is polished |
+| ui-design-partner | Business tab IA shippable in code | Live Streamlit feels professional |
+| button-flow-qa | 7/7 pending-nav flows pass unit trace | Live smoke on prod URL |
+| subagent-roster-advisor | 11-agent roster adequate | Copy/voice is human |
+
+**7 agents were NO or PARTIAL** on revenue, publish bundle, live sends, IMAP, and holistic polish — but the "4/11 sign off" headline implied product completeness.
+
+### Live prod audit (https://lablife.streamlit.app/) — slop signals
+
+| Signal | Severity | Notes |
+|--------|----------|-------|
+| `northstar_admin` + tenant ID in header | P0 | Internal demo account leaked on public host |
+| Operator console default for demo tenant | P0 | Managers land in dev-style Scheduling\|Business toggle |
+| Contradictory readiness banners | P0 | Green "coverage complete" + yellow "needs attention" + 36 compliance errors |
+| Generic login subcopy | P1 | "Sign in to your facility workspace…" — template voice |
+| Business hero internal GTM jargon | P1 | "Revenue cockpit · $2,000 CAD/mo north star" |
+| Landing deploy footer | P1 | "Point this page at your hosted Streamlit app URL…" |
+| Email sign-off "Port Optical team" | P1 | Robotic; not peer operator voice |
+| Streamlit-default chrome | P2 | Control Panel sidebar, red Save, dense equity drift wall |
+| Scheduling vs Business confusion | P2 | Two consoles; operator nav at top easy to miss |
+
+### Agent-by-agent holistic grades (live experience today)
+
+| Agent | Holistic grade | Notes |
+|-------|----------------|-------|
+| revenue-growth | **NO** | 0 mailtos sent |
+| manager-value-qa | **PARTIAL** | RSI PASS in CI; live contradictory health messaging |
+| scheduling-rules-coordinator | **YES** (rules only) | Rotation engine trustworthy; UI still noisy |
+| ui-design-partner | **NO** | Streamlit-default feel; weak first impression |
+| goal-coordinator | **NO** | Scoring headline obscured polish gap |
+| production-runtime-partner | **PARTIAL** | Live URL exists; demo metadata leakage |
+| button-flow-qa | **PARTIAL** | Code flows PASS; live smoke not re-run this iteration |
+| customer-relations | **NO** | No live reply thread |
+| subagent-roster-advisor | **YES** (roster only) | Team structure fine; not a UX verdict |
+| brand-voice-partner | **NO** | Login, hero, email still template/generic |
+| persuasion-psychology-partner | **NO** | 0 execution proof |
+
+**Holistic unanimous YES count: 1/11** (scheduling-rules only). **Narrow gate YES: still 4/11** — do not conflate.
+
+### Revised sign-off criteria (shipped to `goal-coordinator.md`)
+
+- Unanimous YES requires **live URL anti-slop checklist** + human execution proof where applicable
+- Agents **cannot YES on code-only evidence** for UX/copy agents
+- FINISH_APP iteration log must separate **narrow gate YES** vs **holistic YES**
+
+### Fixes shipped (Iteration 8)
+
+| Item | Why | Files |
+|------|-----|-------|
+| Production manager-first default for demo ops tenant | Stop landing visitors in Operator console | `scripts/app.py` |
+| Hide `northstar_admin` / tenant IDs on production | Remove internal leakage from headers/sidebar | `scripts/app.py` |
+| Login + landing copy humanization | Manitoba lab manager voice; remove deploy template footer | `scripts/app.py`, `deploy/landing.html` |
+| Business hero de-jargon | Remove "$2k north star" from operator UI | `components.py` |
+| Email sign-off humanization | Peer operator sign-off in drafts | `email_templates.py`, `section.py`, `prospect_service.py` |
+
+### Next iteration focus (quality, not revenue gates)
+
+1. **ui-design-partner** — manager workspace first impression: reconcile readiness banners, Save button hierarchy, equity drift scannability
+2. **brand-voice-partner** — second pass on email opener (less formulaic posting-season paragraph)
+3. **button-flow-qa** — mandatory live prod smoke with unauthenticated login capture
+4. **manager-value-qa** — align posting readiness copy when compliance errors > 0
+
+---

@@ -121,7 +121,7 @@ def render_email_preview_tab(
         return
 
     enrichment = load_facility_enrichment(prospect)
-    sender_name = st.session_state.get("biz_sender_name", "Port Optical team")
+    sender_name = st.session_state.get("biz_sender_name", "Dan — Portage Lab Staffing")
 
     header_left, header_mid, header_right = st.columns([1, 3, 1])
     with header_left:

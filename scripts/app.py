@@ -595,6 +595,23 @@ def _is_demo_ops_tenant(tenant_id: str) -> bool:
     return tenant_id in _DEMO_OPS_TENANT_IDS
 
 
+def _user_facing_account_label() -> str:
+    """Human-readable session label — hide demo usernames and internal IDs on production."""
+
+    display = str(st.session_state.get("display_name") or "").strip()
+    username = str(st.session_state.get("username") or "").strip()
+    if not _is_production_runtime():
+        return display or username or "operator"
+    if display and display.lower() not in {username.lower(), "northstar administrator", "southbridge administrator"}:
+        return display
+    if username.endswith("_admin") or username in {"northstar_admin", "southbridge_admin"}:
+        return "Operator"
+    if "@" in username:
+        local = username.split("@", 1)[0]
+        return local.replace(".", " ").replace("_", " ").strip().title() or "Signed in"
+    return display or "Signed in"
+
+
 def _is_self_serve_trial(tenant_id: str, gates: FeatureGates) -> bool:
     return gates.is_trial_tier and not _is_demo_ops_tenant(tenant_id)
 
@@ -615,7 +632,8 @@ def _is_manager_mode(conn: sqlite3.Connection, tenant_id: str) -> bool:
     if _manager_entry_requested():
         return True
     if _is_demo_ops_tenant(tenant_id):
-        return False
+        # Local dev: operator console for GTM smoke. Production: manager-first landing.
+        return _is_production_runtime()
     if "manager_mode" in st.session_state:
         return bool(st.session_state["manager_mode"])
     configured = get_tenant_config_value(
@@ -11963,24 +11981,30 @@ def _run_scheduling_dashboard(conn: sqlite3.Connection, tenant_id: str) -> None:
 
     self_serve_trial = _is_self_serve_trial(tenant_id, gates)
 
+    account_label = _user_facing_account_label()
     if not _any_schedule_focus_active():
         if manager_mode or self_serve_trial:
             st.title(tenant_name)
             if self_serve_trial:
                 st.caption(
-                    f"Trial preview ({TRIAL_MAX_WEEKS} weeks) · signed in as {username}"
+                    f"Trial preview ({TRIAL_MAX_WEEKS} weeks) · {account_label}"
                 )
+            elif _is_production_runtime():
+                st.caption(f"Signed in · {account_label}")
             else:
                 st.caption(f"Signed in as {username}")
         else:
             st.title("Lab Staffing Scheduler")
-            st.caption(
-                f"**{tenant_name}** · signed in as `{username}` · tenant `{tenant_id}`"
-            )
+            if _is_production_runtime():
+                st.caption(f"**{tenant_name}** · {account_label}")
+            else:
+                st.caption(
+                    f"**{tenant_name}** · signed in as `{username}` · tenant `{tenant_id}`"
+                )
 
     st.sidebar.header("Control Panel" if not manager_mode else "Menu")
     st.sidebar.markdown(f"**Facility:** {tenant_name}")
-    if not manager_mode and not self_serve_trial:
+    if not _is_production_runtime() and not manager_mode and not self_serve_trial:
         st.sidebar.caption(f"Tenant ID: `{tenant_id}`")
     if not manager_mode:
         _render_account_subscription_sidebar(
@@ -12705,11 +12729,10 @@ def _render_operator_section_nav() -> str:
 
 def _render_business_operator_shell(conn: sqlite3.Connection, tenant_id: str) -> None:
     tenant_name = st.session_state.get("tenant_name", tenant_id)
-    username = st.session_state.get("username", "operator")
 
     st.sidebar.header("Control Panel")
-    st.sidebar.markdown(f"**Operator:** `{username}`")
-    st.sidebar.caption(f"Tenant context: {tenant_name}")
+    st.sidebar.markdown(f"**Signed in:** {_user_facing_account_label()}")
+    st.sidebar.caption(f"Facility: {tenant_name}")
     if _manager_entry_requested():
         if st.sidebar.button(
             "← Back to manager workspace",
@@ -12730,7 +12753,8 @@ def _render_production_auth_gate(conn: sqlite3.Connection) -> None:
         <div class="lab-login-wrap">
           <p class="lab-login-title">Lab Staffing Scheduler</p>
           <p class="lab-login-sub">
-            Sign in to your facility workspace or create a new trial account.
+            Manitoba hospital labs — sign in to build and post breakroom-ready
+            8-week rotations, or start a free 14-day trial on the Portage demo roster.
           </p>
         </div>
         """,

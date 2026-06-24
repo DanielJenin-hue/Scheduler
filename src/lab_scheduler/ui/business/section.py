@@ -458,7 +458,7 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         return
 
     enrichment = load_facility_enrichment(prospect)
-    sender_name = st.session_state.get("biz_sender_name", "Port Optical team")
+    sender_name = st.session_state.get("biz_sender_name", "Dan — Portage Lab Staffing")
     pitch_angle = derive_pitch_angle(prospect, enrichment)
     context = build_template_context(
         prospect,
@@ -727,7 +727,7 @@ def render_business_section(conn: sqlite3.Connection) -> None:
     ensure_business_prospects_schema(conn)
     ensure_business_inbound_schema(conn)
     inject_business_theme_css()
-    st.session_state.setdefault("biz_sender_name", "Port Optical team")
+    st.session_state.setdefault("biz_sender_name", "Dan — Portage Lab Staffing")
     apply_pending_business_tab(st.session_state)
     _show_toast()
 

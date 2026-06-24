@@ -81,7 +81,7 @@ def _greeting(contact_name: Optional[str]) -> str:
 def generate_outreach_email(
     prospect: Prospect,
     *,
-    sender_name: str = "Port Optical team",
+    sender_name: str = "Dan — Portage Lab Staffing",
     extra_context: Optional[str] = None,
     subject_variant: str = "a",
 ) -> EmailDraft:

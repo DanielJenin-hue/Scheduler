@@ -254,7 +254,7 @@ def generate_email_preview(
     conn: sqlite3.Connection,
     prospect_id: str,
     *,
-    sender_name: str = "Port Optical team",
+    sender_name: str = "Dan — Portage Lab Staffing",
     mark_previewed: bool = True,
 ) -> EmailDraft:
     """Generate outreach email and persist draft fields on the prospect."""
