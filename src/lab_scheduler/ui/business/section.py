@@ -49,6 +49,7 @@ from lab_scheduler.ui.business.helpers import (
     FIRST_TOUCH_SUBJECT_VARIANT_LABELS,
     blocked_honesty_phrases,
     build_template_context,
+    default_outreach_sender_name,
     derive_pitch_angle,
     first_touch_subject,
     load_facility_enrichment,
@@ -57,6 +58,7 @@ from lab_scheduler.ui.business.helpers import (
     mailto_link,
     merge_template_variables,
     save_onboarding_tasks,
+    validate_first_touch_draft,
 )
 from lab_scheduler.ui.business.inbox import render_inbox_tab, unread_inbox_badge_label
 from lab_scheduler.ui.business.navigation import (
@@ -477,7 +479,7 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         return
 
     enrichment = load_facility_enrichment(prospect)
-    sender_name = st.session_state.get("biz_sender_name", "Dan — Portage Lab Staffing")
+    sender_name = st.session_state.get("biz_sender_name", default_outreach_sender_name())
     pitch_angle = derive_pitch_angle(prospect, enrichment)
     context = build_template_context(
         prospect,
@@ -550,7 +552,7 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         to_email = st.text_input(
             "To",
             value=prospect.email or "",
-            placeholder="lab.manager@example.com",
+            placeholder="Add lab manager email",
             key=f"preview_email_{prospect.id}",
         )
         subject = st.text_input(
@@ -571,6 +573,9 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         blocked = blocked_honesty_phrases(preview_body)
         if blocked:
             st.warning(f"Honesty check: avoid unverified claims — {', '.join(blocked)}")
+
+        for warning in validate_first_touch_draft(preview_body, subject):
+            st.warning(f"Draft quality: {warning}")
 
         st.markdown("**Mail client preview**")
         st.caption("What you copy or open in your mail app — edits above are reflected here.")
@@ -746,7 +751,7 @@ def render_business_section(conn: sqlite3.Connection) -> None:
     ensure_business_prospects_schema(conn)
     ensure_business_inbound_schema(conn)
     inject_business_theme_css()
-    st.session_state.setdefault("biz_sender_name", "Dan — Portage Lab Staffing")
+    st.session_state.setdefault("biz_sender_name", default_outreach_sender_name())
     _clear_stale_email_preview_prospect(conn)
     apply_pending_business_tab(st.session_state)
     _show_toast()

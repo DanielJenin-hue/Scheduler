@@ -27,12 +27,14 @@ from lab_scheduler.ui.business.helpers import (
     DEFAULT_EMAIL_SUBJECT_TEMPLATE,
     blocked_honesty_phrases,
     build_template_context,
+    default_outreach_sender_name,
     derive_pitch_angle,
     icp_band,
     icp_display_score,
     load_facility_enrichment,
     mailto_link,
     merge_template_variables,
+    validate_first_touch_draft,
 )
 
 __all__ = ["render_email_preview_tab"]
@@ -121,7 +123,7 @@ def render_email_preview_tab(
         return
 
     enrichment = load_facility_enrichment(prospect)
-    sender_name = st.session_state.get("biz_sender_name", "Dan — Portage Lab Staffing")
+    sender_name = st.session_state.get("biz_sender_name", default_outreach_sender_name())
 
     header_left, header_mid, header_right = st.columns([1, 3, 1])
     with header_left:
@@ -200,7 +202,7 @@ def render_email_preview_tab(
         to_email = st.text_input(
             "To",
             value=prospect.email or "",
-            placeholder="lab.manager@example.com",
+            placeholder="Add lab manager email",
             key="biz_email_to",
         )
         subject = st.text_input(
@@ -230,6 +232,10 @@ def render_email_preview_tab(
         blocked = blocked_honesty_phrases(preview_body)
         if blocked:
             st.warning(f"Honesty check: avoid unverified claims — {', '.join(blocked)}")
+
+        quality_warnings = validate_first_touch_draft(preview_body, subject)
+        for warning in quality_warnings:
+            st.warning(f"Draft quality: {warning}")
 
         st.markdown("**Mail client preview**")
         st.caption("What you copy or open in your mail app — edits above are reflected here.")

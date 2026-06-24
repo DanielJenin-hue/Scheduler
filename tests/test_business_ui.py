@@ -196,6 +196,12 @@ def test_email_preview_envelope_escapes_and_includes_headers() -> None:
     assert "biz-email-envelope" in html_out
 
 
+def test_email_preview_envelope_empty_to_shows_prompt_not_placeholder() -> None:
+    html_out = email_preview_envelope_html(to="", subject="Hi", body="Body")
+    assert "lab.manager@example.com" not in html_out
+    assert "(add recipient email)" in html_out
+
+
 def test_prospect_card_html_starts_with_tag_not_indent() -> None:
     """Indented HTML is rendered as a markdown code block in Streamlit."""
     conn = sqlite3.connect(":memory:")

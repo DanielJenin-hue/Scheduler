@@ -11,7 +11,11 @@ from typing import List, Optional, Sequence
 from lab_scheduler.auth.onboarding import DEFAULT_JURISDICTION, seed_lab_infrastructure
 from lab_scheduler.auth.signup import slugify_facility_name
 from lab_scheduler.business.discovery import discover_manitoba_prospects, purge_excluded_prospects
-from lab_scheduler.business.email_templates import EmailDraft, generate_outreach_email
+from lab_scheduler.business.email_templates import (
+    EmailDraft,
+    default_outreach_sender_name,
+    generate_outreach_email,
+)
 from lab_scheduler.business.models import (
     Prospect,
     ProspectStatus,
@@ -254,13 +258,14 @@ def generate_email_preview(
     conn: sqlite3.Connection,
     prospect_id: str,
     *,
-    sender_name: str = "Dan — Portage Lab Staffing",
+    sender_name: str | None = None,
     mark_previewed: bool = True,
 ) -> EmailDraft:
     """Generate outreach email and persist draft fields on the prospect."""
 
     prospect = get_prospect(conn, prospect_id)
-    draft = generate_outreach_email(prospect, sender_name=sender_name)
+    resolved_sender = (sender_name or default_outreach_sender_name()).strip()
+    draft = generate_outreach_email(prospect, sender_name=resolved_sender)
     status = prospect.status
     if mark_previewed and status == ProspectStatus.DISCOVERED:
         status = ProspectStatus.PREVIEWED

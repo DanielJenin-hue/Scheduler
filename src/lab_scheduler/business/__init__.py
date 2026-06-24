@@ -14,7 +14,9 @@ from lab_scheduler.business.discovery import (
 from lab_scheduler.business.email_templates import (
     EmailDraft,
     PRODUCT_VALUE_PROPS,
+    default_outreach_sender_name,
     generate_outreach_email,
+    validate_first_touch_draft,
 )
 from lab_scheduler.business.inbound_email import (
     InboundMessage,
@@ -56,6 +58,7 @@ __all__ = [
     "SyncResult",
     "compute_icp_score",
     "create_prospect",
+    "default_outreach_sender_name",
     "derive_pain_signals",
     "discover_and_persist_manitoba",
     "discover_manitoba_prospects",
@@ -72,4 +75,5 @@ __all__ = [
     "sync_inbound_from_imap",
     "update_prospect",
     "update_prospect_status",
+    "validate_first_touch_draft",
 ]

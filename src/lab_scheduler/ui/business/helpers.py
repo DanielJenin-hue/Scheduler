@@ -15,6 +15,8 @@ from lab_scheduler.business.discovery import DEFAULT_FACILITY_DATASET, score_fac
 from lab_scheduler.business.email_templates import (
     MANAGED_BLOCK_PRICE_LABEL,
     PRO_MONTHLY_PRICE_LABEL,
+    default_outreach_sender_name,
+    validate_first_touch_draft,
 )
 from lab_scheduler.business.models import Prospect, ProspectStatus
 from lab_scheduler.rsi.prospector import RegionalFacilityRecord, load_regional_facility_dataset
@@ -28,6 +30,7 @@ __all__ = [
     "FIRST_TOUCH_SUBJECT_VARIANT_LABELS",
     "blocked_honesty_phrases",
     "build_template_context",
+    "default_outreach_sender_name",
     "first_touch_subject",
     "derive_pitch_angle",
     "email_preview_envelope_html",
@@ -41,6 +44,7 @@ __all__ = [
     "inbound_reply_to_address",
     "merge_template_variables",
     "save_onboarding_tasks",
+    "validate_first_touch_draft",
     "status_badge_class",
     "status_label",
 ]
@@ -208,27 +212,22 @@ def build_template_context(
     pitch_angle: str,
     trial_link: str = "/?signup=1",
 ) -> dict[str, str]:
+    from lab_scheduler.business.email_templates import format_pain_signals_for_email
+
     first_name = ""
     if prospect.contact_name and prospect.contact_name.strip():
         first_name = prospect.contact_name.strip().split()[0]
 
     short_name = prospect.facility.replace(" Hospital", "").replace(" Regional Lab", "")
-    pain_opener = (
-        prospect.pain_signals[0]
-        if prospect.pain_signals
-        else (
-            "Most managers I talk to still juggle separate tabs for evenings, nights, "
-            "and a breakroom grid that has to match union rest rules."
-        )
+    pain_mirror = format_pain_signals_for_email(prospect.pain_signals)
+    facility_opener = (
+        f"Posting season at {prospect.facility} usually means evenings, nights, and the breakroom grid "
+        "have to line up before staff see it — often still built across separate spreadsheets."
     )
-    if prospect.pain_signals and (
-        "test volume" in prospect.pain_signals[0].lower()
-        or "ot" in prospect.pain_signals[0].lower()
-    ):
-        pain_opener = (
-            f"{prospect.pain_signals[0].rstrip('.')}. "
-            "That usually shows up as last-minute OT patches and equity questions mid-week."
-        )
+    if pain_mirror:
+        pain_opener = f"{facility_opener} {pain_mirror}"
+    else:
+        pain_opener = facility_opener
     savings = (
         f"${enrichment.estimated_savings_usd:,.0f}/yr"
         if enrichment
@@ -236,6 +235,14 @@ def build_template_context(
     )
     return {
         "first_name": first_name or "there",
+        "greeting_line": (
+            f"Hi {first_name},"
+            if first_name
+            else (
+                f"Hi — quick note for whoever runs lab scheduling at "
+                f"{prospect.facility.replace(' Health Centre', '').replace(' Hospital', '').strip()}:"
+            )
+        ),
         "facility_name": prospect.facility,
         "facility_short_name": short_name,
         "region": enrichment.region if enrichment else "Manitoba",
@@ -244,7 +251,7 @@ def build_template_context(
         "pain_opener": pain_opener,
         "managed_offer_paragraph": (
             f"We run managed 8-week publishes for Manitoba hospital labs ({MANAGED_BLOCK_PRICE_LABEL}): "
-            "roster lines and period dates in, compliance check and breakroom HTML out. "
+            "roster and period dates in, compliance check and breakroom HTML out. "
             "You post the grid — we don't hand you another login to figure out solo."
         ),
         "solution_paragraph": (
@@ -270,7 +277,7 @@ def build_template_context(
 def email_preview_envelope_html(*, to: str, subject: str, body: str) -> str:
     """HTML for a mail-client-style preview (escaped, pre-wrapped body)."""
 
-    recipient = to.strip() or "lab.manager@example.com"
+    recipient = to.strip() or "(add recipient email)"
     return textwrap.dedent(
         f"""
         <div class="biz-email-envelope">
@@ -288,9 +295,7 @@ def email_preview_envelope_html(*, to: str, subject: str, body: str) -> str:
     ).strip()
 
 
-DEFAULT_EMAIL_BODY_TEMPLATE = """Hi {{first_name}},
-
-Posting season at {{facility_name}} usually means evenings, nights, and the breakroom grid all have to line up — often from separate spreadsheets.
+DEFAULT_EMAIL_BODY_TEMPLATE = """{{greeting_line}}
 
 {{pain_opener}}
 

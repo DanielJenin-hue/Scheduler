@@ -11,7 +11,11 @@ from lab_scheduler.business.discovery import (
     purge_excluded_prospects,
     score_facility_record,
 )
-from lab_scheduler.business.email_templates import generate_outreach_email
+from lab_scheduler.business.email_templates import (
+    default_outreach_sender_name,
+    generate_outreach_email,
+    validate_first_touch_draft,
+)
 from lab_scheduler.business.models import ProspectStatus, ensure_business_prospects_schema
 from lab_scheduler.business.prospect_service import (
     ProspectServiceError,
@@ -235,7 +239,45 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     assert "urgent" not in lowered
     assert "Selkirk Regional Lab" in draft.subject or "selkirk" in draft.subject.lower()
     assert "Jordan" in draft.body
-    assert len(draft.body.split()) <= 150
+    assert "portage" not in lowered
+    assert len(draft.body.split()) <= 120
+    assert not validate_first_touch_draft(draft.body, draft.subject)
+
+
+def test_boundary_trails_first_touch_no_portage_or_compliance_bullet() -> None:
+    prospect = create_prospect(
+        _memory_db(),
+        facility="Boundary Trails Health Centre",
+        facility_id="MB-MOR-BTHC",
+        pain_signals=[
+            "Manitoba union fatigue and rest rules require audit-ready schedules",
+            "Managers need breakroom-ready HTML export, not another weekend in Excel",
+        ],
+    )
+    draft = generate_outreach_email(prospect)
+    lowered = draft.body.lower()
+    assert "portage" not in lowered
+    assert "hello," not in lowered.splitlines()[0]
+    assert "boundary trails" in lowered
+    assert "manitoba union fatigue" not in lowered
+    assert draft.body.strip().endswith(default_outreach_sender_name())
+    assert "—" in draft.body
+    assert len(draft.body.split()) <= 120
+
+
+def test_validate_first_touch_draft_flags_slop() -> None:
+    warnings = validate_first_touch_draft(
+        "Hello,\n\n- bullet one\n- bullet two\n\nDan — Portage Lab Staffing",
+        "Test",
+    )
+    assert any("Hello" in w for w in warnings)
+    assert any("Portage" in w for w in warnings)
+    assert any("Bullet" in w for w in warnings)
+
+
+def test_default_outreach_sender_name_from_env(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("LAB_OUTREACH_SENDER_NAME", "Dan — Manitoba lab scheduling")
+    assert default_outreach_sender_name() == "Dan — Manitoba lab scheduling"
 
 
 def test_proceed_with_client_creates_tenant() -> None:
