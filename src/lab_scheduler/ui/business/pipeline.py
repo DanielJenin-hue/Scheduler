@@ -36,10 +36,14 @@ _PIPELINE_COLUMNS: tuple[tuple[str, frozenset[ProspectStatus]], ...] = (
 
 
 def _top_target(prospects: List[Prospect]) -> str:
+    from lab_scheduler.business.discovery import EXCLUDED_FACILITY_IDS
+
     candidates = [
         p
         for p in prospects
         if p.status in {ProspectStatus.DISCOVERED, ProspectStatus.PREVIEWED, ProspectStatus.CONTACTED}
+        and p.facility_id not in EXCLUDED_FACILITY_IDS
+        and not p.facility.startswith("Portage Regional")
     ]
     if not candidates:
         return "—"

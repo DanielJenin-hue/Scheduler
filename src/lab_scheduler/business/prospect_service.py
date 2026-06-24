@@ -10,7 +10,7 @@ from typing import List, Optional, Sequence
 
 from lab_scheduler.auth.onboarding import DEFAULT_JURISDICTION, seed_lab_infrastructure
 from lab_scheduler.auth.signup import slugify_facility_name
-from lab_scheduler.business.discovery import discover_manitoba_prospects
+from lab_scheduler.business.discovery import discover_manitoba_prospects, purge_excluded_prospects
 from lab_scheduler.business.email_templates import EmailDraft, generate_outreach_email
 from lab_scheduler.business.models import (
     Prospect,
@@ -281,6 +281,7 @@ def discover_and_persist_manitoba(
     skip_existing: bool = False,
     min_icp_score: int = 0,
 ):
+    purge_excluded_prospects(conn)
     return discover_manitoba_prospects(
         conn,
         skip_existing=skip_existing,

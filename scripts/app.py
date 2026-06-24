@@ -6346,6 +6346,9 @@ def _ensure_demo_db(db_path: Path) -> None:
         cur.executescript(
             (SQL_DIR / "19_business_inbound.sql").read_text(encoding="utf-8")
         )
+        cur.executescript(
+            (SQL_DIR / "20_remove_portage_prospect.sql").read_text(encoding="utf-8")
+        )
         ensure_tenant_configuration_schema(conn)
 
         seed_default_accounts(conn)

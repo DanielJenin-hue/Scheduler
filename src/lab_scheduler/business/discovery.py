@@ -24,10 +24,12 @@ from lab_scheduler.rsi.prospector import (
 
 __all__ = [
     "DEFAULT_FACILITY_DATASET",
+    "EXCLUDED_FACILITY_IDS",
     "DiscoveryResult",
     "compute_icp_score",
     "derive_pain_signals",
     "discover_manitoba_prospects",
+    "purge_excluded_prospects",
     "score_facility_record",
 ]
 
@@ -36,6 +38,9 @@ DEFAULT_FACILITY_DATASET = (
 )
 
 MANITOBA_PROVINCE_CODES = frozenset({"MB", "MANITOBA"})
+
+# Facilities the operator manages directly or has excluded from outbound GTM.
+EXCLUDED_FACILITY_IDS = frozenset({"MB-WPG-PORTAGE"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -106,6 +111,29 @@ def _is_manitoba_facility(facility: RegionalFacilityRecord) -> bool:
     return facility.state_province.strip().upper() in MANITOBA_PROVINCE_CODES
 
 
+def _is_excluded_facility(facility: RegionalFacilityRecord) -> bool:
+    return facility.facility_id.strip().upper() in EXCLUDED_FACILITY_IDS
+
+
+def purge_excluded_prospects(conn: sqlite3.Connection) -> int:
+    """Remove excluded facilities from the persisted pipeline (e.g. Portage Regional)."""
+
+    ensure_business_prospects_schema(conn)
+    placeholders = ",".join("?" for _ in EXCLUDED_FACILITY_IDS)
+    if not placeholders:
+        return 0
+    cursor = conn.execute(
+        f"""
+        DELETE FROM business_prospects
+        WHERE facility_id IN ({placeholders})
+           OR facility LIKE 'Portage Regional%'
+        """,
+        tuple(sorted(EXCLUDED_FACILITY_IDS)),
+    )
+    conn.commit()
+    return int(cursor.rowcount)
+
+
 def _fetch_existing_by_facility_id(
     conn: sqlite3.Connection,
     facility_id: str,
@@ -129,11 +157,12 @@ def discover_manitoba_prospects(
     """Discover and score Manitoba hospital lab prospects from the RSI CSV dataset."""
 
     ensure_business_prospects_schema(conn)
+    purge_excluded_prospects(conn)
     path = dataset_path or DEFAULT_FACILITY_DATASET
     facilities = [
         facility
         for facility in load_regional_facility_dataset(path)
-        if _is_manitoba_facility(facility)
+        if _is_manitoba_facility(facility) and not _is_excluded_facility(facility)
     ]
 
     created = 0
@@ -230,7 +259,7 @@ def list_scored_manitoba_facilities(
     path = dataset_path or DEFAULT_FACILITY_DATASET
     scored: list[tuple[RegionalFacilityRecord, ViabilityReport, int, List[str]]] = []
     for facility in load_regional_facility_dataset(path):
-        if not _is_manitoba_facility(facility):
+        if not _is_manitoba_facility(facility) or _is_excluded_facility(facility):
             continue
         report, icp, pain = score_facility_record(facility)
         scored.append((facility, report, icp, pain))

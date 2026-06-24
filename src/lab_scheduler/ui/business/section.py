@@ -14,6 +14,7 @@ from lab_scheduler.business.inbound_email import (
     ensure_business_inbound_schema,
     prospect_ids_with_inbound,
 )
+from lab_scheduler.business.discovery import DEFAULT_FACILITY_DATASET, EXCLUDED_FACILITY_IDS
 from lab_scheduler.business.models import Prospect, ProspectStatus, ensure_business_prospects_schema
 from lab_scheduler.business.prospect_service import (
     ProspectServiceError,
@@ -201,11 +202,29 @@ def _render_business_landing(conn: sqlite3.Connection, prospects: List[Prospect]
             _run_auto_gather(conn)
 
 
+def _clear_stale_email_preview_prospect(conn: sqlite3.Connection) -> None:
+    prospect_id = st.session_state.get("business_prospect_id")
+    if not prospect_id:
+        return
+    try:
+        prospect = get_prospect(conn, str(prospect_id))
+    except ProspectServiceError:
+        st.session_state.pop("business_prospect_id", None)
+        return
+    if (
+        prospect.facility_id in EXCLUDED_FACILITY_IDS
+        or prospect.facility.startswith("Portage Regional")
+    ):
+        st.session_state.pop("business_prospect_id", None)
+
+
 def _top_icp_prospect(prospects: List[Prospect]) -> Optional[Prospect]:
     candidates = [
         p
         for p in prospects
         if p.status not in {ProspectStatus.DECLINED, ProspectStatus.ACTIVE_CLIENT}
+        and p.facility_id not in EXCLUDED_FACILITY_IDS
+        and not p.facility.startswith("Portage Regional")
     ]
     if not candidates:
         return None
@@ -728,6 +747,7 @@ def render_business_section(conn: sqlite3.Connection) -> None:
     ensure_business_inbound_schema(conn)
     inject_business_theme_css()
     st.session_state.setdefault("biz_sender_name", "Dan — Portage Lab Staffing")
+    _clear_stale_email_preview_prospect(conn)
     apply_pending_business_tab(st.session_state)
     _show_toast()
 

@@ -4,8 +4,11 @@ from pathlib import Path
 import pytest
 
 from lab_scheduler.business.discovery import (
+    DEFAULT_FACILITY_DATASET,
     compute_icp_score,
     discover_manitoba_prospects,
+    list_scored_manitoba_facilities,
+    purge_excluded_prospects,
     score_facility_record,
 )
 from lab_scheduler.business.email_templates import generate_outreach_email
@@ -151,8 +154,8 @@ def test_create_and_list_prospects() -> None:
     conn = _memory_db()
     created = create_prospect(
         conn,
-        facility="Portage Regional Health Centre",
-        facility_id="MB-WPG-PORTAGE",
+        facility="Health Sciences Centre Winnipeg",
+        facility_id="MB-WPG-HSC",
         icp_score=82,
         pain_signals=["Union fatigue rules"],
     )
@@ -160,6 +163,36 @@ def test_create_and_list_prospects() -> None:
     rows = list_prospects(conn, min_icp_score=80)
     assert len(rows) == 1
     assert rows[0].id == created.id
+
+
+def test_default_manitoba_dataset_has_expanded_pipeline() -> None:
+    scored = list_scored_manitoba_facilities(DEFAULT_FACILITY_DATASET)
+    assert len(scored) >= 10
+    names = {facility.facility_name for facility, _report, _icp, _pain in scored}
+    assert "Health Sciences Centre Winnipeg" in names
+    assert "Brandon Regional Health Centre" in names
+    assert "Portage Regional Health Centre" not in names
+
+
+def test_purge_excluded_portage_prospect() -> None:
+    conn = _memory_db()
+    create_prospect(
+        conn,
+        facility="Portage Regional Health Centre",
+        facility_id="MB-WPG-PORTAGE",
+        icp_score=100,
+    )
+    create_prospect(
+        conn,
+        facility="St. Boniface Hospital",
+        facility_id="MB-WPG-STB",
+        icp_score=90,
+    )
+    removed = purge_excluded_prospects(conn)
+    assert removed == 1
+    facilities = {p.facility for p in list_prospects(conn)}
+    assert "Portage Regional Health Centre" not in facilities
+    assert "St. Boniface Hospital" in facilities
 
 
 def test_generate_email_preview_persists_draft_and_status() -> None:

@@ -2,11 +2,13 @@
 
 from lab_scheduler.business.discovery import (
     DEFAULT_FACILITY_DATASET,
+    EXCLUDED_FACILITY_IDS,
     DiscoveryResult,
     compute_icp_score,
     derive_pain_signals,
     discover_manitoba_prospects,
     list_scored_manitoba_facilities,
+    purge_excluded_prospects,
     score_facility_record,
 )
 from lab_scheduler.business.email_templates import (
@@ -41,6 +43,7 @@ from lab_scheduler.business.prospect_service import (
 
 __all__ = [
     "DEFAULT_FACILITY_DATASET",
+    "EXCLUDED_FACILITY_IDS",
     "DiscoveryResult",
     "EmailDraft",
     "InboundMessage",
@@ -64,6 +67,7 @@ __all__ = [
     "list_prospects",
     "list_scored_manitoba_facilities",
     "proceed_with_client",
+    "purge_excluded_prospects",
     "score_facility_record",
     "sync_inbound_from_imap",
     "update_prospect",

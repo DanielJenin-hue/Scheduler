@@ -1,9 +1,19 @@
 facility_id,facility_name,region,state_province,annual_test_volume,mlt_fte,mla_fte
-MB-WPG-PORTAGE,Portage Regional Health Centre,Prairies,MB,920000,12.0,10.0
 MB-WPG-STB,St. Boniface Hospital,Prairies,MB,1100000,14.0,11.0
+MB-WPG-HSC,Health Sciences Centre Winnipeg,Prairies,MB,1500000,18.0,14.0
+MB-WPG-GRACE,Grace Hospital,Prairies,MB,520000,8.0,6.0
+MB-WPG-SOGH,Seven Oaks General Hospital,Prairies,MB,480000,7.0,5.0
+MB-WPG-CONC,Concordia Hospital,Prairies,MB,410000,6.0,5.0
+MB-WPG-VGH,Victoria General Hospital,Prairies,MB,380000,6.0,4.0
+MB-BDN-BRHC,Brandon Regional Health Centre,Prairies,MB,620000,9.0,7.0
+MB-STB-SRHC,Steinbach Regional Health Centre,Prairies,MB,340000,5.0,4.0
+MB-THO-TGH,Thompson General Hospital,Prairies,MB,280000,4.0,3.0
+MB-DAU-DRHC,Dauphin Regional Health Centre,Prairies,MB,190000,3.0,2.0
+MB-MOR-BTHC,Boundary Trails Health Centre,Prairies,MB,220000,3.5,2.5
+MB-FFL-FFGH,Flin Flon General Hospital,Prairies,MB,165000,2.5,2.0
+MB-SEL-SELK,Selkirk Regional Lab,Prairies,MB,210000,3.0,2.0
 ON-TO-GH,Toronto General Hospital,Ontario,ON,2400000,22.0,18.0
 ON-OT-OTT,Ottawa Civic Laboratory,Ontario,ON,680000,9.0,8.0
 BC-VAN-VGH,Vancouver General Hospital,Pacific,BC,1850000,18.0,15.0
 AB-CGY-FMC,Foothills Medical Centre,Prairies,AB,1350000,16.0,13.0
 SK-SAK-RUH,Royal University Hospital,Prairies,SK,540000,7.0,6.0
-MB-SEL-SELK,Selkirk Regional Lab,Prairies,MB,210000,3.0,2.0
