@@ -19,6 +19,7 @@ __all__ = [
     "generate_outreach_email",
     "format_pain_signals_for_email",
     "first_touch_subject_variants",
+    "managed_offer_paragraph",
     "validate_first_touch_draft",
 ]
 
@@ -137,11 +138,21 @@ def _facility_opener(facility: str, pain_mirror: str) -> str:
     return f"{base} {pain_mirror}"
 
 
-def _managed_offer_line() -> str:
+def managed_offer_paragraph(*, include_pricing: bool = False) -> str:
+    """Managed-first offer line — price deferred by default (see FIRST_TOUCH_PSYCHOLOGY_BRIEF)."""
+    base = (
+        "We run managed 8-week publishes for Manitoba hospital labs"
+    )
+    if include_pricing:
+        return (
+            f"{base} (typically {MANAGED_BLOCK_PRICE_LABEL} depending on roster size): "
+            "roster and period dates in, compliance check and breakroom HTML out. "
+            "You post the grid — exact scope and fee after a 15-minute walkthrough."
+        )
     return (
-        f"We run managed 8-week publishes for Manitoba hospital labs ({MANAGED_BLOCK_PRICE_LABEL}): "
-        "roster and period dates in, compliance check and breakroom HTML out. "
-        "You post the grid — we don't hand you another login to figure out solo."
+        f"{base}: roster and period dates in, compliance check and breakroom HTML out. "
+        "Fixed fee once we confirm your line count on a short walkthrough — "
+        "you post the grid; we don't hand you another login to figure out solo."
     )
 
 
@@ -151,6 +162,7 @@ def generate_outreach_email(
     sender_name: str | None = None,
     extra_context: Optional[str] = None,
     subject_variant: str = "a",
+    include_pricing: bool = False,
 ) -> EmailDraft:
     """Generate a managed-first, single-CTA outreach email (~90 words) for preview before sending."""
 
@@ -167,7 +179,7 @@ def generate_outreach_email(
         "",
         opener,
         "",
-        _managed_offer_line(),
+        managed_offer_paragraph(include_pricing=include_pricing),
     ]
 
     if extra_context and extra_context.strip():
@@ -232,5 +244,10 @@ def validate_first_touch_draft(body: str, subject: str = "") -> list[str]:
 
     if "pro self-serve" in lowered_body or "sample breakroom" in lowered_body:
         warnings.append("Deferred offer (Pro/trial/sample) in first touch — save for follow-up #2")
+
+    if re.search(r"\$[\d,]+", body):
+        warnings.append(
+            "Dollar amount in first touch — defer pricing to discovery call unless they asked about budget"
+        )
 
     return warnings

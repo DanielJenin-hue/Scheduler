@@ -14,6 +14,7 @@ from lab_scheduler.business.discovery import (
 from lab_scheduler.business.email_templates import (
     default_outreach_sender_name,
     generate_outreach_email,
+    managed_offer_paragraph,
     validate_first_touch_draft,
 )
 from lab_scheduler.business.models import ProspectStatus, ensure_business_prospects_schema
@@ -228,7 +229,8 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     draft = generate_outreach_email(prospect)
     lowered = draft.body.lower()
     assert "managed" in lowered
-    assert "$800" in draft.body or "800" in draft.body
+    assert "$800" not in draft.body
+    assert "fixed fee" in lowered or "walkthrough" in lowered
     assert "14-day trial" not in lowered
     assert "sample breakroom" not in lowered
     assert "what we deliver for managers" not in lowered
@@ -240,8 +242,29 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     assert "Selkirk Regional Lab" in draft.subject or "selkirk" in draft.subject.lower()
     assert "Jordan" in draft.body
     assert "portage" not in lowered
-    assert len(draft.body.split()) <= 120
+    assert len(draft.body.split()) <= 130
     assert not validate_first_touch_draft(draft.body, draft.subject)
+
+
+def test_generate_outreach_email_optional_pricing() -> None:
+    prospect = create_prospect(
+        _memory_db(),
+        facility="Selkirk Regional Lab",
+        pain_signals=["High test volume increases scheduling leakage and OT risk"],
+    )
+    draft = generate_outreach_email(prospect, include_pricing=True)
+    assert "$800" in draft.body or "800" in draft.body
+    warnings = validate_first_touch_draft(draft.body, draft.subject)
+    assert any("Dollar amount" in w for w in warnings)
+
+
+def test_managed_offer_paragraph_modes() -> None:
+    deferred = managed_offer_paragraph(include_pricing=False).lower()
+    priced = managed_offer_paragraph(include_pricing=True).lower()
+    assert "$" not in deferred
+    assert "fixed fee" in deferred
+    assert "$800" in priced or "800" in priced
+    assert "typically" in priced or "depending" in priced
 
 
 def test_boundary_trails_first_touch_no_portage_or_compliance_bullet() -> None:
@@ -262,7 +285,7 @@ def test_boundary_trails_first_touch_no_portage_or_compliance_bullet() -> None:
     assert "manitoba union fatigue" not in lowered
     assert draft.body.strip().endswith(default_outreach_sender_name())
     assert "—" in draft.body
-    assert len(draft.body.split()) <= 120
+    assert len(draft.body.split()) <= 130
 
 
 def test_validate_first_touch_draft_flags_slop() -> None:

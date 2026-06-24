@@ -16,6 +16,7 @@ from lab_scheduler.business.email_templates import (
     MANAGED_BLOCK_PRICE_LABEL,
     PRO_MONTHLY_PRICE_LABEL,
     default_outreach_sender_name,
+    managed_offer_paragraph,
     validate_first_touch_draft,
 )
 from lab_scheduler.business.models import Prospect, ProspectStatus
@@ -211,6 +212,7 @@ def build_template_context(
     sender_name: str,
     pitch_angle: str,
     trial_link: str = "/?signup=1",
+    include_pricing: bool = False,
 ) -> dict[str, str]:
     from lab_scheduler.business.email_templates import format_pain_signals_for_email
 
@@ -249,11 +251,7 @@ def build_template_context(
         "mlt_mla_summary": enrichment.mlt_mla_summary if enrichment else "your MLT/MLA lines",
         "annual_test_volume": format_test_volume(enrichment.annual_test_volume) if enrichment else "your test volume",
         "pain_opener": pain_opener,
-        "managed_offer_paragraph": (
-            f"We run managed 8-week publishes for Manitoba hospital labs ({MANAGED_BLOCK_PRICE_LABEL}): "
-            "roster and period dates in, compliance check and breakroom HTML out. "
-            "You post the grid — we don't hand you another login to figure out solo."
-        ),
+        "managed_offer_paragraph": managed_offer_paragraph(include_pricing=include_pricing),
         "solution_paragraph": (
             "We deliver an 8-week schedule that is legal, covered, and breakroom-ready — "
             "with Manitoba labor rules and vacant-line fairness built in."

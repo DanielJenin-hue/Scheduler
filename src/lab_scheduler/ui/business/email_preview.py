@@ -137,11 +137,13 @@ def render_email_preview_tab(
     display_icp, max_icp = icp_display_score(prospect.icp_score)
     band_label, _ = icp_band(display_icp)
     pitch_angle = derive_pitch_angle(prospect, enrichment)
+    include_pricing = st.session_state.get("biz_include_pricing", False)
     context = build_template_context(
         prospect,
         enrichment,
         sender_name=sender_name,
         pitch_angle=pitch_angle,
+        include_pricing=include_pricing,
     )
 
     if prospect.email_draft_subject and prospect.email_draft_body:
@@ -169,6 +171,20 @@ def render_email_preview_tab(
         pitch_angle = st.text_input("Pitch angle", value=pitch_angle, key="biz_pitch_angle")
         context["pitch_angle"] = pitch_angle
 
+        include_pricing = st.checkbox(
+            "Include pricing in first touch",
+            value=st.session_state.get("biz_include_pricing", False),
+            key="biz_include_pricing",
+            help="Default off — share fixed fee on the 15-minute walkthrough after they reply.",
+        )
+        context = build_template_context(
+            prospect,
+            enrichment,
+            sender_name=sender_name,
+            pitch_angle=pitch_angle,
+            include_pricing=include_pricing,
+        )
+
         template_label = st.selectbox(
             "Template",
             list(TEMPLATE_OPTIONS),
@@ -178,7 +194,12 @@ def render_email_preview_tab(
 
         if st.button("Regenerate draft", key="biz_regenerate"):
             if st.session_state.get("biz_confirm_regenerate"):
-                draft = generate_email_preview(conn, prospect_id, sender_name=sender_name)
+                draft = generate_email_preview(
+                    conn,
+                    prospect_id,
+                    sender_name=sender_name,
+                    include_pricing=include_pricing,
+                )
                 st.session_state["biz_email_subject"] = draft.subject
                 template_key = TEMPLATE_OPTIONS[template_label]
                 if template_key == "managed":

@@ -1,6 +1,6 @@
 # First-Touch Psychology Brief — Manitoba Hospital Labs (Batch 1)
 
-**Date:** 2026-06-19 · **Iteration 5**  
+**Date:** 2026-06-19 · **Iteration 6** (pricing deferred in first touch — 2026-06-24)  
 **Owner:** persuasion-psychology-partner  
 **Handoff to:** brand-voice-partner (wording), revenue-growth (target list), customer-relations (reply path)  
 **North star:** 5 qualified first-touch mailtos → 1 pilot reply → $800 managed block
@@ -41,11 +41,23 @@
 1. **Greeting** — first name if known  
 2. **Posting-season peer opener** (1–2 sentences) — evenings/nights/grid alignment, not vendor pitch  
 3. **Pain mirror** — one honest sentence from prospect pain_signals (OT/equity when volume pain is present)  
-4. **Managed-first offer** — one paragraph: $800–1,200 CAD 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out)  
+4. **Managed-first offer** — one paragraph: fixed-fee 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out). **Defer dollar amount** to walkthrough or reply thread; optional toggle in Email Preview if prospect asked about budget upfront.  
 5. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run` (walkthrough times follow on reply)  
 6. **Sign-off** — em dash + sender name (Port Optical team)
 
-**Not in first touch:** sample breakroom export offer, Pro self-serve pricing, 14-day trial link, extra value-bullet stacks, or secondary CTAs.
+**Not in first touch:** sample breakroom export offer, Pro self-serve pricing, 14-day trial link, **lead-with price range ($800–1,200)**, extra value-bullet stacks, or secondary CTAs.
+
+---
+
+## Pricing in first touch (iteration 6 — 2026-06-24)
+
+| Question | Answer |
+|----------|--------|
+| **Is $800–1,200 justified?** | Yes for operator-led work (3–6h roster import, Distribute/Fill/Save, RSI PASS, breakroom HTML). Not comparable to $299/mo Pro — that's self-serve after they know the product. |
+| **Include in cold email?** | **No (default).** Sticker shock before trust/reciprocity kills reply rate. Price belongs on the 15-minute walkthrough or in reply-thread step 5 (billing contact). |
+| **When to include** | Prospect explicitly asked about cost; follow-up #2 after they engaged; Email Preview toggle ON for that send only. |
+| **Deferred wording** | "Fixed fee once we confirm your line count on a short walkthrough" — not silence on money, just no number before conversation. |
+| **Soft framing if included** | "Typically $800–1,200 CAD depending on roster size" + "exact scope and fee after walkthrough" — never bare range as the hook. |
 
 ---
 
@@ -101,6 +113,7 @@ When prospect replies, use numbered intake:
 - [x] Psychology brief artifact exists for batch 1  
 - [x] Subject A/B/C selectable in Business → Email Preview (`first_touch_subject` helper)  
 - [x] First-touch template aligned to managed-first single CTA (no sample/Pro/trial in opener)  
+- [x] First-touch default defers dollar amount; Email Preview toggle for optional pricing  
 - [ ] First 5 mailtos sent with Reply-To wired  
 - [ ] Reply converted via numbered intake template
 

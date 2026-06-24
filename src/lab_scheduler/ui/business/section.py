@@ -481,11 +481,13 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
     enrichment = load_facility_enrichment(prospect)
     sender_name = st.session_state.get("biz_sender_name", default_outreach_sender_name())
     pitch_angle = derive_pitch_angle(prospect, enrichment)
+    include_pricing = st.session_state.get("biz_include_pricing", False)
     context = build_template_context(
         prospect,
         enrichment,
         sender_name=sender_name,
         pitch_angle=pitch_angle,
+        include_pricing=include_pricing,
     )
 
     header_col, badge_col = st.columns([4, 1])
@@ -508,7 +510,13 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         prospect = get_prospect(conn, prospect.id)
 
     if not prospect.email_draft_body:
-        draft = generate_email_preview(conn, prospect.id, sender_name=sender_name, mark_previewed=True)
+        draft = generate_email_preview(
+            conn,
+            prospect.id,
+            sender_name=sender_name,
+            mark_previewed=True,
+            include_pricing=include_pricing,
+        )
         prospect = get_prospect(conn, prospect.id)
         default_subject = draft.subject
         default_body = draft.body
@@ -524,6 +532,19 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
         render_html(render_prospect_card_html(prospect, enrichment, compact=True))
         pitch_angle = st.text_input("Pitch angle", value=pitch_angle, key=f"pitch_{prospect.id}")
         context["pitch_angle"] = pitch_angle
+        include_pricing = st.checkbox(
+            "Include pricing in first touch",
+            value=st.session_state.get("biz_include_pricing", False),
+            key="biz_include_pricing",
+            help="Default off — share fixed fee on the 15-minute walkthrough after they reply.",
+        )
+        context = build_template_context(
+            prospect,
+            enrichment,
+            sender_name=sender_name,
+            pitch_angle=pitch_angle,
+            include_pricing=include_pricing,
+        )
         template_label = st.selectbox("Template", _TEMPLATE_OPTIONS, key=f"template_{prospect.id}")
         subject_variant_label = st.selectbox(
             "Subject variant (psych brief A/B/C)",
@@ -539,7 +560,12 @@ def _render_email_preview_tab(conn: sqlite3.Connection) -> None:
             st.rerun()
         st.caption("Channel: Email · LinkedIn")
         if st.button("Regenerate draft", key=f"regen_{prospect.id}"):
-            draft = generate_email_preview(conn, prospect.id, sender_name=sender_name)
+            draft = generate_email_preview(
+                conn,
+                prospect.id,
+                sender_name=sender_name,
+                include_pricing=include_pricing,
+            )
             st.session_state[f"draft_subject_{prospect.id}"] = draft.subject
             st.session_state[f"draft_body_{prospect.id}"] = draft.body
             if template_label != "First touch — managed service":

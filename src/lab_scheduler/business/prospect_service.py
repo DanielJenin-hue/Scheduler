@@ -260,12 +260,17 @@ def generate_email_preview(
     *,
     sender_name: str | None = None,
     mark_previewed: bool = True,
+    include_pricing: bool = False,
 ) -> EmailDraft:
     """Generate outreach email and persist draft fields on the prospect."""
 
     prospect = get_prospect(conn, prospect_id)
     resolved_sender = (sender_name or default_outreach_sender_name()).strip()
-    draft = generate_outreach_email(prospect, sender_name=resolved_sender)
+    draft = generate_outreach_email(
+        prospect,
+        sender_name=resolved_sender,
+        include_pricing=include_pricing,
+    )
     status = prospect.status
     if mark_previewed and status == ProspectStatus.DISCOVERED:
         status = ProspectStatus.PREVIEWED
