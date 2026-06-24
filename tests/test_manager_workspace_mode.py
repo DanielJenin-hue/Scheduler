@@ -171,3 +171,64 @@ def test_manager_mode_config_key_round_trip() -> None:
         tenant_id="acme-lab",
         config_key=MANAGER_MODE_KEY,
     ) == "false"
+
+
+def test_workspace_export_ready_blocked_by_audit_errors() -> None:
+    from dataclasses import replace
+
+    from scripts.app import SchedulePostingReadiness, _workspace_export_ready
+
+    readiness = SchedulePostingReadiness(
+        is_ready=True,
+        attention_bullets=(),
+        using_preview=False,
+        last_persist_ok=True,
+        has_failed_preview_available=False,
+        hours_delta=0.0,
+        below_evening_days=0,
+        below_night_days=0,
+        pending_mutations=0,
+    )
+    audit = replace(_sample_audit_summary(), active_error_count=3)
+
+    assert _workspace_export_ready(posting_readiness=readiness, audit_summary=audit) is False
+
+
+def test_posting_readiness_includes_audit_and_draft_compliance_errors() -> None:
+    from datetime import date as date_cls
+
+    from lab_scheduler.compliance.engine import ShiftTemplateInfo
+    from scripts.app import _evaluate_schedule_posting_readiness
+
+    period = type(
+        "Period",
+        (),
+        {
+            "period_start": date_cls(2026, 6, 1),
+            "period_end_inclusive": date_cls(2026, 8, 31),
+        },
+    )()
+    template_info = {
+        "shift-d": ShiftTemplateInfo(
+            id="shift-d",
+            code="DAY",
+            name="Day",
+            start_time="07:00",
+            end_time="15:00",
+            duration_minutes=480,
+            crosses_midnight=False,
+        ),
+    }
+    readiness = _evaluate_schedule_posting_readiness(
+        assignments=[],
+        employees=[],
+        period=period,
+        template_info=template_info,
+        hours_delta=0.0,
+        compliance_error_count=2,
+        audit_error_count=5,
+    )
+
+    assert readiness.is_ready is False
+    assert any("saved schedule" in item for item in readiness.attention_bullets)
+    assert any("this draft" in item for item in readiness.attention_bullets)

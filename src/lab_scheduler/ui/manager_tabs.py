@@ -29,25 +29,32 @@ def render_manager_print_tab(
     publish_state: Mapping[str, object],
     schedule_archetype: str,
     posting_readiness: Optional[object],
+    export_ready: bool,
     build_breakroom_document: callable,
     breakroom_posting_context: callable,
 ) -> None:
     saved_filled = int(publish_state.get("saved_filled") or 0)
     saved_total = int(publish_state.get("saved_total") or 0)
-    export_ready = posting_readiness is None or bool(getattr(posting_readiness, "is_ready", False))
 
     st.markdown("#### Posting checklist")
     st.markdown(f"- **Saved database schedule:** {saved_filled}/{saved_total} slots")
     st.markdown(
-        f"- **Breakroom export:** {'Ready' if export_ready and gates.can_export_breakroom else 'Blocked — fix tallies or contract hours'}"
+        f"- **Breakroom export:** {'Ready' if export_ready and gates.can_export_breakroom else 'Blocked — fix tallies, contract hours, or compliance'}"
     )
 
-    if posting_readiness is not None and not getattr(posting_readiness, "is_ready", False):
-        bullets = getattr(posting_readiness, "attention_bullets", ())
+    if not export_ready:
+        bullets = ()
+        if posting_readiness is not None:
+            bullets = getattr(posting_readiness, "attention_bullets", ())
         bullet_lines = "\n".join(f"- {item}" for item in bullets)
-        st.warning(
-            f"**Schedule saved; breakroom export blocked until checks pass:**\n\n{bullet_lines}"
-        )
+        if bullet_lines:
+            st.warning(
+                f"**Schedule saved; breakroom export blocked until checks pass:**\n\n{bullet_lines}"
+            )
+        else:
+            st.warning(
+                "**Schedule saved; breakroom export blocked** — resolve compliance or contract checks."
+            )
     elif not gates.can_export_breakroom:
         st.info(PREMIUM_UPSELL_SHORT)
     else:

@@ -808,3 +808,22 @@ The FINISH_APP loop reports **domain-specific YES**, not holistic production qua
 4. **manager-value-qa** — align posting readiness copy when compliance errors > 0
 
 ---
+
+## Iteration 9 — Manager workspace polish (2026-06-24)
+
+### Shipped
+
+| Item | Why | Files |
+|------|-----|-------|
+| Honest posting readiness | Never claim export/audit ready when `active_error_count > 0` or contract/tally blockers exist | `scripts/app.py`, `manager_tabs.py` |
+| Unified schedule status banner | One success OR warning in manager health panel; no green + yellow contradiction | `scripts/app.py` |
+| Calm manager chrome | Blue primary Save styling; light ops-ribbon variant; equity drift in expander cards | `scripts/app.py` |
+| Operator audit export banner | Coverage-complete copy respects compliance error count | `scripts/app.py` |
+
+### Live verify after deploy
+
+- Manager Schedule tab: single status line; no "audit ready" when compliance errors > 0
+- Save button: blue primary in sidebar and ribbon (not destructive red)
+- Staffing balance notes collapsed under expander
+
+---

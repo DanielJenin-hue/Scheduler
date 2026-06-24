@@ -675,6 +675,20 @@ def _assignments_to_planned_for_tallies(assignments: List[Dict]) -> List:
     ]
 
 
+def _workspace_export_ready(
+    *,
+    posting_readiness: Optional[SchedulePostingReadiness],
+    audit_summary: Optional[ComplianceAuditSummary],
+) -> bool:
+    """True when breakroom posting and audit export may claim ready."""
+
+    if audit_summary is not None and audit_summary.active_error_count > 0:
+        return False
+    if posting_readiness is not None:
+        return posting_readiness.is_ready
+    return True
+
+
 def _evaluate_schedule_posting_readiness(
     *,
     assignments: List[Dict],
@@ -688,6 +702,8 @@ def _evaluate_schedule_posting_readiness(
     schedule_frame: Optional[pd.DataFrame] = None,
     templates: Optional[Dict[str, Dict]] = None,
     dates: Optional[List[date]] = None,
+    compliance_error_count: int = 0,
+    audit_error_count: int = 0,
 ) -> SchedulePostingReadiness:
     del using_preview
     tally_source = assignments
@@ -720,12 +736,24 @@ def _evaluate_schedule_posting_readiness(
             f"{pending_mutations} unpublished grid edit"
             f"{'' if pending_mutations == 1 else 's'}"
         )
+    if compliance_error_count > 0:
+        bullets.append(
+            f"{compliance_error_count} compliance error"
+            f"{'' if compliance_error_count == 1 else 's'} on this draft"
+        )
+    if audit_error_count > 0:
+        bullets.append(
+            f"{audit_error_count} compliance error"
+            f"{'' if audit_error_count == 1 else 's'} on saved schedule"
+        )
 
     is_ready = (
         abs(hours_delta) <= FULLTIME_CONTRACT_HOUR_TOLERANCE
         and below_n == 0
         and below_e == 0
         and pending_mutations == 0
+        and compliance_error_count == 0
+        and audit_error_count == 0
     )
     return SchedulePostingReadiness(
         is_ready=is_ready,
@@ -745,10 +773,27 @@ def _render_schedule_health_panel(
     period: TenantPeriod,
     snapshot: ScheduleHealthSnapshot,
     dates: List[date],
+    manager_mode: bool = False,
+    posting_readiness: Optional[SchedulePostingReadiness] = None,
+    audit_summary: Optional[ComplianceAuditSummary] = None,
 ) -> None:
     """Live draft health summary above the manager schedule grid."""
 
-    st.markdown(f"#### Schedule health · {html_lib.escape(period.name)}")
+    export_ready = _workspace_export_ready(
+        posting_readiness=posting_readiness,
+        audit_summary=audit_summary,
+    )
+    floor_ok = snapshot.is_operational_floor_ok
+    compliance_ok = snapshot.compliance_error_count == 0
+    edits_ok = snapshot.pending_mutations == 0
+    contract_ok = (
+        posting_readiness is None
+        or abs(posting_readiness.hours_delta) <= FULLTIME_CONTRACT_HOUR_TOLERANCE
+    )
+    draft_clear = floor_ok and compliance_ok and edits_ok and contract_ok and export_ready
+
+    heading = "Schedule status" if manager_mode else f"Schedule health · {html_lib.escape(period.name)}"
+    st.markdown(f"#### {heading}")
 
     metric_evenings, metric_nights, metric_compliance, metric_unsaved = st.columns(4)
     with metric_evenings:
@@ -777,31 +822,43 @@ def _render_schedule_health_panel(
             help="Staged grid changes not yet written to the database.",
         )
 
-    floor_ok = snapshot.is_operational_floor_ok
-    compliance_ok = snapshot.compliance_error_count == 0
-    edits_ok = snapshot.pending_mutations == 0
-    if floor_ok and compliance_ok and edits_ok:
-        st.success("This draft passes operational floor, compliance, and save checks.")
+    attention_parts: List[str] = []
+    if posting_readiness is not None and posting_readiness.attention_bullets:
+        attention_parts.extend(posting_readiness.attention_bullets)
     else:
-        parts: List[str] = []
         if not floor_ok:
-            parts.append(
+            attention_parts.append(
                 f"{len(snapshot.tally_issues)} evening/night day-band issue"
                 f"{'' if len(snapshot.tally_issues) == 1 else 's'}"
             )
         if not compliance_ok:
-            parts.append(
+            attention_parts.append(
                 f"{snapshot.compliance_error_count} compliance error"
                 f"{'' if snapshot.compliance_error_count == 1 else 's'}"
             )
         if not edits_ok:
-            parts.append(
+            attention_parts.append(
                 f"{snapshot.pending_mutations} unsaved edit"
                 f"{'' if snapshot.pending_mutations == 1 else 's'}"
             )
-        st.warning("Needs attention: " + "; ".join(parts) + ".")
+        if not contract_ok:
+            attention_parts.append(
+                f"{snapshot.hours_delta:+.0f}h contract hours vs roster targets"
+            )
 
-    if snapshot.pending_mutations > 0:
+    if draft_clear:
+        if manager_mode:
+            st.success(
+                "Draft passes floor tallies, compliance, and contract checks. "
+                "Breakroom export is ready."
+            )
+        else:
+            st.success("This draft passes operational floor, compliance, and save checks.")
+    else:
+        detail = "; ".join(dict.fromkeys(attention_parts))
+        st.warning(f"Needs attention: {detail}." if detail else "Needs attention.")
+
+    if snapshot.pending_mutations > 0 and not manager_mode:
         emphasis = (
             " Review before using Distribute or Fill alternate."
             if snapshot.pending_mutations >= 50
@@ -813,49 +870,90 @@ def _render_schedule_health_panel(
             "Save or **Clear schedule** before running auto-fill tools."
             f"{emphasis}"
         )
+    elif snapshot.pending_mutations > 0 and manager_mode:
+        st.info(
+            f"**{snapshot.pending_mutations}** unsaved edit"
+            f"{'' if snapshot.pending_mutations == 1 else 's'} — click **Save** in the menu."
+        )
 
     top_issues = snapshot.tally_issues[:5]
     if top_issues:
-        st.markdown("**Operational floor issues**")
-        for index, issue in enumerate(top_issues):
-            issue_col, action_col = st.columns([5, 1])
-            issue_col.markdown(f"⚠ {format_tally_issue_message(issue)}")
-            with action_col:
-                if st.button(
-                    "Go",
-                    key=f"health_go_{period.id}_{issue.assignment_date.isoformat()}_{issue.band}_{index}",
-                    help="Jump the grid to the week chunk containing this date.",
-                    width="stretch",
-                ):
-                    chunk_index = chunk_index_for_date(dates, issue.assignment_date)
-                    st.session_state[_schedule_view_chunk_key(period.id)] = chunk_index
-                    st.session_state[_schedule_health_focus_date_key(period.id)] = (
-                        issue.assignment_date.isoformat()
-                    )
-                    _invalidate_schedule_matrix_view_cache(period.id)
-                    st.rerun()
-        if len(snapshot.tally_issues) > 5:
-            st.caption(
-                f"Showing 5 of {len(snapshot.tally_issues)} day-band mismatches. "
-                "Check footer reds in the grid for the full list."
-            )
+        issues_block = "Operational floor issues" if not manager_mode else "Floor tally issues"
+        if manager_mode and len(snapshot.tally_issues) > 2:
+            with st.expander(f"{issues_block} ({len(snapshot.tally_issues)})", expanded=False):
+                _render_tally_issue_rows(period, dates, top_issues, snapshot.tally_issues)
+        else:
+            st.markdown(f"**{issues_block}**")
+            _render_tally_issue_rows(period, dates, top_issues, snapshot.tally_issues)
 
-    equity_notes: List[str] = []
-    if snapshot.equity_evening_mismatch_lines:
-        equity_notes.append(
-            "Evening targets: " + " · ".join(snapshot.equity_evening_mismatch_lines[:4])
-        )
-    if snapshot.equity_drift_lines:
-        equity_notes.append(
-            "Equity drift: " + ", ".join(snapshot.equity_drift_lines[:4])
-        )
-    if equity_notes:
-        st.caption(" · ".join(equity_notes))
+    equity_lines = list(snapshot.equity_evening_mismatch_lines) + list(snapshot.equity_drift_lines)
+    if equity_lines:
+        if manager_mode:
+            with st.expander(
+                f"Staffing balance ({len(equity_lines)} note"
+                f"{'' if len(equity_lines) == 1 else 's'})",
+                expanded=False,
+            ):
+                for line in equity_lines[:8]:
+                    st.markdown(
+                        f'<div class="lab-equity-card">{html_lib.escape(line)}</div>',
+                        unsafe_allow_html=True,
+                    )
+                if len(equity_lines) > 8:
+                    st.caption(f"Showing 8 of {len(equity_lines)} balance notes.")
+        else:
+            equity_notes: List[str] = []
+            if snapshot.equity_evening_mismatch_lines:
+                equity_notes.append(
+                    "Evening targets: "
+                    + " · ".join(snapshot.equity_evening_mismatch_lines[:4])
+                )
+            if snapshot.equity_drift_lines:
+                equity_notes.append(
+                    "Equity drift: " + ", ".join(snapshot.equity_drift_lines[:4])
+                )
+            st.caption(" · ".join(equity_notes))
 
     if snapshot.de_evening_pattern_lines:
-        st.markdown("**Evening rotation pattern**")
-        for line in snapshot.de_evening_pattern_lines[:5]:
-            st.caption(f"⚠ {html_lib.escape(line)}")
+        pattern_label = "Evening rotation pattern"
+        if manager_mode:
+            with st.expander(f"{pattern_label} ({len(snapshot.de_evening_pattern_lines)})", expanded=False):
+                for line in snapshot.de_evening_pattern_lines[:5]:
+                    st.caption(f"⚠ {html_lib.escape(line)}")
+        else:
+            st.markdown(f"**{pattern_label}**")
+            for line in snapshot.de_evening_pattern_lines[:5]:
+                st.caption(f"⚠ {html_lib.escape(line)}")
+
+
+def _render_tally_issue_rows(
+    period: TenantPeriod,
+    dates: List[date],
+    top_issues: Sequence[object],
+    all_issues: Sequence[object],
+) -> None:
+    for index, issue in enumerate(top_issues):
+        issue_col, action_col = st.columns([5, 1])
+        issue_col.markdown(f"⚠ {format_tally_issue_message(issue)}")
+        with action_col:
+            if st.button(
+                "Go",
+                key=f"health_go_{period.id}_{issue.assignment_date.isoformat()}_{issue.band}_{index}",
+                help="Jump the grid to the week chunk containing this date.",
+                width="stretch",
+            ):
+                chunk_index = chunk_index_for_date(dates, issue.assignment_date)
+                st.session_state[_schedule_view_chunk_key(period.id)] = chunk_index
+                st.session_state[_schedule_health_focus_date_key(period.id)] = (
+                    issue.assignment_date.isoformat()
+                )
+                _invalidate_schedule_matrix_view_cache(period.id)
+                st.rerun()
+    if len(all_issues) > len(top_issues):
+        st.caption(
+            f"Showing {len(top_issues)} of {len(all_issues)} day-band mismatches. "
+            "Check footer reds in the grid for the full list."
+        )
 
 
 def _workspace_publish_state(
@@ -882,6 +980,7 @@ def _render_manager_preview_status_card(
     publish_state: Mapping[str, object],
     policy_view: Optional[PolicyViewModel] = None,
     posting_readiness: Optional[SchedulePostingReadiness] = None,
+    audit_summary: Optional[ComplianceAuditSummary] = None,
 ) -> None:
     """Manager banner: saved schedule, staged edits, or export blockers."""
 
@@ -889,27 +988,34 @@ def _render_manager_preview_status_card(
     saved_filled = int(publish_state.get("saved_filled") or 0)
     saved_total = int(publish_state.get("saved_total") or 0)
     pending_count = len(policy_view.pending_mutations) if policy_view else 0
+    export_ready = _workspace_export_ready(
+        posting_readiness=posting_readiness,
+        audit_summary=audit_summary,
+    )
 
     if pending_count > 0:
         st.warning(
             f"**Unsaved edits ({pending_count})** — click **Save** "
             "to write the database and refresh the standard JSON backup."
         )
-    elif posting_readiness is not None and posting_readiness.is_ready:
+    elif export_ready:
         st.success(
             f"**Saved schedule** for **{html_lib.escape(period.name)}** — "
             f"{saved_filled}/{saved_total} slots ({saved_pct:.0f}% filled). "
             "Breakroom export is ready."
         )
     elif posting_readiness is not None and posting_readiness.attention_bullets:
-        bullet_lines = "\n".join(f"- {item}" for item in posting_readiness.attention_bullets)
+        bullet_lines = "\n".join(
+            f"- {item}" for item in posting_readiness.attention_bullets
+        )
         st.warning(
             f"**Schedule saved; breakroom export blocked**\n\n{bullet_lines}"
         )
     else:
-        st.success(
+        st.info(
             f"**Saved schedule** for **{html_lib.escape(period.name)}** — "
-            f"{saved_filled}/{saved_total} slots in the database ({saved_pct:.0f}% filled)."
+            f"{saved_filled}/{saved_total} slots in the database ({saved_pct:.0f}% filled). "
+            "Resolve compliance or contract checks before posting."
         )
     st.caption(
         "Row targets show **contract FTE hours** (e.g. 320h). "
@@ -936,8 +1042,13 @@ def _render_manager_print_tab(
     publish_state: Mapping[str, object],
     schedule_archetype: str = "STANDARD",
     posting_readiness: Optional[SchedulePostingReadiness] = None,
+    audit_summary: Optional[ComplianceAuditSummary] = None,
 ) -> None:
     del conn, tenant_id
+    export_ready = _workspace_export_ready(
+        posting_readiness=posting_readiness,
+        audit_summary=audit_summary,
+    )
     render_manager_print_tab(
         period=period,
         facility_name=facility_name,
@@ -954,6 +1065,7 @@ def _render_manager_print_tab(
         publish_state=publish_state,
         schedule_archetype=schedule_archetype,
         posting_readiness=posting_readiness,
+        export_ready=export_ready,
         build_breakroom_document=_build_breakroom_print_document,
         breakroom_posting_context=breakroom_posting_context_from_publish_state,
     )
@@ -2108,6 +2220,62 @@ def _inject_global_ui_styles() -> None:
               background-color: #1e293b !important;
               color: #f8fafc !important;
             }
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _inject_manager_ui_styles() -> None:
+    st.markdown(
+        """
+        <style>
+          [data-testid="stSidebar"] button[kind="primary"],
+          [data-testid="stSidebar"] button[kind="primaryFormSubmit"] {
+            background-color: #2563eb !important;
+            border-color: #1d4ed8 !important;
+            color: #ffffff !important;
+          }
+          [data-testid="stSidebar"] button[kind="primary"]:hover,
+          [data-testid="stSidebar"] button[kind="primaryFormSubmit"]:hover {
+            background-color: #1d4ed8 !important;
+            border-color: #1e40af !important;
+          }
+          .lab-manager-save-zone button[kind="primary"] {
+            background-color: #2563eb !important;
+            border-color: #1d4ed8 !important;
+            color: #ffffff !important;
+          }
+          .lab-ops-ribbon--manager {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+          }
+          .lab-ops-ribbon--manager .lab-ops-metric {
+            background: #ffffff;
+            border-color: #e2e8f0;
+          }
+          .lab-ops-ribbon--manager .lab-ops-metric-label {
+            color: #64748b;
+          }
+          .lab-ops-ribbon--manager .lab-ops-metric-value {
+            color: #0f172a;
+          }
+          .lab-ops-ribbon--manager .lab-ops-metric-ok {
+            color: #15803d;
+          }
+          .lab-ops-ribbon--manager .lab-ops-metric-warn {
+            color: #b45309;
+            text-shadow: none;
+          }
+          .lab-equity-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #334155;
+            background: #f8fafc;
           }
         </style>
         """,
@@ -9657,6 +9825,12 @@ def _render_audit_export_status(
             f"({coverage.filled_slots}/{coverage.total_shift_slots} shift slots). "
             "The export includes coverage gaps and deflected-violation estimates."
         )
+    elif audit_summary.active_error_count > 0:
+        st.warning(
+            f"Schedule is filled ({coverage.filled_slots}/{coverage.total_shift_slots} slots) but "
+            f"**{audit_summary.active_error_count} compliance error(s)** remain. "
+            "Resolve violations before treating the audit export as ready."
+        )
     else:
         st.success(
             f"Schedule coverage complete ({coverage.filled_slots}/{coverage.total_shift_slots} slots). "
@@ -9690,15 +9864,24 @@ def _render_schedule_status_bar(
     trial_weeks = gates.trial_week_cap or TRIAL_MAX_WEEKS
 
     if gates.is_premium and posting_readiness is not None:
-        if posting_readiness.is_ready:
+        audit_blocked = (
+            audit_summary is not None and audit_summary.active_error_count > 0
+        )
+        if posting_readiness.is_ready and not audit_blocked:
             title = "Schedule ready"
             kind = "success"
             primary = "Coverage, contract hours, and night tallies passed for this block."
         else:
             title = "Schedule needs attention"
             kind = "warn"
+            bullet_items = list(posting_readiness.attention_bullets)
+            if audit_blocked:
+                bullet_items.insert(
+                    0,
+                    f"{audit_summary.active_error_count} compliance error(s) on saved schedule",
+                )
             bullet_html = "<br>".join(
-                f"• {html_lib.escape(item)}" for item in posting_readiness.attention_bullets
+                f"• {html_lib.escape(item)}" for item in bullet_items
             )
             primary = (
                 f"**{fill_pct:.0f}%** filled · **{gap_count}** open gap(s)."
@@ -9714,7 +9897,9 @@ def _render_schedule_status_bar(
                 f"**{fill_pct:.0f}%** filled · **{gap_count}** open gap(s) · "
                 "review gaps before breakroom posting."
             )
-        elif not needs_attention:
+        elif not needs_attention and (
+            audit_summary is None or audit_summary.active_error_count == 0
+        ):
             title = "Schedule ready"
             kind = "success"
             primary = (
@@ -10243,10 +10428,16 @@ def _ops_ribbon_metrics_html(
     hours_delta: float,
     gap_count: int,
     draft_badge: str = "",
+    manager_mode: bool = False,
 ) -> str:
     deficit_label, deficit_class = _ops_ribbon_deficit_display(hours_delta)
+    ribbon_class = (
+        "lab-ops-ribbon lab-ops-ribbon--manager"
+        if manager_mode
+        else "lab-ops-ribbon"
+    )
     return f"""
-            <div class="lab-ops-ribbon">
+            <div class="{ribbon_class}">
               <div class="lab-ops-metric">
                 <div class="lab-ops-metric-label">Contract Hours Deficit{draft_badge}</div>
                 <div id="lab-ops-hours-deficit" class="{deficit_class}">{html_lib.escape(deficit_label)}</div>
@@ -10265,6 +10456,7 @@ def _seed_ops_ribbon_metrics_slot(
     hours_delta: float,
     gap_count: int,
     pending_mutations: int = 0,
+    manager_mode: bool = False,
 ) -> None:
     draft_badge = ""
     if pending_mutations > 0:
@@ -10278,6 +10470,7 @@ def _seed_ops_ribbon_metrics_slot(
                 hours_delta=hours_delta,
                 gap_count=gap_count,
                 draft_badge=draft_badge,
+                manager_mode=manager_mode,
             ),
             unsafe_allow_html=True,
         )
@@ -10363,6 +10556,7 @@ def _render_operational_ribbon(
                 hours_delta=hours_delta,
                 gap_count=gap_count,
                 draft_badge=draft_badge,
+                manager_mode=manager_mode,
             ),
             unsafe_allow_html=True,
         )
@@ -10374,6 +10568,9 @@ def _render_operational_ribbon(
     pending_count = len(_load_pending_mutations(period.id))
     save_label = _save_button_label(period.id)
 
+    if manager_mode and not focus_mode:
+        st.markdown('<div class="lab-manager-save-zone">', unsafe_allow_html=True)
+
     if action_cols[0].button(
         save_label,
         type="primary",
@@ -10382,6 +10579,9 @@ def _render_operational_ribbon(
     ):
         handle_save_button_click(st.session_state, period.id, rerun=st.rerun)
         st.rerun()
+
+    if manager_mode and not focus_mode:
+        st.markdown("</div>", unsafe_allow_html=True)
 
     if focus_mode and action_cols[1].button(
         "Exit fullscreen",
@@ -10762,6 +10962,32 @@ def _render_unified_workspace(
         employee_target_hours=display_target_hours,
         schedule_archetype=schedule_archetype_value,
     )
+
+    health_snapshot: Optional[ScheduleHealthSnapshot] = None
+    if not _schedule_focus_active(period.id) and is_portage_roster(employees):
+        health_snapshot = build_schedule_health_snapshot(
+            schedule_frame=draft,
+            employees=employees,
+            dates=dates,
+            templates=templates,
+            template_info=template_info,
+            period_start=period.period_start,
+            period_end=period.period_end_inclusive,
+            qual_codes=qual_codes,
+            pending_mutations=len(policy_view.pending_mutations),
+            hours_delta=readiness_hours_delta,
+            rules=rules,
+            weeks_in_period=period.week_count,
+            employee_target_hours=display_target_hours,
+            emp_quals=emp_quals,
+        )
+
+    audit_error_count = (
+        audit_summary.active_error_count if audit_summary is not None else 0
+    )
+    draft_compliance_errors = (
+        health_snapshot.compliance_error_count if health_snapshot is not None else compliance_report.error_count
+    )
     posting_readiness = _evaluate_schedule_posting_readiness(
         assignments=assignments,
         employees=employees,
@@ -10773,6 +10999,8 @@ def _render_unified_workspace(
         schedule_frame=draft,
         templates=templates,
         dates=dates,
+        compliance_error_count=draft_compliance_errors,
+        audit_error_count=audit_error_count,
     )
 
     if audit_summary is not None and not manager_mode and not _schedule_focus_active(period.id):
@@ -10853,6 +11081,7 @@ def _render_unified_workspace(
                 publish_state=publish_state,
                 schedule_archetype=schedule_archetype_value,
                 posting_readiness=posting_readiness,
+                audit_summary=audit_summary,
             )
             return
 
@@ -10867,25 +11096,7 @@ def _render_unified_workspace(
             hours_delta=readiness_hours_delta,
             gap_count=live_gap_count,
             pending_mutations=len(policy_view.pending_mutations),
-        )
-
-    health_snapshot: Optional[ScheduleHealthSnapshot] = None
-    if not focus_on and is_portage_roster(employees):
-        health_snapshot = build_schedule_health_snapshot(
-            schedule_frame=draft,
-            employees=employees,
-            dates=dates,
-            templates=templates,
-            template_info=template_info,
-            period_start=period.period_start,
-            period_end=period.period_end_inclusive,
-            qual_codes=qual_codes,
-            pending_mutations=len(policy_view.pending_mutations),
-            hours_delta=readiness_hours_delta,
-            rules=rules,
-            weeks_in_period=period.week_count,
-            employee_target_hours=display_target_hours,
-            emp_quals=emp_quals,
+            manager_mode=manager_mode,
         )
 
     if health_snapshot is not None and not focus_on:
@@ -10893,6 +11104,9 @@ def _render_unified_workspace(
             period=period,
             snapshot=health_snapshot,
             dates=dates,
+            manager_mode=manager_mode,
+            posting_readiness=posting_readiness,
+            audit_summary=audit_summary,
         )
 
     if focus_on:
@@ -11965,6 +12179,8 @@ def _run_scheduling_dashboard(conn: sqlite3.Connection, tenant_id: str) -> None:
     billing = fetch_tenant_billing(conn, tenant_id)
     gates = feature_gates_for_billing(billing)
     manager_mode = _is_manager_mode(conn, tenant_id)
+    if manager_mode:
+        _inject_manager_ui_styles()
     process_billing_checkout_trigger(
         conn,
         st.session_state,
