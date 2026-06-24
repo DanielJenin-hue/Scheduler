@@ -75,7 +75,7 @@ def _followup_body(context: dict[str, str]) -> str:
     return merge_template_variables(
         """Hi {{first_name}},
 
-Quick follow-up on {{facility_short_name}} — rotation compliance and footer coverage are usually where manual schedules break before breakroom posting.
+Quick follow-up on {{facility_short_name}} — rest rules and footer coverage are usually where manual schedules break before you post on the wall.
 
 {{solution_paragraph}}
 
@@ -88,7 +88,7 @@ Happy to show a 15-minute walkthrough on your roster shape ({{mlt_mla_summary}})
 
 def _linkedin_note(context: dict[str, str]) -> str:
     text = merge_template_variables(
-        "Hi {{first_name}} — I work on breakroom-ready lab scheduling for Manitoba hospitals "
+        "Hi {{first_name}} — I work on 8-week lab scheduling for Manitoba hospitals "
         "({{facility_short_name}}). {{pitch_angle}} Open to connect?",
         context,
     )

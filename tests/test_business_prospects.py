@@ -135,7 +135,10 @@ def test_score_facility_record_derives_pain_signals() -> None:
     assert report.facility_id == "MB-TEST-1"
     assert icp > 0
     assert any("Manitoba" in signal for signal in pain)
-    assert any("breakroom" in signal.lower() for signal in pain)
+    assert any(
+        "excel" in signal.lower() or "wall" in signal.lower() or "posting" in signal.lower()
+        for signal in pain
+    )
 
 
 def test_discover_manitoba_prospects_from_csv(tmp_path: Path) -> None:
@@ -211,7 +214,7 @@ def test_generate_email_preview_persists_draft_and_status() -> None:
     draft = generate_email_preview(conn, created.id)
     assert "St. Boniface Hospital" in draft.subject
     assert "Alex" in draft.body
-    assert "breakroom" in draft.body.lower()
+    assert "posting season" in draft.body.lower() or "print and post" in draft.body.lower()
 
     refreshed = get_prospect(conn, created.id)
     assert refreshed.email_draft_subject == draft.subject
@@ -228,13 +231,16 @@ def test_generate_outreach_email_is_managed_first_professional() -> None:
     )
     draft = generate_outreach_email(prospect)
     lowered = draft.body.lower()
-    assert "managed" in lowered
+    assert "8-week" in lowered
     assert "$800" not in draft.body
     assert "fixed fee" in lowered or "walkthrough" in lowered
     assert "14-day trial" not in lowered
     assert "sample breakroom" not in lowered
     assert "what we deliver for managers" not in lowered
-    assert "posting season" in lowered or "evenings, nights" in lowered
+    assert "posting season" in lowered or "excel" in lowered
+    assert "print and post" in lowered
+    assert "breakroom html" not in lowered
+    assert "managed publish" not in lowered
     assert "walkthrough" in lowered or "walkthrough times" in lowered
     assert 'reply with "yes — [week] works"' in lowered
     assert "!!!" not in draft.body
@@ -274,7 +280,7 @@ def test_boundary_trails_first_touch_no_portage_or_compliance_bullet() -> None:
         facility_id="MB-MOR-BTHC",
         pain_signals=[
             "Manitoba union fatigue and rest rules require audit-ready schedules",
-            "Managers need breakroom-ready HTML export, not another weekend in Excel",
+            "Posting season still means weekends in Excel before staff see the schedule on the wall",
         ],
     )
     draft = generate_outreach_email(prospect)
@@ -283,6 +289,14 @@ def test_boundary_trails_first_touch_no_portage_or_compliance_bullet() -> None:
     assert "hello," not in lowered.splitlines()[0]
     assert "boundary trails" in lowered
     assert "manitoba union fatigue" not in lowered
+    assert "breakroom html" not in lowered
+    assert "compliance check" not in lowered
+    assert "managed publish" not in lowered
+    assert "print and post" in lowered
+    first_three = [line for line in draft.body.splitlines() if line.strip()][:3]
+    first_three_text = " ".join(first_three).lower()
+    assert "breakroom" not in first_three_text
+    assert "html" not in first_three_text
     assert draft.body.strip().endswith(default_outreach_sender_name())
     assert "—" in draft.body
     assert len(draft.body.split()) <= 130
@@ -296,6 +310,25 @@ def test_validate_first_touch_draft_flags_slop() -> None:
     assert any("Hello" in w for w in warnings)
     assert any("Portage" in w for w in warnings)
     assert any("Bullet" in w for w in warnings)
+
+
+def test_validate_first_touch_draft_flags_product_jargon() -> None:
+    jargon_body = (
+        "Hi Pat,\n\n"
+        "We run managed 8-week publishes with a compliance check and breakroom HTML export.\n\n"
+        'Reply with "yes — [week] works".'
+    )
+    warnings = validate_first_touch_draft(jargon_body, "Test Hospital")
+    assert any("breakroom html" in w.lower() for w in warnings)
+    assert any("managed" in w.lower() or "compliance check" in w.lower() for w in warnings)
+
+    plain_body = (
+        "Hi Pat,\n\n"
+        "We build your 8-week rotation from your roster lines, check it against Manitoba rest rules, "
+        "and hand you a schedule you can print and post on the wall.\n\n"
+        'Reply with "yes — [week] works".'
+    )
+    assert not any("breakroom html" in w.lower() for w in validate_first_touch_draft(plain_body))
 
 
 def test_default_outreach_sender_name_from_env(monkeypatch: pytest.MonkeyPatch) -> None:

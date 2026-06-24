@@ -81,7 +81,7 @@ def derive_pain_signals(
     if roster_size >= 15:
         signals.append("Large MLT/MLA roster makes vacant-line fairness hard to track")
     elif roster_size >= 8:
-        signals.append("Growing roster outpaces Excel-based breakroom posting")
+        signals.append("Growing roster outpaces keeping a wall-ready schedule in Excel")
 
     if facility.state_province.upper() in MANITOBA_PROVINCE_CODES:
         signals.append("Manitoba union fatigue and rest rules require audit-ready schedules")
@@ -91,7 +91,9 @@ def derive_pain_signals(
             f"Projected ${report.estimated_annual_savings_usd:,.0f}/yr from coverage gap prevention"
         )
 
-    signals.append("Managers need breakroom-ready HTML export, not another weekend in Excel")
+    signals.append(
+        "Posting season still means weekends in Excel before staff see the schedule on the wall"
+    )
     return signals
 
 

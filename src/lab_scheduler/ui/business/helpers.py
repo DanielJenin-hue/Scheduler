@@ -149,20 +149,22 @@ def format_volume_short(volume: int) -> str:
 
 
 def derive_pitch_angle(prospect: Prospect, enrichment: Optional[FacilityEnrichment]) -> str:
+    from lab_scheduler.business.email_templates import translate_pain_signal_for_email
+
     if prospect.pain_signals:
-        top = prospect.pain_signals[0]
-        if "breakroom" in top.lower() or "excel" in top.lower():
-            return f'Footer 2/2 before breakroom posting — {prospect.facility}'
-        if "volume" in top.lower() or "ot" in top.lower():
+        top = translate_pain_signal_for_email(prospect.pain_signals[0])
+        if "excel" in top.lower() or "wall" in top.lower() or "posting" in top.lower():
+            return f"Wall-ready schedule before posting season — {prospect.facility}"
+        if "volume" in top.lower() or " ot" in top.lower() or "overtime" in top.lower():
             vol = format_volume_short(enrichment.annual_test_volume) if enrichment else "high volume"
-            return f"Compliance-checked breakroom grid for {vol} at {prospect.facility}"
+            return f"Rest-rule-checked schedule for {vol} at {prospect.facility}"
     if enrichment and enrichment.mlt_fte + enrichment.mla_fte >= 15:
         return (
-            f"Your {enrichment.roster_summary} roster is a fit for our 8-week "
-            f"Portage-style catalog — footer 2/2/2 before you publish."
+            f"Your {enrichment.roster_summary} roster fits an 8-week rotation — "
+            "M/E/N coverage lined up before you post."
         )
     return (
-        f"Breakroom-ready scheduling for {prospect.facility} — "
+        f"8-week lab scheduling for {prospect.facility} — "
         "preview before your next posting cycle."
     )
 
@@ -223,8 +225,8 @@ def build_template_context(
     short_name = prospect.facility.replace(" Hospital", "").replace(" Regional Lab", "")
     pain_mirror = format_pain_signals_for_email(prospect.pain_signals)
     facility_opener = (
-        f"Posting season at {prospect.facility} usually means evenings, nights, and the breakroom grid "
-        "have to line up before staff see it — often still built across separate spreadsheets."
+        f"Posting season at {prospect.facility} usually means M/E/N coverage, footer gaps, "
+        "and last-minute Excel before staff see the schedule."
     )
     if pain_mirror:
         pain_opener = f"{facility_opener} {pain_mirror}"
@@ -253,13 +255,13 @@ def build_template_context(
         "pain_opener": pain_opener,
         "managed_offer_paragraph": managed_offer_paragraph(include_pricing=include_pricing),
         "solution_paragraph": (
-            "We deliver an 8-week schedule that is legal, covered, and breakroom-ready — "
-            "with Manitoba labor rules and vacant-line fairness built in."
+            "We deliver an 8-week schedule that is covered, fair across lines, and ready to post "
+            "on the wall — with Manitoba rest rules and vacant-line fairness built in."
         ),
         "proof_paragraph": (
-            f"After a successful managed publish ({MANAGED_BLOCK_PRICE_LABEL}), teams can move to "
+            f"After a successful first 8-week block ({MANAGED_BLOCK_PRICE_LABEL}), teams can move to "
             f"Pro self-serve ({PRO_MONTHLY_PRICE_LABEL}) or explore with a free 14-day trial on "
-            "a Portage-style demo roster."
+            "a demo roster."
         ),
         "estimated_savings": savings,
         "pitch_angle": pitch_angle,
@@ -304,12 +306,12 @@ DEFAULT_EMAIL_BODY_TEMPLATE = """{{greeting_line}}
 —
 {{sender_name}}"""
 
-DEFAULT_EMAIL_SUBJECT_TEMPLATE = "{{facility_name}} — breakroom grid before posting season?"
+DEFAULT_EMAIL_SUBJECT_TEMPLATE = "{{facility_name}} — staff schedule before posting season?"
 
 # persuasion-psychology-partner: FIRST_TOUCH_PSYCHOLOGY_BRIEF.md subject A/B/C
 FIRST_TOUCH_SUBJECT_VARIANT_LABELS: dict[str, str] = {
-    "A — breakroom grid (recommended)": "a",
-    "B — posting season": "b",
+    "A — posting season (recommended)": "a",
+    "B — rotation question": "b",
     "C — quick question": "c",
 }
 
@@ -317,7 +319,7 @@ FIRST_TOUCH_SUBJECT_VARIANT_LABELS: dict[str, str] = {
 def first_touch_subject(*, facility_name: str, variant: str = "a") -> str:
     """Return a psychology-brief subject line for variant a, b, or c."""
     templates = {
-        "a": f"{facility_name} — breakroom grid before posting season?",
+        "a": f"{facility_name} — staff schedule before posting season?",
         "b": f"{facility_name} rotation — one question before you post",
         "c": f"Quick question — MLT lines at {facility_name}",
     }

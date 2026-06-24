@@ -12,7 +12,7 @@
 | Field | Spec |
 |-------|------|
 | **Who** | Lab manager / staffing coordinator at Manitoba hospital lab (15–60 MLT/MLA lines) |
-| **Pain (ranked)** | Breakroom posting from Excel; rotation footer gaps; union OT equity; posting-season crunch |
+| **Pain (ranked)** | Wall posting from Excel; rotation footer gaps; union OT equity; posting-season crunch |
 | **Inbox reality** | 30-second triage; deletes generic SaaS; opens facility-specific + low-commitment asks |
 | **Trust bar** | Peer operator tone; no patient data; compliance claims must match RSI PASS evidence |
 
@@ -20,7 +20,31 @@
 
 ## Primary psychological lever
 
-**Specificity + single low-commitment ask** — lead with *their* facility and a true pain mirror, then one managed-first offer paragraph (8-week publish, compliance check, breakroom HTML). **One CTA only:** reply with `"yes — [week] works"` and roughly how many MLT/MLA lines they run. Defer sample exports, Pro, and trial to follow-up #2 or the 15-minute walkthrough — not the first touch.
+**Specificity + single low-commitment ask** — lead with *their* facility and a true pain mirror, then one managed-first offer paragraph in **manager-native language** (8-week rotation built from roster lines → rest-rule check → schedule ready to print and post). **One CTA only:** reply with `"yes — [week] works"` and roughly how many MLT/MLA lines they run. Defer sample exports, Pro, and trial to follow-up #2 or the 15-minute walkthrough — not the first touch.
+
+---
+
+## Manager-native language (mandatory)
+
+Cold Manitoba hospital lab managers do **not** know product internals. First-touch copy must read like a peer who has posted wall schedules — not a developer demo.
+
+| Don't say (ban in first touch) | Say instead |
+|--------------------------------|-------------|
+| breakroom HTML / breakroom-ready HTML export | schedule your staff can print and post on the wall (or share as a link) |
+| breakroom grid / breakroom posting | M/E/N schedule staff see before Monday / posting on the wall |
+| managed 8-week publish / managed publish | we build your 8-week rotation from your roster lines — you review, then post |
+| compliance check / audit-ready schedules | we check it against Manitoba rest rules before you post |
+| RSI / RSI PASS | *(omit in first touch — internal gate)* |
+| Distribute / Fill / Save | *(omit — internal workflow)* |
+| Port Optical / the product | we / lab scheduling for Manitoba hospitals |
+| HTML export | print-ready schedule |
+
+**Rules:**
+1. **No product jargon in the first three body lines** — opener must be posting season, Excel, M/E/N, wall posting, OT patches.
+2. **Managed offer = one plain sentence** — what you do, what they get, no feature stack.
+3. **`validate_first_touch_draft`** warns when banned phrases appear without their plain gloss (`FIRST_TOUCH_JARGON_GLOSSARY` in `email_templates.py`).
+4. **Discovery `pain_signals`** and **`derive_pitch_angle`** must not inject banned jargon into manager-facing strings.
+5. **Operator UI** (Business tab, onboarding checklist) may keep internal labels; **emails and pitch angles** may not.
 
 ---
 
@@ -28,7 +52,7 @@
 
 | Variant | Subject | Hypothesis | Ethical guard |
 |---------|---------|------------|---------------|
-| **A (recommended)** | `{Facility} — breakroom grid before posting season?` | Curiosity gap tied to posting-season pain + true deliverable | Body must describe managed publish outcome; no sample attachment promise in first email |
+| **A (recommended)** | `{Facility} — staff schedule before posting season?` | Curiosity gap tied to posting-season pain + true deliverable | Body must describe managed offer in plain language; no sample attachment promise in first email |
 | **B** | `{Facility} rotation — one question before you post` | Specificity + low-pressure question before seasonal post | No fake deadlines; answer the question in the first two lines |
 | **C** | `Quick question — MLT lines at {Facility}` | Specificity + question format boosts open on mobile | Body must answer the implied question in first 2 lines |
 
@@ -41,7 +65,7 @@
 1. **Greeting** — first name if known  
 2. **Posting-season peer opener** (1–2 sentences) — evenings/nights/grid alignment, not vendor pitch  
 3. **Pain mirror** — one honest sentence from prospect pain_signals (OT/equity when volume pain is present)  
-4. **Managed-first offer** — one paragraph: fixed-fee 8-week managed publish (roster in → schedule + compliance check + breakroom HTML out). **Defer dollar amount** to walkthrough or reply thread; optional toggle in Email Preview if prospect asked about budget upfront.  
+4. **Managed-first offer** — one paragraph: we build your 8-week rotation from roster lines, check Manitoba rest rules, hand you a print-and-post schedule. **Defer dollar amount** to walkthrough or reply thread; optional toggle in Email Preview if prospect asked about budget upfront.  
 5. **Single CTA** — `Reply with "yes — [week] works" and roughly how many MLT/MLA lines you run` (walkthrough times follow on reply)  
 6. **Sign-off** — em dash + sender name (Port Optical team)
 
@@ -53,7 +77,7 @@
 
 | Question | Answer |
 |----------|--------|
-| **Is $800–1,200 justified?** | Yes for operator-led work (3–6h roster import, Distribute/Fill/Save, RSI PASS, breakroom HTML). Not comparable to $299/mo Pro — that's self-serve after they know the product. |
+| **Is $800–1,200 justified?** | Yes for operator-led work (3–6h roster import, schedule build, rest-rule review, print-ready wall schedule). Not comparable to $299/mo Pro — that's self-serve after they know the product. |
 | **Include in cold email?** | **No (default).** Sticker shock before trust/reciprocity kills reply rate. Price belongs on the 15-minute walkthrough or in reply-thread step 5 (billing contact). |
 | **When to include** | Prospect explicitly asked about cost; follow-up #2 after they engaged; Email Preview toggle ON for that send only. |
 | **Deferred wording** | "Fixed fee once we confirm your line count on a short walkthrough" — not silence on money, just no number before conversation. |
@@ -65,7 +89,7 @@
 
 Use to deliver deferred reciprocity and upsell paths without cluttering the opener:
 
-- **Sample breakroom HTML** from Portage-style demo roster (no PHI) — on walkthrough or second email  
+- **Sample print-ready schedule** from demo roster (no PHI) — on walkthrough or second email  
 - **Pro self-serve** and **14-day trial** — only after managed path is understood or post successful publish  
 - Calendar times for 15-minute walkthrough — confirm once they reply with week + line count
 
@@ -89,7 +113,7 @@ When prospect replies, use numbered intake:
 1. Confirm MLT/MLA line count and 8-week period start  
 2. Roster format (Excel export / PDF / photo of grid — no PHI in email)  
 3. Union rules summary (DE/DN, weekend pattern, max consecutive)  
-4. Preferred breakroom publish date  
+4. Preferred wall-posting date for the schedule  
 5. Billing contact for managed block invoice
 
 (Offer sample export and walkthrough scheduling in this thread, not in the cold first touch.)

@@ -438,14 +438,14 @@ Best regards,
     elif template == "Follow-up #2":
         raw = """Hi {{first_name}},
 
-Follow-up on {{facility_short_name}} — rotation compliance before breakroom posting.
+Follow-up on {{facility_short_name}} — rest rules and footer coverage are usually where manual schedules break before you post on the wall.
 
 {{solution_paragraph}}
 
 {{sender_name}}"""
     elif template == "LinkedIn connection note":
         raw = (
-            "Hi {{first_name}} — breakroom-ready scheduling for {{facility_short_name}}. "
+            "Hi {{first_name}} — 8-week lab scheduling for {{facility_short_name}}. "
             "{{pitch_angle}} Open to connect?"
         )
         return merge_template_variables(raw, context)[:300]

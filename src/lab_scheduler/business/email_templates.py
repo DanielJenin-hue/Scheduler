@@ -11,6 +11,7 @@ from lab_scheduler.business.models import Prospect
 
 __all__ = [
     "EmailDraft",
+    "FIRST_TOUCH_JARGON_GLOSSARY",
     "MANAGED_BLOCK_PRICE_LABEL",
     "OUTBOUND_REPLY_TO_NOTES",
     "PRODUCT_VALUE_PROPS",
@@ -20,6 +21,7 @@ __all__ = [
     "format_pain_signals_for_email",
     "first_touch_subject_variants",
     "managed_offer_paragraph",
+    "translate_pain_signal_for_email",
     "validate_first_touch_draft",
 ]
 
@@ -33,13 +35,32 @@ OUTBOUND_REPLY_TO_NOTES = (
     "so replies sync into Business → Inbox. Gmail/Outlook: use an app password for IMAP sync."
 )
 
-# Value propositions aligned with deploy/landing.html
+# Manager-native glossary — internal/product terms → plain language for cold hospital managers.
+# Used by validate_first_touch_draft (warn when banned phrase lacks its gloss in the body).
+FIRST_TOUCH_JARGON_GLOSSARY: tuple[tuple[str, str], ...] = (
+    ("breakroom html", "print and post"),
+    ("breakroom-ready html", "print and post"),
+    ("html export", "print and post"),
+    ("breakroom grid", "schedule on the wall"),
+    ("breakroom-ready", "ready to print and post"),
+    ("breakroom posting", "posting on the wall"),
+    ("managed 8-week publish", "8-week rotation from your roster"),
+    ("managed publish", "rotation from your roster"),
+    ("compliance check", "manitoba rest rules"),
+    ("audit-ready schedules", "manitoba rest rules"),
+    ("rsi pass", "rest rules"),
+    ("distribute/fill/save", "roster lines"),
+    ("distribute fill save", "roster lines"),
+    ("port optical", "lab scheduling"),
+)
+
+# Value propositions aligned with deploy/landing.html — manager-facing wording.
 PRODUCT_VALUE_PROPS: tuple[str, ...] = (
-    "Build an 8-week lab schedule that is legal, covered, and breakroom-ready",
-    "Fill M/E/N master rotations with Manitoba labor rules and vacant-line fairness",
-    "Export breakroom HTML managers can post today — not another Excel weekend",
+    "Build an 8-week lab schedule that is covered, fair across lines, and ready to post on the wall",
+    "Fill M/E/N master rotations with Manitoba rest rules and vacant-line fairness",
+    "Hand managers a print-ready schedule — not another Excel weekend",
     "Full roster support for 15–60 MLT/MLA lines with union fatigue rules",
-    "Compliance audit trail before you publish the breakroom grid",
+    "Rest-rule review before you post the schedule staff see Monday morning",
 )
 
 _FIRST_TOUCH_CTA = (
@@ -51,18 +72,20 @@ _FIRST_TOUCH_CTA = (
 _GENERIC_COMPLIANCE_PHRASE = "manitoba union fatigue and rest rules require audit-ready schedules"
 
 _PAIN_PRIORITY_KEYWORDS = (
-    "breakroom",
     "excel",
+    "wall",
+    "posting",
+    "spreadsheet",
     "volume",
     " ot",
     "overtime",
     "roster",
     "rotation",
     "footer",
-    "posting",
     "coverage",
     "equity",
     "savings",
+    "weekend",
 )
 
 
@@ -81,23 +104,40 @@ def first_touch_subject_variants(facility: str) -> dict[str, str]:
     """Psychology-brief subject A/B/C (see docs/FIRST_TOUCH_PSYCHOLOGY_BRIEF.md)."""
     name = facility.strip()
     return {
-        "a": f"{name} — breakroom grid before posting season?",
+        "a": f"{name} — staff schedule before posting season?",
         "b": f"{name} rotation — one question before you post",
         "c": f"Quick question — MLT lines at {name}",
     }
 
 
+def translate_pain_signal_for_email(signal: str) -> str:
+    """Rewrite discovery pain_signals into manager-native language for email weaving."""
+    lowered = signal.lower()
+    if "breakroom-ready html" in lowered or "breakroom html" in lowered:
+        return (
+            "Posting season still means weekends in Excel before staff see the schedule on the wall"
+        )
+    if "excel-based breakroom" in lowered or "breakroom posting" in lowered:
+        return "Growing roster outpaces keeping a wall-ready schedule in Excel"
+    if _GENERIC_COMPLIANCE_PHRASE in lowered:
+        return signal
+    if "audit-ready schedules" in lowered:
+        return "Manitoba rest rules (consecutive nights, weekends) need to be right before you post"
+    return signal
+
+
 def _pick_primary_pain_signal(signals: Sequence[str]) -> Optional[str]:
     if not signals:
         return None
+    translated = [translate_pain_signal_for_email(s).strip() for s in signals]
     for keyword in _PAIN_PRIORITY_KEYWORDS:
-        for signal in signals:
+        for signal in translated:
             if keyword in signal.lower():
-                return signal.strip()
-    for signal in signals:
+                return signal
+    for signal in translated:
         if _GENERIC_COMPLIANCE_PHRASE not in signal.lower():
-            return signal.strip()
-    return signals[0].strip()
+            return signal
+    return translated[0]
 
 
 def format_pain_signals_for_email(signals: Sequence[str], *, max_items: int = 3) -> str:
@@ -111,7 +151,7 @@ def format_pain_signals_for_email(signals: Sequence[str], *, max_items: int = 3)
             f"{primary.rstrip('.')}. "
             "That usually shows up as last-minute OT patches and equity questions mid-week."
         )
-    if "breakroom" in lowered or "excel" in lowered:
+    if "excel" in lowered or "wall" in lowered or "posting" in lowered or "weekend" in lowered:
         return primary.rstrip(".") + "."
     if _GENERIC_COMPLIANCE_PHRASE in lowered:
         return ""
@@ -128,31 +168,33 @@ def _greeting(contact_name: Optional[str], facility: str) -> str:
 
 def _facility_opener(facility: str, pain_mirror: str) -> str:
     base = (
-        f"Posting season at {facility} usually means evenings, nights, and the breakroom grid "
-        "have to line up before staff see it — often still built across separate spreadsheets."
+        f"Posting season at {facility} usually means M/E/N coverage, footer gaps, "
+        "and last-minute Excel before staff see the schedule."
     )
     if not pain_mirror:
         return base
     if _GENERIC_COMPLIANCE_PHRASE in pain_mirror.lower():
+        return base
+    pain_lower = pain_mirror.lower()
+    if any(token in pain_lower for token in ("excel", "wall", "posting", "weekend", "spreadsheet")):
         return base
     return f"{base} {pain_mirror}"
 
 
 def managed_offer_paragraph(*, include_pricing: bool = False) -> str:
     """Managed-first offer line — price deferred by default (see FIRST_TOUCH_PSYCHOLOGY_BRIEF)."""
-    base = (
-        "We run managed 8-week publishes for Manitoba hospital labs"
+    offer_core = (
+        "We build your 8-week rotation from your MLT/MLA lines, check Manitoba rest rules, "
+        "and send a schedule you can print and post on the wall (or share as a link). "
+        "You review, then post."
     )
     if include_pricing:
         return (
-            f"{base} (typically {MANAGED_BLOCK_PRICE_LABEL} depending on roster size): "
-            "roster and period dates in, compliance check and breakroom HTML out. "
-            "You post the grid — exact scope and fee after a 15-minute walkthrough."
+            f"{offer_core} Typically {MANAGED_BLOCK_PRICE_LABEL} depending on roster size — "
+            "exact scope and fee after a 15-minute walkthrough."
         )
     return (
-        f"{base}: roster and period dates in, compliance check and breakroom HTML out. "
-        "Fixed fee once we confirm your line count on a short walkthrough — "
-        "you post the grid; we don't hand you another login to figure out solo."
+        f"{offer_core} Fixed fee once we confirm line count on a short walkthrough."
     )
 
 
@@ -241,6 +283,15 @@ def validate_first_touch_draft(body: str, subject: str = "") -> list[str]:
     for phrase in jargon:
         if phrase in lowered_combined:
             warnings.append(f'Internal jargon "{phrase}" — remove before sending to prospects')
+
+    for banned, gloss in FIRST_TOUCH_JARGON_GLOSSARY:
+        if banned in lowered_combined and gloss not in lowered_body:
+            warnings.append(
+                f'Product jargon "{banned}" — managers expect plain language like "{gloss}"'
+            )
+
+    if re.search(r"\brsi\b", lowered_combined) and "rest rules" not in lowered_body:
+        warnings.append('Internal jargon "RSI" — omit or say "Manitoba rest rules"')
 
     if "pro self-serve" in lowered_body or "sample breakroom" in lowered_body:
         warnings.append("Deferred offer (Pro/trial/sample) in first touch — save for follow-up #2")
